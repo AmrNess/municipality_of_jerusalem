@@ -54,3 +54,5 @@ field_error = {
     "unclean_email_error": "שדה לא תקין",
     "incomplete_unclean_email_error": "שדה חובה-שדה לא תקין"
 }
+
+explicit_wait = 30

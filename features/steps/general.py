@@ -60,6 +60,12 @@ def field_has_valid_value(context, widget_name):
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
+
+    loop = widget.is_invalid()
+    log.info(loop)
+    noop = widget.is_valid()
+    log.info(noop)
+
     assert widget.is_invalid is False and widget.is_valid is True, "Field considered as invalid"
 
 
@@ -286,4 +292,201 @@ def search_in_select(context, selected_input, widget_name):
     assert widget.select_input_without_writing(selected_input), "Error, the selected address is not available"
 
 
+@when('I pick "{selected_input}" in "{widget_name}"')
+def search_in_select(context, selected_input, widget_name):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    widget.select_radio_btn(selected_input)
 
+
+@when('Is "{selected_input}" selected in "{widget_name}"')
+def search_in_select(context, selected_input, widget_name):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    selected_one = widget.who_is_selected()
+    assert widget.check_if_selected(selected_input), f'Error, {selected_input} is not selected, {selected_one} is selected'
+
+
+@when('we have "{selected_input:d}" steps in this page')
+def search_in_select(context, selected_input):
+    widget_name = "page_steps"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    steps_amount = widget.get_steps_amount()
+    assert steps_amount == selected_input, f'Error, you have {steps_amount} steps'
+
+
+
+@when('steps tittle is "{expected_tittle}"')
+def search_in_select(context, expected_tittle):
+    widget_name = "page_steps"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    assert widget.check_app_steps_tittle(expected_tittle), "Error, This Tittle is not correct"
+
+
+
+@when('Are we in the "{expected_step}" step')
+def search_in_select(context, expected_step):
+    widget_name = "page_steps"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    current_step = widget.get_step_name()
+    assert widget.step_checker(expected_step), f'Error, You Are in Step {current_step}'
+
+
+@when('Is header tittle is "{expected_step}"')
+def search_in_select(context, expected_step):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_header_tittle(expected_step), "Error This tittle is not correct"
+
+
+@when('Is header Logo is displayed')
+def search_in_select(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_header_picture, "Error The Logo is not displayed"
+
+
+@when('Is application name is "{expected_app_name}"')
+def search_in_select(context, expected_app_name):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_header_application_name(expected_app_name), "Error This Application name is not correct"
+
+
+@when('Is application status is "{expected_status}"')
+def search_in_select(context, expected_status):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_header_status(expected_status), "Error This Application Status is not correct"
+
+
+@when('Did application filled in "{expected_date}"')
+def search_in_select(context, expected_date):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_header_paper_filled(expected_date), "Error This Application fill date is not correct"
+
+
+@when('Click on "{widget_name}" button')
+def search_in_select(context, widget_name):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    widget.clickBtn()
+
+
+
+
+
+
+
+@when('Close the information tab')
+def search_in_select(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    widget.close_info_tab
+
+
+@when('Is application information tittle is "{expected_tittle}"')
+def search_in_select(context, expected_tittle):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_application_explanation_tittle(expected_tittle), "Error This information tittle is not correct"
+
+
+@when('Does information have text')
+def search_in_select(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_info_tab_content(), "Error This information content is smaller than 20"
+
+
+@when('Does application explanation have text')
+def search_in_select(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    assert widget.check_application_explanation_content(), "Error This information content is smaller than 20"
+
+
+@when('Accept the alert')
+def search_in_select(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    widget.accept_alert()
+
+
+@when('Cancel the print option')
+def search_in_select(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    widget.cancel_print()
+
+
+
+@when('I choose "{widget_name}" in search')
+def choose_in_search(context, widget_name):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    widget.clickBtn()

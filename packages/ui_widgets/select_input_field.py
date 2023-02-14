@@ -1,7 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from infra import logger
+from infra import logger, config
 from ui_widgets.dropDown_field import DropDown_field
 
 log = logger.get_logger(__name__)
@@ -31,7 +31,7 @@ class SelectInputField(DropDown_field):
                                                   "//div/following-sibling::div/ul/cdk-virtual-scroll-viewport/div/p-dropdownitem/li")
         for element in elements:
             if element.text == input:
-                WebDriverWait(self.web_element, 30).until(EC.element_to_be_clickable((element))).click()
+                WebDriverWait(self.web_element, config.explicit_wait).until(EC.element_to_be_clickable((element))).click()
                 return element.text
         return "-1"
 
@@ -51,5 +51,5 @@ class SelectInputField(DropDown_field):
                     doc = self.driver.find_element(By.XPATH,
                                                    f'//div/following-sibling::div/ul/cdk-virtual-scroll-viewport')
                     self.driver.execute_script("arguments[0].scrollBy(0, 30);", doc)
-        WebDriverWait(self.web_element, 30).until(EC.element_to_be_clickable((city_li))).click()
+        WebDriverWait(self.web_element, config.explicit_wait).until(EC.element_to_be_clickable((city_li))).click()
         return True

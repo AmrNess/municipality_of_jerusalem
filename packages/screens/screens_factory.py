@@ -1,6 +1,7 @@
 from infra import logger, reporter
-from screens.forms import confirmation_for_structure
+from screens.forms import confirmation_for_structure, placeContainer, eduInstituteRegistration, parking
 from screens.forms import freedomInfo
+
 
 log = logger.get_logger(__name__)
 rep = reporter.get_reporter()
@@ -20,7 +21,10 @@ class ScreensFactory(object):
 
         screens_dict = {
             'ConfirmationForStructure': confirmation_for_structure.ConfirmationForStructure,
-            'FreedomInfo': freedomInfo.FreedomInfo
+            'FreedomInfo': freedomInfo.FreedomInfo,
+            'PlaceContainer': placeContainer.PlaceContainer,
+            'EduInstituteRegistration': eduInstituteRegistration.EduInstituteRegistration,
+            'Parking': parking.Parking
         }
 
         screens = []
