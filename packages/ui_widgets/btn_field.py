@@ -13,8 +13,6 @@ class BtnField(BaseWidget):
     def get_text(self):
         return self.web_element.text
 
-
-
     @property
     def locator(self):
         return {
