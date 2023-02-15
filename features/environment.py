@@ -12,8 +12,8 @@ rep = reporter.get_reporter()
 log = logger.get_logger(__name__)
 
 # if there is a failed step in the scenario, the scenario will continue
-def before_scenario(context, scenario):
-    scenario.continue_after_failed_step = True
+# def before_scenario(context, scenario):
+#     scenario.continue_after_failed_step = True
 
 
 
@@ -29,6 +29,8 @@ def before_all(context):
 def before_scenario(context, scenario):
     scenario.starting_scenario_msg = f'----- Starting Scenario - {scenario.name} -----'
     log.info(scenario.starting_scenario_msg)
+    scenario.continue_after_failed_step = True
+
 
 def before_step(context, step):
     log.info(f'----- Starting Step - {step.name} -----')
