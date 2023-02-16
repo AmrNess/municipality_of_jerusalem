@@ -67,9 +67,13 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 752123133 | 112233440 |
     | 165786534 | 223344557 |
 
+
+
   @form
   # excel sheet rule number 3
-  Scenario Outline:  student, parent id value test (invalid)
+  # BUG:
+  # Another BUG : the student, parent id that contains one letter until 16 number
+  Scenario Outline: id value test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
     And I write "<student_id>" in "מספר זהות תלמיד"
@@ -78,7 +82,33 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     Then Check field "מספר זהות תלמיד" has valid value
     And Check field "מספר זהות הורה" has valid value
     Examples:
-    |student_id                     |parent_id                    |
+    | student_id                    | parent_id                     |
+    | 000000000                     |000000000                      |
+    | 000000018                     |000000018                      |
+    | 3327981827336443728282        |3327981827336443728282         |
+    | 12321323142133                |12321323142133                 |
+    | 12345678934567467788998       |12345678934567467788998        |
+    | 33279618433                   |33279618433                    |
+    | 22345567754                   |22345567754                    |
+    | 2323443211343355              |2323443211343355               |
+    | 33344557897                   |33344557897                    |
+    | 00                            |00                             |
+
+  @form
+  # excel sheet rule number 18
+  # BUG:
+  Scenario Outline: student, parent id error message test (invalid) and student, parent id value test (invalid)
+    Given I navigate to "MishpachtonimAppeal" page
+    When Choose "ת.ז." in "סוג זהות תלמיד"
+    And I write "<student_id>" in "מספר זהות תלמיד"
+    And Choose "ת.ז." in "מספר זהות הורה"
+    And I write "<parent_id>" in "מספר זהות הורה"
+    Then Check field "מספר זהות תלמיד" has invalid value
+    And Check field "מספר זהות הורה" has invalid value
+    And Check if error message of "מספר זהות תלמיד" is "מספר זהות לא תקין"
+    And Check if error message of "מספר זהות הורה" is "מספר זהות לא תקין"
+    Examples:
+        |student_id                     |parent_id                    |
     | 000000001                     |000000001                    |
     | 000000118                     |000000118                    |
     | 000000009                     |000000009                    |
@@ -116,98 +146,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 154528136                    |154528136                     |
     | 160786030                    |160786030                     |
 
-  @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the student, parent id that contains one letter until 16 number
-  Scenario Outline: id value test (invalid)
-    Given I navigate to "MishpachtonimAppeal" page
-    When Choose "ת.ז." in "סוג זהות תלמיד"
-    And I write "<student_id>" in "מספר זהות תלמיד"
-    And Choose "ת.ז." in "סוג זהות הורה"
-    And I write "<parent_id>" in "מספר זהות הורה"
-    Then Check field "מספר זהות תלמיד" has valid value
-    And Check field "מספר זהות הורה" has valid value
-    Examples:
-    | student_id                    | parent_id                     |
-    | 000000000                     |000000000                      |
-    | 000000018                     |000000018                      |
-    | 3327981827336443728282        |3327981827336443728282         |
-    | 12321323142133                |12321323142133                 |
-    | 12345678934567467788998       |12345678934567467788998        |
-    | 33279618433                   |33279618433                    |
-    | 22345567754                   |22345567754                    |
-    | 2323443211343355              |2323443211343355               |
-    | 33344557897                   |33344557897                    |
-    | 00                            |00                             |
-
-  @form
-  # excel sheet rule number 18
-  # BUG:
-  Scenario Outline: student id error message test (invalid)
-    Given I navigate to "MishpachtonimAppeal" page
-    When Choose "ת.ז." in "סוג זהות תלמיד"
-    And I write "<student_id>" in "מספר זהות תלמיד"
-    Then Check field "מספר זהות תלמיד" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
-    Examples:
-    | student_id                    |
-    | 000000001                     |
-    | 000000118                     |
-    | 000000009                     |
-    | 3121                          |
-    | 92443232                      |
-    | 3219                          |
-    | 8883                          |
-    | 0157                          |
-    | 0180                          |
-    | 01                            |
-    | 3r3343WT4QE2                  |
-    | @#$%^&                        |
-    | גכעיחלךגכעיח                   |
-    | يبلاتنمك                        |
-    | fghiopfdrtyuil;               |
-    | 000000000                     |
-    | 000000018                     |
-    | 3327981827336443728282        |
-    | 33279618433                   |
-    | 22345567754                   |
-    | 331133232ssd2321312233        |
-    | 00                            |
-
-  @form
-  # excel sheet rule number 18
-  # BUG:
-  Scenario Outline: parent_id error message test (invalid)
-    Given I navigate to "MishpachtonimAppeal" page
-    When Choose "ת.ז." in "מספר זהות הורה"
-    And I write "<parent_id>" in "מספר זהות הורה"
-    Then Check field "מספר זהות הורה" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
-    Examples:
-    | parent_id                     |
-    | 000000001                     |
-    | 000000118                     |
-    | 000000009                     |
-    | 3121                          |
-    | 92443232                      |
-    | 3219                          |
-    | 8883                          |
-    | 0157                          |
-    | 0180                          |
-    | 01                            |
-    | 3r3343WT4QE2                  |
-    | @#$%^&                        |
-    | גכעיחלךגכעיח                   |
-    | يبلاتنمك                        |
-    | fghiopfdrtyuil;               |
-    | 000000000                     |
-    | 000000018                     |
-    | 3327981827336443728282        |
-    | 33279618433                   |
-    | 22345567754                   |
-    | 331133232ssd2321312233        |
-    | 00                            |
 
   @form
   # excel sheet rule number 5

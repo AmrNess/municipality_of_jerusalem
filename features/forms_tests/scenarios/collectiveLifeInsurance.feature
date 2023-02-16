@@ -19,7 +19,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
   @Critical
   @form
   # excel sheet rule number 11
-  Scenario : full scenario for the page test (valid)
+  Scenario : full scenario for the page with sve click test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "332796184" in "מספר זהות"
     And I click on "שמור" button
@@ -41,7 +41,8 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
     Examples:
-    | id  |
+    | id        |
+    | 0         |
     | 331212324 |
     | 223344557 |
     | 112233440 |
@@ -55,7 +56,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 433243433 |
     | 752123133 |
     | 165786534 |
-    | 0 |
+    | 2345678234567823456782345678234567823456789345678 |
 
   @form
   # excel sheet rule number 3
@@ -66,7 +67,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
     Examples:
-    | id  |
+    | id                            |
     | 000000000                     |
     | 000000018                     |
     | 3327                          |
@@ -97,9 +98,9 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
+    And Check if error message of "מספר זהות" is "מספר זהות לא תקין"
     Examples:
-    | id  |
+    | id                            |
     | 000000001                     |
     | 000000118                     |
     | 000000009                     |
@@ -145,7 +146,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I write " " in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
-    And Check if error message is "חובה למלא מספר זהות"
+    And Check if error message  of "מספר זהות" is "חובה למלא מספר זהות"
 
   @form
   # excel sheet rule number 18
@@ -154,9 +155,9 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
+    And Check if error message  of "מספר זהות" is "מספר זהות לא תקין"
     Examples:
-    | id  |
+    | id                            |
     | 000000000                     |
     | 000000018                     |
     | 3327                          |
@@ -234,7 +235,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Then Check field "מספר זהות" has valid value
     And Validate that "מספר זהות" have the input with only numbers
     Examples:
-    | id  |
+    | id                            |
     | 33ק'/דגגבשד344557897          |
     | 33ק'سببسث344557897            |
     | 33ק'/דגגכבבשד344557897        |

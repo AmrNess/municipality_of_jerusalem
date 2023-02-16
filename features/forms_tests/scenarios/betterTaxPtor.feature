@@ -80,7 +80,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<case_number>" in "מספר תיק בנין"
     Then Check field "מספר תיק בנין" has invalid value
-    And Check if error message is "חובה לבחור תיק קווי בנין"
+    And Check if error message  of "מספר תיק בנין" is "חובה לבחור תיק קווי בנין"
     Examples:
     | case_number  |
     |              |

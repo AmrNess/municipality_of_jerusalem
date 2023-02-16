@@ -112,10 +112,10 @@ Feature: Basic Test for PlaceContainer Form Page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
-    And Check if error message is "עוסק זה אינו מוכר במערכת רישוי עסקים"
+    And Check if error message of "מספר מזהה" is "עוסק זה אינו מוכר במערכת רישוי עסקים"
     Examples:
     | id  |
-        | 000000001                     |
+        | 000000001                 |
     | 000000118                     |
     | 000000009                     |
     | 3121                          |
@@ -160,7 +160,7 @@ Feature: Basic Test for PlaceContainer Form Page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
-    And Check if error message is "עוסק זה אינו מוכר במערכת רישוי עסקים"
+    And Check if error message of "מספר מזהה" is "עוסק זה אינו מוכר במערכת רישוי עסקים"
     Examples:
     | id  |
     | 000000000                     |
@@ -295,7 +295,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write " " in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
-    And Check if error message is "יש למלא שם פרטי"
+    And Check if error message of "שם פרטי" is "יש למלא שם פרטי"
 
   @form
   # excel sheet rule number 18
@@ -305,7 +305,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "שם פרטי" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | first_name                  |
     |   firas                     |
@@ -320,7 +320,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write " " in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
-    And Check if error message is "יש למלא שם משפחה"
+    And Check if error message of "שם משפחה" is "יש למלא שם משפחה"
 
   @form
   # excel sheet rule number 18
@@ -330,7 +330,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write "<last_name>" in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "שם משפחה" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | last_name                   |
     |   firas                     |
@@ -345,7 +345,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write " " in "כתובת האתר לשפיכת הפסולת"
     Then Check field "כתובת האתר לשפיכת הפסולת" has invalid value
-    And Check if error message is "חובה להזין כתובת"
+    And Check if error message of "כתובת האתר לשפיכת הפסולת" is "חובה להזין כתובת"
 
    @form
   # excel sheet rule number 18
@@ -356,11 +356,11 @@ Feature: Basic Test for PlaceContainer Form Page
     When I write "<web_url>" in "כתובת האתר לשפיכת הפסולת"
     Then Check field "כתובת האתר לשפיכת הפסולת" has invalid value
     # dont know what the format of the url
-    And Check if error message is " "
+    And Check if error message of "כתובת האתר לשפיכת הפסולת" is " "
     Examples:
     | web_url               |
     |   sfsafsafasd         |
-    |   גכעיחלךכעיחל          |
+    |   גכעיחלךכעיחל         |
     |   بلاتنم%^&*[لأأـ،قفإ‘÷  |
 
   @form
@@ -428,7 +428,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
-    And Check if error message is "דוא''ל לא תקין"
+    And Check if error message of "אימייל" is "דוא''ל לא תקין"
     Examples:
     | email                        |
     | a@b...דג..............com    |
@@ -446,7 +446,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
-    And Check if error message is "דוא''ל לא תקין"
+    And Check if error message of "אימייל" is "דוא''ל לא תקין"
     Examples:
     | email                           |
     | a@b.com.com.com.com             |
@@ -501,7 +501,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write " " in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message is "חובה להזין מספר טלפון נייד"
+    And Check if error message of "מספר טלפון נייד" is "חובה להזין מספר טלפון נייד"
 
   @form
   # excel sheet rule number 18
@@ -510,7 +510,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message is "מספר טלפון נייד לא תקין"
+    And Check if error message of "מספר טלפון נייד" is "מספר טלפון נייד לא תקין"
     Examples:
     | phone_number  |
     | dka-dsasdas   |

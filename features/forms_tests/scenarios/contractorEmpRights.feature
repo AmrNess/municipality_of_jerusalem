@@ -90,7 +90,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
     Examples:
-    | id  |
+    | id        |
     | 331212324 |
     | 223344557 |
     | 112233440 |
@@ -116,7 +116,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
     Examples:
-    | id  |
+    | id                            |
     | 000000000                     |
     | 000000018                     |
     | 3327981827336443728282        |
@@ -134,10 +134,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
+    And Check if error message of "מספר זהות" is "מספר זהות לא תקין"
     Examples:
-    | id  |
-     | 000000001                    |
+    | id                           |
+    | 000000001                    |
     | 000000118                    |
     | 000000009                    |
     | 3121                         |
@@ -181,9 +181,9 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
+    And Check if error message of "מספר זהות" is "מספר זהות לא תקין"
     Examples:
-    | id  |
+    | id                            |
     | 000000000                     |
     | 000000018                     |
     | 3327981827336443728282        |
@@ -213,8 +213,8 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 356534567 | 112gdds40    | 112gdds40        |
     | 356534567 | 22sdfs440    | 22sdfs440        |
     | 356534567 | 111#$%&00    | 111#$%&00        |
-    | 356534567 | 223עיחל57    | 223עיחל57        |
-    | 356534567 | 223بتتن39    | 223بتتن39        |
+    | 356534567 | 223עיחל57    | 223עיחל57         |
+    | 356534567 | 223بتتن39    | 223بتتن39         |
     | 356534567 | 5$^%56745    | 5$^%56745        |
     | 356534567 | 1212@@$20    | 1212@@$20        |
     | 356534567 | 0088OIk80    | 0088OIk80        |
@@ -222,7 +222,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 356534567 | 75כע23133    | 75כע23133        |
     | 356534567 | ראטוןןלםם    | ראטוןןלםם         |
     | 356534567 | المينسةؤن    | المينسةؤن         |
-    | 356534567 | dlkjhokjl   | dlkjhokjl        |
+    | 356534567 | dlkjhokjl   | dlkjhokjl         |
 
   @form
   # excel sheet rule number 5
@@ -320,7 +320,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
-    And Check if error message is "יש למלא שם פרטי"
+    And Check if error message of "שם פרטי" is "יש למלא שם פרטי"
 
   @form
   # excel sheet rule number 18
@@ -330,7 +330,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "שם פרטי" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | first_name            |
     |   firas               |
@@ -345,7 +345,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
-    And Check if error message is "יש למלא שם משפחה"
+    And Check if error message of "שם משפחה" is "יש למלא שם משפחה"
 
   @form
   # excel sheet rule number 18
@@ -355,7 +355,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<last_name>" in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "שם משפחה" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | last_name             |
     |   firas               |
@@ -371,7 +371,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<street>" in "רחוב"
     Then Check field "רחוב" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "רחוב" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | street                |
     |   sfsafsafasd         |
@@ -386,7 +386,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<city_site_name>" in "שם אתר עירוני"
     Then Check field "שם אתר עירוני" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "שם אתר עירוני" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | city_site_name        |
     |   sfsafsafasd         |
@@ -458,7 +458,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
-    And Check if error message is "דוא''ל לא תקין"
+    And Check if error message of "אימייל" is "דוא''ל לא תקין"
     Examples:
     | email  |
     | a@b...דג..............com    |
@@ -476,7 +476,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
-    And Check if error message is "דוא''ל לא תקין"
+    And Check if error message of "אימייל" is "דוא''ל לא תקין"
     Examples:
     | email  |
     | a@b.com.com.com.com          |
@@ -495,7 +495,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then Check field "מספר טלפון נייד" has valid value
     And Validate that "מספר טלפון נייד" have the input with only numbers
     Examples:
-    | phone_number  |
+    | phone_number |
     | 0527878787   |
     | 0568907495   |
     | 0778748576   |
@@ -524,7 +524,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message is "יש להזין מספר טלפון נייד"
+    And Check if error message of "מספר טלפון נייד" is "יש להזין מספר טלפון נייד"
 
   @form
   # excel sheet rule number 18
@@ -533,14 +533,14 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message is "יש להזין ספרות בלבד"
+    And Check if error message of "מספר טלפון נייד" is "יש להזין ספרות בלבד"
     Examples:
-    | phone_number  |
+    | phone_number |
     | dkadsasdas   |
     | 052sdks2j2   |
     | 054394832j   |
-    | 035יעחלךןח    |
-    | 077تلاتتاتن    |
+    | 035יעחלךןח   |
+    | 077تلاتتاتن   |
 
   @form
   # excel sheet rule number 18
@@ -550,12 +550,12 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message is "ש להשלים את הספרות החסרות"
+    And Check if error message of "מספר טלפון נייד" is "ש להשלים את הספרות החסרות"
     Examples:
     | phone_number  |
-    | 0522   |
-    | 05234  |
-    | 054567 |
+    | 0522          |
+    | 05234         |
+    | 054567        |
 
   @form
   # excel sheet rule number 5
@@ -567,10 +567,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Validate that "מספר טלפון" have the input with only numbers
     Examples:
     | home_phone_number  |
-    | 027878787   |
-    | 068907495   |
-    | 078748576   |
-    | 053247857   |
+    | 027878787          |
+    | 068907495          |
+    | 078748576          |
+    | 053247857          |
 
   @form
   # excel sheet rule number 5
@@ -583,10 +583,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Validate that "מספר טלפון" have the input with only numbers
      Examples:
     | home_phone_number |
-    | sjh-skjsksj  |
-    | sdsasasdd    |
-    | gregwe$%f    |
-    | @#$%^&*(7    |
+    | sjh-skjsksj       |
+    | sdsasasdd         |
+    | gregwe$%f         |
+    | @#$%^&*(7         |
 
   @form
   # excel sheet rule number 18
@@ -595,14 +595,14 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has invalid value
-    And Check if error message is "יש להזין ספרות בלבד"
+    And Check if error message of "מספר טלפון" is "יש להזין ספרות בלבד"
     Examples:
     | home_phone_number  |
-    | dka-dsasdas   |
-    | 052-sdks2j2   |
-    | 054-394832j   |
-    | 035-יעחלךןח    |
-    | 077-تلاتتاتن    |
+    | dka-dsasdas        |
+    | 052-sdks2j2        |
+    | 054-394832j        |
+    | 035-יעחלךןח         |
+    | 077-تلاتتاتن        |
 
   @form
   # excel sheet rule number 18
@@ -612,12 +612,12 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has invalid value
-    And Check if error message is "ש להשלים את הספרות החסרות"
+    And Check if error message of "מספר טלפון" is "ש להשלים את הספרות החסרות"
     Examples:
     | home_phone_number  |
-    | 0522   |
-    | 05234  |
-    | 054567 |
+    | 0522               |
+    | 05234              |
+    | 054567             |
 
   @form
   Scenario Outline: birthday date value test (valid)
@@ -625,12 +625,12 @@ Feature: Basic Test for ContractorEmpRights Form Page
     When I pick date of "<birthday_date>" in "תאריך לידה"
     Examples:
     | birthday_date |
-    | 12/4/1990  |
-    | 15/3/1997  |
-    | 23/6/2000  |
-    | 4/7/2020   |
-    | 3/12/2017  |
-    | 2/1/2018   |
+    | 12/4/1990     |
+    | 15/3/1997     |
+    | 23/6/2000     |
+    | 4/7/2020      |
+    | 3/12/2017     |
+    | 2/1/2018      |
 
   @form
   Scenario Outline: branch value test (valid)
@@ -719,7 +719,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "פרטי התלונה"
     Then Check field "פרטי התלונה" has invalid value
-    And Check if error message is "יש למלא את פרטי התלונה"
+    And Check if error message of "פרטי התלונה" is "יש למלא את פרטי התלונה"
 
   @form
   # excel sheet rule number 18
@@ -729,7 +729,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
     Then Check field "פרטי התלונה" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "פרטי התלונה" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | complaint_details      |
     |   firas                |
@@ -785,7 +785,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
     Then Check field "התשובה שקיבלתי" has invalid value
-    And Check if error message is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
+    And Check if error message of "התשובה שקיבלתי" is "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -"
     Examples:
     | answer_you_got      |
     |   firas             |
