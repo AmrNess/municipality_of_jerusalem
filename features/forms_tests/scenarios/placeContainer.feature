@@ -19,9 +19,32 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario: id value test (valid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write " " in "מספר מזהה"
+    And I write " " in "מספר מזהה"
     Then Check field "מספר מזהה" has valid value
     And Click on "המשך"
+
+
+  # excel sheet rule number 11
+  Scenario : full scenario for the page test (valid)
+    Given I navigate to "PlaceContainer" page
+    When Choose "ת.ז." in "סוג זהות"
+    And I write "332796184" in "מספר מזהה"
+    And I write "פראס" in "שם פרטי"
+    And I write "אבו סנינה" in "שם משפחה"
+    And I write "0528076374" in "מספר טלפון נייד"
+    And I write "firas@ab.com" in "אימייל"
+    And I pick "א - זבאדי" in "רחוב"
+    And I write "2" in "מספר בית"
+    And I write "1" in "מספר דירה"
+    And I pick "א - זבאדי" in "רחוב הצבת המכולה"
+    And I write "4" in "מספר בית"
+    And I write "2" in "מספר מכולה"
+    And I pick date of "12/4/2023 16:00 " in "מתאריך"
+    And I pick date of "12/5/2023 16:00 " in "עד תאריך"
+    And I pick "מותרת" in "סוג החניה"
+    And I write "www.ss.com" in "כתובת האתר לשפיכת הפסולת"
+    And I click on "שמור" button
+    Then validate that you have information in the fields that you filled
 
 
 
@@ -29,7 +52,7 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: id value test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write "<id>" in "מספר מזהה"
+    And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
     Examples:
     | id  |
@@ -77,7 +100,7 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: id value test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write "<id>" in "מספר מזהה"
+    And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
     Examples:
     | id  |
@@ -96,7 +119,7 @@ Feature: Basic Test for PlaceContainer Form Page
     Scenario Outline: id error message test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write "<id>" in "מספר מזהה"
+    And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
     And Check if error message is "עוסק זה אינו מוכר במערכת רישוי עסקים"
     Examples:
@@ -119,7 +142,7 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: id error message test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write "<id>" in "מספר מזהה"
+    And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
     And Check if error message is "עוסק זה אינו מוכר במערכת רישוי עסקים"
     Examples:
@@ -140,14 +163,14 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: id,house number, apartment_number, container_number value allow to write just numbers test (valid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write "<id>" in "מספר מזהה"
-    When I write "<house_number>" in "מספר בית"
-    When I write "<apartment_number>" in "מספר דירה"
-    When I write "<container_number>" in "מספר מכולה"
+    And I write "<id>" in "מספר מזהה"
+    And I write "<house_number>" in "מספר בית"
+    And I write "<apartment_number>" in "מספר דירה"
+    And I write "<container_number>" in "מספר מכולה"
     Then Check field "מספר מזהה" has valid value
-    Then Check field "מספר בית" has valid value
-    Then Check field "מספר דירה" has valid value
-    Then Check field "מספר מכולה" has valid value
+    And Check field "מספר בית" has valid value
+    And Check field "מספר דירה" has valid value
+    And Check field "מספר מכולה" has valid value
     Examples:
     | id        |house_number  | apartment_number | container_number |
     | 356534567 | 356534567    | 356534567        | 356534567        |
@@ -173,14 +196,14 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: id,house number, apartment_number, container_number value allow to write just numbers test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
-    When I write "<id>" in "מספר מזהה"
-    When I write "<house_number>" in "מספר בית"
-    When I write "<apartment_number>" in "מספר דירה"
-    When I write "<container_number>" in "מספר מכולה"
+    And I write "<id>" in "מספר מזהה"
+    And I write "<house_number>" in "מספר בית"
+    And I write "<apartment_number>" in "מספר דירה"
+    And I write "<container_number>" in "מספר מכולה"
     Then Check field "מספר מזהה" has invalid value
-    Then Check field "מספר בית" has valid value
-    Then Check field "מספר דירה" has valid value
-    Then Check field "מספר מכולה" has valid value
+    And Check field "מספר בית" has valid value
+    And Check field "מספר דירה" has valid value
+    And Check field "מספר מכולה" has valid value
     Examples:
     | id  |house_number  | apartment_number        | container_number |
     | 457756e67  | 457756e67    | 457756e67        | 457756e67        |
@@ -195,11 +218,11 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
-    When I write "<last_name>" in "שם משפחה"
-    When I write "<web_url>" in "כתובת האתר לשפיכת הפסולת"
+    And I write "<last_name>" in "שם משפחה"
+    And I write "<web_url>" in "כתובת האתר לשפיכת הפסולת"
     Then Check field "שם פרטי" has valid valid
-    Then Check field "שם משפחה" has valid valid
-    Then Check field "כתובת האתר לשפיכת הפסולת" has valid valid
+    And Check field "שם משפחה" has valid valid
+    And Check field "כתובת האתר לשפיכת הפסולת" has valid valid
     Examples:
     | first_name   | last_name   | web_url     |
     | פראס         | א-בו דגככ    |  אבו דגככ   |
@@ -218,11 +241,11 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario Outline: all text field allow to write just Hebrew test (invalid)
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
-    When I write "<last_name>" in "שם משפחה"
-    When I write "<web_url>" in "כתובת האתר לשפיכת הפסולת"
+    And I write "<last_name>" in "שם משפחה"
+    And I write "<web_url>" in "כתובת האתר לשפיכת הפסולת"
     Then Check field "שם פרטי" has valid valid
-    Then Check field "שם משפחה" has valid valid
-    Then Check field "כתובת האתר לשפיכת הפסולת" has valid valid
+    And Check field "שם משפחה" has valid valid
+    And Check field "כתובת האתר לשפיכת הפסולת" has valid valid
     Examples:
     | first_name      | last_name      |  web_url          |
     | سفغعه           | يبلاتنم          |  يبلاتنم           |

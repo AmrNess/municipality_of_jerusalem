@@ -11,7 +11,15 @@ Feature: Basic Test for BetterTaxPtor Form Page
   Scenario: Check Print display
     Given I navigate to "BetterTaxPtor" page
     When I click on "הדפס" button
-    And Check if Print display is clear
+    Then Check if Print display is clear
+
+
+  # excel sheet rule number 11
+  Scenario : full scenario for the page test (valid)
+    Given I navigate to "BetterTaxPtor" page
+    When I write "3327961844" in "מספר תיק בנין"
+    When I click on "שמור" button
+    Then validate that you have information in the fields that you filled
 
   # excel sheet rule number 5
   Scenario Outline: case number value test (valid)

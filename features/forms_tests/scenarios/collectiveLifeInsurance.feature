@@ -12,6 +12,13 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I click on "הדפס" button
     Then Check if Print display is clear
 
+   # excel sheet rule number 11
+  Scenario : full scenario for the page test (valid)
+    Given I navigate to "CollectiveLifeInsurance" page
+    When I write "332796184" in "מספר זהות"
+    And I click on "שמור" button
+    Then validate that you have information in the fields that you filled
+
 
 
   # excel sheet rule number 3

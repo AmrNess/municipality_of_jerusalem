@@ -14,15 +14,29 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
 
 
 
+  # excel sheet rule number 11
+  Scenario : full scenario for the page test (valid)
+    Given I navigate to "PlaceContainer" page
+    When Choose "ת.ז." in "סוג זהות תלמיד"
+    And I write "332796184" in "מספר זהות תלמיד"
+    And Choose "ת.ז." in "סוג זהות הורה"
+    And I write "334496184" in "מספר זהות הורה"
+    And I pick "תשפ"ד - 2024" in "שנת רישום"
+    And I pick "ערעור על החלטת הוועדה" in "סוג הפניה"
+    And I click on "שמור" button
+    Then validate that you have information in the fields that you filled
+
+
+
    # excel sheet rule number 3
   Scenario Outline: student, parent id value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
-    When I write "<student_id>" in "מספר זהות תלמיד"
-    When Choose "ת.ז." in "סוג זהות הורה"
-    When I write "<parent_id>" in "מספר זהות הורה"
+    And I write "<student_id>" in "מספר זהות תלמיד"
+    And Choose "ת.ז." in "סוג זהות הורה"
+    And I write "<parent_id>" in "מספר זהות הורה"
     Then Check field "מספר זהות תלמיד" has valid value
-    Then Check field "מספר זהות הורה" has valid value
+    And Check field "מספר זהות הורה" has valid value
     Examples:
     | student_id| parent_id |
     | 331212324 | 165786534 |
@@ -45,11 +59,11 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
   Scenario Outline:  student, parent id value test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
-    When I write "<student_id>" in "מספר זהות תלמיד"
-    When Choose "ת.ז." in "סוג זהות הורה"
-    When I write "<parent_id>" in "מספר זהות הורה"
+    And I write "<student_id>" in "מספר זהות תלמיד"
+    And Choose "ת.ז." in "סוג זהות הורה"
+    And I write "<parent_id>" in "מספר זהות הורה"
     Then Check field "מספר זהות תלמיד" has valid value
-    Then Check field "מספר זהות הורה" has valid value
+    And Check field "מספר זהות הורה" has valid value
     Examples:
     |student_id                     |parent_id                    |
     | 000000001                     |000000001                    |
@@ -96,11 +110,11 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
   Scenario Outline: id value test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
-    When I write "<student_id>" in "מספר זהות תלמיד"
-    When Choose "ת.ז." in "סוג זהות הורה"
-    When I write "<parent_id>" in "מספר זהות הורה"
+    And I write "<student_id>" in "מספר זהות תלמיד"
+    And Choose "ת.ז." in "סוג זהות הורה"
+    And I write "<parent_id>" in "מספר זהות הורה"
     Then Check field "מספר זהות תלמיד" has valid value
-    Then Check field "מספר זהות הורה" has valid value
+    And Check field "מספר זהות הורה" has valid value
     Examples:
     | student_id                    | parent_id                     |
     | 000000000                     |000000000                      |
@@ -119,7 +133,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     Scenario Outline: student id error message test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
-    When I write "<student_id>" in "מספר זהות תלמיד"
+    And I write "<student_id>" in "מספר זהות תלמיד"
     Then Check field "מספר זהות תלמיד" has invalid value
     And Check if error message is "מספר זהות לא תקין"
     Examples:
@@ -153,7 +167,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
   Scenario Outline: parent_id error message test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "מספר זהות הורה"
-    When I write "<parent_id>" in "מספר זהות הורה"
+    And I write "<parent_id>" in "מספר זהות הורה"
     Then Check field "מספר זהות הורה" has invalid value
     And Check if error message is "מספר זהות לא תקין"
     Examples:
@@ -188,10 +202,10 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
   Scenario Outline: student, parent id value allow to write just numbers test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
-    When I write "<student_id>" in "מספר זהות תלמיד"
+    And I write "<student_id>" in "מספר זהות תלמיד"
     Then Check field "מספר זהות תלמיד" has invalid value
     When Choose "ת.ז." in "מספר זהות הורה"
-    When I write "<parent_id>" in "מספר זהות הורה"
+    And I write "<parent_id>" in "מספר זהות הורה"
     Then Check field "מספר זהות הורה" has invalid value
     Examples:
     | student_id  |parent_id      |
@@ -222,4 +236,4 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
   Scenario: year and reason check value test (valid)
     Given I navigate to "MishpachtonimAppeal" page
     When I pick "תשפ"ד - 2024" in "שנת רישום"
-    When I pick "ערעור על החלטת הוועדה" in "סוג הפניה"
+    And I pick "ערעור על החלטת הוועדה" in "סוג הפניה"

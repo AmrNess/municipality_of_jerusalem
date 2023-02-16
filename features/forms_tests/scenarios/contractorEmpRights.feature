@@ -15,6 +15,36 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+
+  # excel sheet rule number 11
+  Scenario : full scenario for the page test (valid)
+    Given I navigate to "PlaceContainer" page
+    When I write "332796184" in "מספר זהות"
+    And I write "פראס" in "שם פרטי"
+    And I write "אבו סנינה" in "שם משפחה"
+    And I pick date of "14/02/2023" in "תאריך לידה"
+    And I pick "א - זבאדי" in "רחוב"
+    And I write "2" in "מספר בית"
+    And I write "1" in "מספר דירה"
+    And I write "028076374" in "מספר טלפון"
+    And I write "0528076374" in "מספר טלפון נייד"
+    And I write "firas@ab.com" in "אימייל"
+    And I pick "הסעדה" in "ענף"
+    And I pick "גורמה ארוחות בע"מ " in "שם חברה"
+    And I write "אבו דגשדגשדככ" in "שם אתר עירוני"
+    And I pick date of "12/4/1990 " in "תאריך תחילת העבודה בחברה"
+    And I pick "ניהול פנקס שעות עבודה " in "נושא התלונה"
+    And I write "פראס" in "פרטי התלונה"
+    And Click On "+" sign in "חודשים לבדיקה"
+    And I pick "2023" in "שנה"
+    And I pick "1" in "חודשים"
+    And Choose "כן" in "האם היתה פניה למעסיק קודם הגשת תלונה זו"
+    And I write "שדכשד__שדג " in "התשובה שקיבלתי"
+    And I click on "שמור" button
+    Then validate that you have information in the fields that you filled
+
+
+
    # excel sheet rule number 3
   Scenario Outline: id value test (valid)
     Given I navigate to "ContractorEmpRights" page
@@ -147,11 +177,11 @@ Feature: Basic Test for ContractorEmpRights Form Page
   Scenario Outline: id,house number, apartment_number value allow to write just numbers test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
-    When I write "<house_number>" in "מספר בית"
-    When I write "<apartment_number>" in "מספר דירה"
+    And I write "<house_number>" in "מספר בית"
+    And I write "<apartment_number>" in "מספר דירה"
     Then Check field "מספר זהות" has valid value
-    Then Check field "מספר בית" has valid value
-    Then Check field "מספר דירה" has valid value
+    And Check field "מספר בית" has valid value
+    And Check field "מספר דירה" has valid value
     # the id field accept all letters in all languages and signs, for that i put just numbers in the id field
     Examples:
     | id        |house_number  | apartment_number |
@@ -177,11 +207,11 @@ Feature: Basic Test for ContractorEmpRights Form Page
   Scenario Outline: id,house number, apartment_number value allow to write just numbers test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
-    When I write "<house_number>" in "מספר בית"
-    When I write "<apartment_number>" in "מספר דירה"
+    And I write "<house_number>" in "מספר בית"
+    And I write "<apartment_number>" in "מספר דירה"
     Then Check field "מספר זהות" has invalid value
-    Then Check field "מספר בית" has valid value
-    Then Check field "מספר דירה" has valid value
+    And Check field "מספר בית" has valid value
+    And Check field "מספר דירה" has valid value
     Examples:
     | id         |house_number  | apartment_number|
     | 457756e67  | 457756e67    | 457756e67       |
@@ -212,13 +242,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
-    When I write "<last_name>" in "שם משפחה"
-    When I write "<street>" in "רחוב"
-    When I write "<city_site_name>" in "שם אתר עירוני"
+    And I write "<last_name>" in "שם משפחה"
+    And I write "<street>" in "רחוב"
+    And I write "<city_site_name>" in "שם אתר עירוני"
     Then Check field "שם פרטי" has valid valid
-    Then Check field "שם משפחה" has valid valid
-    Then Check field "רחוב" has valid valid
-    Then Check field "שם אתר עירוני" has valid valid
+    And Check field "שם משפחה" has valid valid
+    And Check field "רחוב" has valid valid
+    And Check field "שם אתר עירוני" has valid valid
     Examples:
     | first_name  | last_name    | street       | city_site_name  |
     | פראס         | א-בו דגככ    |  אבו דגככ     | אבו דגשדגשדככ    |
@@ -236,13 +266,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
   Scenario Outline: all text field allow to write just Hebrew test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
-    When I write "<last_name>" in "שם משפחה"
-    When I write "<street>" in "רחוב"
-    When I write "<city_site_name>" in "שם אתר עירוני"
+    And I write "<last_name>" in "שם משפחה"
+    And I write "<street>" in "רחוב"
+    And I write "<city_site_name>" in "שם אתר עירוני"
     Then Check field "שם פרטי" has valid valid
-    Then Check field "שם משפחה" has valid valid
-    Then Check field "רחוב" has valid valid
-    Then Check field "שם אתר עירוני" has valid valid
+    And Check field "שם משפחה" has valid valid
+    And Check field "רחוב" has valid valid
+    And Check field "שם אתר עירוני" has valid valid
     Examples:
     | first_name      | last_name        |  street           | city_site_name   |
     | سفغعه           | يبلاتنم            |  يبلاتنم            | يبلات567$%^       |
@@ -751,10 +781,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Scenario Outline: months to check value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When Click On "+" sign in "חודשים לבדיקה"
-    When I pick "<year>" in "שנה"
-    When I pick "<month>" in "חודשים"
+    And I pick "<year>" in "שנה"
+    And I pick "<month>" in "חודשים"
     Examples:
-    | year  | month |
+    | month  | year |
     |  1    |  2023 |
     |  2    |  2022 |
     |  3    |  2023 |
