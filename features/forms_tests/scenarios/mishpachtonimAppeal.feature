@@ -1,11 +1,13 @@
 Feature: Basic Test for MishpachtonimAppeal Form Page
 
+  @header
   # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "MishpachtonimAppeal" page
     When Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
+  @header
   # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "MishpachtonimAppeal" page
@@ -13,7 +15,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     And Check if Print display is clear
 
 
-
+  @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "PlaceContainer" page
@@ -28,6 +30,18 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
 
 
 
+  @form
+  # excel sheet rule number 18
+  Scenario : Check if the mandatory are invalid
+    Given I navigate to "CollectiveLifeInsurance" page
+    When I click on "שמור" button
+    Then Validate that you are in the same page
+    And Check if "מספר זהות תלמיד" has "יש להזין מספר זהות" message
+    And Check if "מספר זהות הורה" has "יש להזין מספר זהות" message
+
+
+
+    @form
    # excel sheet rule number 3
   Scenario Outline: student, parent id value test (valid)
     Given I navigate to "ContractorEmpRights" page
@@ -53,8 +67,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 752123133 | 112233440 |
     | 165786534 | 223344557 |
 
-
-
+   @form
   # excel sheet rule number 3
   Scenario Outline:  student, parent id value test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
@@ -104,6 +117,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 160786030                    |160786030                     |
 
 
+  @form
   # excel sheet rule number 3
   # BUG:
   # Another BUG : the student, parent id that contains one letter until 16 number
@@ -128,6 +142,8 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 33344557897                   |33344557897                    |
     | 00                            |00                             |
 
+
+    @form
     # excel sheet rule number 18
     # BUG:
     Scenario Outline: student id error message test (invalid)
@@ -162,6 +178,8 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 00                            |
 
 
+
+    @form
     # excel sheet rule number 18
     # BUG:
   Scenario Outline: parent_id error message test (invalid)
@@ -196,7 +214,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 00                            |
 
 
-
+  @form
   # excel sheet rule number 5
   # BUG:
   Scenario Outline: student, parent id value allow to write just numbers test (invalid)
@@ -207,6 +225,8 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     When Choose "ת.ז." in "מספר זהות הורה"
     And I write "<parent_id>" in "מספר זהות הורה"
     Then Check field "מספר זהות הורה" has invalid value
+    And Validate that "מספר זהות תלמיד" have the input with only numbers
+    And Validate that "מספר זהות הורה" have the input with only numbers
     Examples:
     | student_id  |parent_id      |
     | 3456789فغع  | فب7ل8هةخسخ     |
@@ -231,8 +251,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | dlkjhokjl   | !َ@#$%^ٌغهع        |
 
 
-
-
+  @form
   Scenario: year and reason check value test (valid)
     Given I navigate to "MishpachtonimAppeal" page
     When I pick "תשפ"ד - 2024" in "שנת רישום"

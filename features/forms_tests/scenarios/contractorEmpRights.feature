@@ -1,12 +1,14 @@
 Feature: Basic Test for ContractorEmpRights Form Page
 
 
+  @header
   # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "ContractorEmpRights" page
     When Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
+  @header
   # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "ContractorEmpRights" page
@@ -16,6 +18,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+  @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "PlaceContainer" page
@@ -44,7 +47,29 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then validate that you have information in the fields that you filled
 
 
+  @form
+  # excel sheet rule number 18
+  Scenario : Check if the mandatory are invalid
+    Given I navigate to "CollectiveLifeInsurance" page
+    When I click on "שמור" button
+    Then Validate that you are in the same page
+    And Check if "מספר זהות" has "יש להזין מספר זהות" message
+    And Check if "שם פרטי" has "יש למלא שם פרטי" message
+    And Check if "שם משפחה" has "יש למלא שם משפחה" message
+    And Check if "מספר טלפון נייד" has "חובה להזין מספר טלפון נייד" message
+    And Check if "אימייל" has "חובה להזין כתובת אימייל" message
+    And Check if "ענף" has "יש לבחור ענף" message
+    And Check if "שם חברה" has "יש לבחור שם חברה" message
+    And Check if "תאריך תחילת העבודה בחברה" has "יש לסמן תאריך תחילת עבודה" message
+    And Check if "נושא התלונה" has "יש לבחור את נושא/י התלונה" message
+    And Check if "פרטי התלונה" has "יש למלא את פרטי התלונה" message
+    And Check if "חודשים לבדיקה" has "נא למלא שנה נא למלא חודש/ים" message
+    And Check if "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "יש לסמן האם היתה פניה למעסיק קודם הגשת תלונה זו" message
 
+
+
+
+   @form
    # excel sheet rule number 3
   Scenario Outline: id value test (valid)
     Given I navigate to "ContractorEmpRights" page
@@ -68,6 +93,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+  @form
   # excel sheet rule number 3
   Scenario Outline: id value test (invalid)
     Given I navigate to "ContractorEmpRights" page
@@ -113,6 +139,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 160786030                    |
 
 
+  @form
   # excel sheet rule number 3
   # BUG:
   # Another BUG : the id that contains one number until unlimited
@@ -133,6 +160,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 33344557897                   |
     | 00                            |
 
+    @form
     # excel sheet rule number 18
     Scenario Outline: id error message test (invalid)
     Given I navigate to "ContractorEmpRights" page
@@ -154,6 +182,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+  @form
   # excel sheet rule number 18
   # BUG:
   Scenario Outline: id error message test (invalid)
@@ -173,6 +202,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+  @form
   # excel sheet rule number 5
   Scenario Outline: id,house number, apartment_number value allow to write just numbers test (valid)
     Given I navigate to "ContractorEmpRights" page
@@ -182,6 +212,9 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then Check field "מספר זהות" has valid value
     And Check field "מספר בית" has valid value
     And Check field "מספר דירה" has valid value
+    And Validate that "מספר זהות" have the input with only numbers
+    And Validate that "מספר בית" have the input with only numbers
+    And Validate that "מספר דירה" have the input with only numbers
     # the id field accept all letters in all languages and signs, for that i put just numbers in the id field
     Examples:
     | id        |house_number  | apartment_number |
@@ -202,6 +235,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 356534567 | dlkjhokjl   | dlkjhokjl        |
 
 
+   @form
   # excel sheet rule number 5
   # BUG:
   Scenario Outline: id,house number, apartment_number value allow to write just numbers test (invalid)
@@ -212,6 +246,9 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then Check field "מספר זהות" has invalid value
     And Check field "מספר בית" has valid value
     And Check field "מספר דירה" has valid value
+    And Validate that "מספר זהות" have the input with only numbers
+    And Validate that "מספר בית" have the input with only numbers
+    And Validate that "מספר דירה" have the input with only numbers
     Examples:
     | id         |house_number  | apartment_number|
     | 457756e67  | 457756e67    | 457756e67       |
@@ -238,6 +275,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+    @form
    # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "ContractorEmpRights" page
@@ -249,6 +287,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Check field "שם משפחה" has valid valid
     And Check field "רחוב" has valid valid
     And Check field "שם אתר עירוני" has valid valid
+    And Validate that "שם פרטי" have the input only Hebrew with the allowed signs
+    And Validate that "שם משפחה" have the input only Hebrew with the allowed signs
+    And Validate that "רחוב" have the input only Hebrew with the allowed signs
+    And Validate that "שם אתר עירוני" have the input only Hebrew with the allowed signs
     Examples:
     | first_name  | last_name    | street       | city_site_name  |
     | פראס         | א-בו דגככ    |  אבו דגככ     | אבו דגשדגשדככ    |
@@ -259,6 +301,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
+   @form
   # excel sheet rule number 4
   # fields of first name and last name and street accept all languages and signs
   # BUG:
@@ -273,6 +316,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Check field "שם משפחה" has valid valid
     And Check field "רחוב" has valid valid
     And Check field "שם אתר עירוני" has valid valid
+    And Validate that "שם פרטי" have the input only Hebrew with the allowed signs
+    And Validate that "שם משפחה" have the input only Hebrew with the allowed signs
+    And Validate that "רחוב" have the input only Hebrew with the allowed signs
+    And Validate that "שם אתר עירוני" have the input only Hebrew with the allowed signs
     Examples:
     | first_name      | last_name        |  street           | city_site_name   |
     | سفغعه           | يبلاتنم            |  يبلاتنم            | يبلات567$%^       |
@@ -283,6 +330,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | כעיחRTYU4%^&%^  | $%^&RTYقفغfghعه   |  $%^&RTYقفغfghعه  |כעיחRTYU4%^        |
 
 
+  @form
   # excel sheet rule number 18
   # error message for empty field
   Scenario: error message for first name field (invalid)
@@ -292,6 +340,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Check if error message is "יש למלא שם פרטי"
 
 
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -307,6 +356,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   fiwrqrwwras         |
     |   firdasd3r3ras       |
 
+  @form
   # excel sheet rule number 18
   # error message for empty field
   Scenario: error message for last name field (invalid)
@@ -315,7 +365,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then Check field "שם משפחה" has invalid value
     And Check if error message is "יש למלא שם משפחה"
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -331,7 +381,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   fiwrqrwwras         |
     |   firdasd3r3ras       |
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -346,7 +396,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   גכעיחלךכעיחל         |
     |   بلاتنم%^&*[لأأـ،قفإ‘÷  |
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -361,12 +411,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   גכעיחלךכעיחל         |
     |   بلاتنم%^&*[لأأـ،قفإ‘÷  |
 
-
+  @form
   # excel sheet rule number 6
   Scenario Outline: email field allow to write just english and numbers test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has valid value
+    And Validate that "אימייל" have the input only english, numbers with the allowed signs
     Examples:
     | email  |
     | sda32sd@dyj.com    |
@@ -380,12 +431,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | fewfas@fefsab.com  |
     | awdas@efadsb.com   |
 
-
+  @form
   # excel sheet rule number 6
   Scenario Outline: email field allow to write just english and numbers test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
+    And Validate that "אימייל" have the input only english, numbers with the allowed signs
     Examples:
     | email  |
     | a@b...דג..............com    |
@@ -398,6 +450,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | dgh.@gjj.com                 |
     | dfghj.dfghj@@j.com           |
 
+  @form
   # excel sheet rule number 6
   # BUG:
   # Another BUG : the email that contains one letter until unlimited
@@ -405,6 +458,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
+    And Validate that "אימייל" have the input only english, numbers with the allowed signs
     Examples:
     | email  |
     | a@b.com.com.com.com     |
@@ -416,7 +470,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |A@b.cOm                  |
 
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   Scenario Outline: email error message test for wrong input (invalid)
@@ -434,7 +488,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | A@f@h$.com                   |
 
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -453,12 +507,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | a+r@b.com                    |
     |A@b.cOm                       |
 
-
+  @form
  # excel sheet rule number 5
   Scenario Outline: phone number field allow to write just numbers test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has valid value
+    And Validate that "מספר טלפון נייד" have the input with only numbers
     Examples:
     | phone_number  |
     | 0527878787   |
@@ -467,7 +522,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 0597247857   |
 
 
-
+  @form
   # excel sheet rule number 5
   # the field refuse all the letters
   # BUG:
@@ -475,6 +530,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has valid value
+    And Validate that "מספר טלפון נייד" have the input with only numbers
      Examples:
     | phone_number |
     | sjh-skjsksj  |
@@ -484,7 +540,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
+  @form
   # excel sheet rule number 18
   # error message for empty phone number
   Scenario: phone number error message test (invalid)
@@ -493,7 +549,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then Check field "מספר טלפון נייד" has invalid value
     And Check if error message is "יש להזין מספר טלפון נייד"
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong phone number
   Scenario Outline: phone number error message test (invalid)
@@ -510,7 +566,8 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 077تلاتتاتن    |
 
 
-    # excel sheet rule number 18
+  @form
+  # excel sheet rule number 18
   # error message for incomplete phone number
   # BUG:
   Scenario Outline: phone number error message test (invalid)
@@ -525,13 +582,14 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 054567 |
 
 
-
+  @form
   # excel sheet rule number 5
   # BUG:
   Scenario Outline: home phone number field allow to write just numbers test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has valid value
+    And Validate that "מספר טלפון" have the input with only numbers
     Examples:
     | home_phone_number  |
     | 027878787   |
@@ -540,7 +598,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 053247857   |
 
 
-
+  @form
   # excel sheet rule number 5
   # the field refuse all the letters
   # BUG:
@@ -548,6 +606,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has invalid value
+    And Validate that "מספר טלפון" have the input with only numbers
      Examples:
     | home_phone_number |
     | sjh-skjsksj  |
@@ -556,7 +615,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | @#$%^&*(7    |
 
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong phone number
   Scenario Outline: home phone number error message test (invalid)
@@ -572,7 +631,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 035-יעחלךןח    |
     | 077-تلاتتاتن    |
 
-
+  @form
   # excel sheet rule number 18
   # error message for incomplete phone number
   # BUG:
@@ -589,7 +648,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
+  @form
   Scenario Outline: birthday date value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I pick date of "<birthday_date>" in "תאריך לידה"
@@ -604,7 +663,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
+  @form
   Scenario Outline: branch value test (valid)
     Given I navigate to "PlaceContainer" page
     When I pick "<branch>" in "ענף"
@@ -614,7 +673,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | שמירה   |
     | ניקיון  |
 
-
+  @form
   Scenario Outline: company name value test (valid)
     Given I navigate to "PlaceContainer" page
     When I pick "<company_name>" in "שם חברה"
@@ -627,7 +686,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | קמח תורה בע"מ          |
     | גורמה ארוחות בע"מ      |
 
-
+  @form
   Scenario Outline: date of starting work in the company value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I pick date of "<date_of_starting_work>" in "תאריך תחילת העבודה בחברה"
@@ -642,7 +701,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
+  @form
   Scenario Outline: company name value test (valid)
     Given I navigate to "PlaceContainer" page
     When I pick "<complaint_subject>" in "נושא התלונה"
@@ -657,12 +716,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
+    @form
    # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
     Then Check field "פרטי התלונה" has valid valid
+    And Validate that "פרטי התלונה" have the input only Hebrew with the allowed signs
     Examples:
     | complaint_details  |
     | פראס               |
@@ -672,7 +732,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | דש)כדשכדכ           |
 
 
-
+  @form
   # excel sheet rule number 4
   # field of Details of the complaint accept all languages and signs
   # BUG:
@@ -680,6 +740,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
     Then Check field "פרטי התלונה" has valid valid
+    And Validate that "פרטי התלונה" have the input only Hebrew with the allowed signs
     Examples:
     | complaint_details       |
     | سفغعه                   |
@@ -689,7 +750,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | ertyuh$%^               |
     | כעיחRTYU4%^&%^          |
 
-
+  @form
   # excel sheet rule number 18
   # error message for empty field
   Scenario: error message for complaint details field (invalid)
@@ -698,7 +759,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Then Check field "פרטי התלונה" has invalid value
     And Check if error message is "יש למלא את פרטי התלונה"
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -717,7 +778,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
+  @form
   Scenario: question value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When Choose "כן" in "האם היתה פניה למעסיק קודם הגשת תלונה זו"
@@ -725,12 +786,13 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
 
 
-
-   # excel sheet rule number 4
+  @form
+  # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
     Then Check field "התשובה שקיבלתי" has valid valid
+    And Validate that "התשובה שקיבלתי" have the input only Hebrew with the allowed signs
     Examples:
     | answer_you_got   |
     | פראס             |
@@ -740,7 +802,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | דש)כדשכדכ        |
 
 
-
+  @form
   # excel sheet rule number 4
   # field of Details of the complaint accept all languages and signs
   # BUG:
@@ -749,6 +811,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
     Then Check field "התשובה שקיבלתי" has valid valid
+    And Validate that "התשובה שקיבלתי" have the input only Hebrew with the allowed signs
     Examples:
     | answer_you_got   |
     | سفغعه            |
@@ -759,7 +822,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | כעיחRTYU4%^&%^   |
 
 
-
+  @form
   # excel sheet rule number 18
   # error message for wrong input
   # BUG:
@@ -777,7 +840,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   بلاتنمؤبلاتنمكلات     |
 
 
-
+    @form
     Scenario Outline: months to check value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When Click On "+" sign in "חודשים לבדיקה"

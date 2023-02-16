@@ -1,17 +1,20 @@
 Feature: Basic Test for CollectiveLifeInsurance Form Page
 
+  @header
   # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "CollectiveLifeInsurance" page
     Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
+  @header
   # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "הדפס" button
     Then Check if Print display is clear
 
+  @form
    # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
@@ -19,8 +22,18 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     And I click on "שמור" button
     Then validate that you have information in the fields that you filled
 
+  @form
+   # excel sheet rule number 18
+  Scenario : Check if the mandatory are invalid
+    Given I navigate to "CollectiveLifeInsurance" page
+    When I click on "שמור" button
+    Then Validate that you are in the same page
+    And Check if "מספר זהות" has "חובה למלא מספר זהות" message
 
 
+
+
+  @form
   # excel sheet rule number 3
   Scenario Outline: id value test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
@@ -43,7 +56,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 165786534 |
     | 0 |
 
-
+  @form
   # excel sheet rule number 3
   Scenario Outline: id value test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
@@ -88,7 +101,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 154528136                    |
     | 160786030                    |
 
-
+  @form
   # excel sheet rule number 3
   # BUG:
   # Another BUG : the id accept id that contains one number until unlimited
@@ -121,6 +134,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 331133232ssd2321312233       |
     | 00                           |
 
+    @form
     # excel sheet rule number 18
     # error message for wrong input
     Scenario Outline: id error message test (invalid)
@@ -155,10 +169,10 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 01                           |
 
 
-
+  @form
    # excel sheet rule number 18
    # error message for empty input
-  # click on field and then leave it without writing anything
+   # click on field and then leave it without writing anything
     Scenario: id error message test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write " " in "מספר זהות"
@@ -166,7 +180,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     And Check if error message is "חובה למלא מספר זהות"
 
 
-
+  @form
   # excel sheet rule number 18
   # BUG:
   Scenario Outline: id error message test (invalid)
@@ -199,12 +213,13 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 331133232ssd2321312233       |
     | 00                           |
 
-
+  @form
   # excel sheet rule number 5
   Scenario Outline: id value allow to write just numbers test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
+    And Validate that "מספר זהות" have the input with only numbers
     Examples:
     | id        |
     | 331212324 |
@@ -221,12 +236,13 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 752123133 |
     | 165786534 |
 
-
+  @form
   # excel sheet rule number 5
   Scenario Outline: id value allow to write just numbers test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
+    And Validate that "מספר זהות" have the input with only numbers
     Examples:
     | id                            |
     | 33ק'/דגגבשד34455789           |
@@ -240,6 +256,8 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 679857840                    |
     | 887799887                    |
 
+
+  @form
   # excel sheet rule number 5
   # this field allow to write in all languages and signs
   # BUG:
@@ -247,6 +265,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
+    And Validate that "מספר זהות" have the input with only numbers
     Examples:
     | id  |
     | 33ק'/דגגבשד344557897          |

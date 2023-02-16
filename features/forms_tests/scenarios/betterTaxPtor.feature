@@ -1,19 +1,20 @@
 Feature: Basic Test for BetterTaxPtor Form Page
 
-
+  @header
  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "BetterTaxPtor" page
     When Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
+  @header
   # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "BetterTaxPtor" page
     When I click on "הדפס" button
     Then Check if Print display is clear
 
-
+  @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "BetterTaxPtor" page
@@ -21,6 +22,16 @@ Feature: Basic Test for BetterTaxPtor Form Page
     When I click on "שמור" button
     Then validate that you have information in the fields that you filled
 
+
+    @form
+   # excel sheet rule number 18
+  Scenario : Check if the mandatory are invalid
+    Given I navigate to "CollectiveLifeInsurance" page
+    When I click on "שמור" button
+    Then Validate that you are in the same page
+    And Check if "מספר תיק בנין" has "חובה לבחור תיק קווי בנין" message
+
+   @form
   # excel sheet rule number 5
   Scenario Outline: case number value test (valid)
     Given I navigate to "BetterTaxPtor" page
@@ -42,6 +53,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
     | 7521231336 |
     | 1657865347 |
 
+  @form
  # excel sheet rule number 5
  Scenario Outline: case number value test (invalid)
     Given I navigate to "BetterTaxPtor" page
@@ -64,6 +76,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
     | 16578%5347 |
 
 
+  @form
   # excel sheet rule number 18
   Scenario Outline: case number error message test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
