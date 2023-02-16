@@ -5,7 +5,7 @@ Feature: Basic Test for PlaceContainer Form Page
   # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "PlaceContainer" page
-    When Is application information tittle is "הסבר למילוי הטופס:"
+    Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
   @header

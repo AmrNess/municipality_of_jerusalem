@@ -4,7 +4,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "BetterTaxPtor" page
-    When Is application information tittle is "הסבר למילוי הטופס:"
+    Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
   @header
@@ -19,7 +19,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
   Scenario : full scenario for the page test (valid)
     Given I navigate to "BetterTaxPtor" page
     When I write "3327961844" in "מספר תיק בנין"
-    When I click on "שמור" button
+    And I click on "שמור" button
     Then validate that you have information in the fields that you filled
 
 
