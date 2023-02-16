@@ -37,7 +37,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
-    Then Validate that you are in the same page
+    Then Validate that we are in step "פרטי ילד ומגיש הבקשה" of the page
     And Check if "מספר זהות תלמיד" has "יש להזין מספר זהות" error message
     And Check if "מספר זהות הורה" has "יש להזין מספר זהות" error message
 

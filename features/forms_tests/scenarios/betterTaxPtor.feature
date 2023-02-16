@@ -26,8 +26,8 @@ Feature: Basic Test for BetterTaxPtor Form Page
   # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
-    When I click on "שמור" button
-    Then Validate that you are in the same page
+    When I click on "המשך" button
+    Then Validate that we are in step "פרטי הבקשה" of the page
     And Check if "מספר תיק בנין" has "חובה לבחור תיק קווי בנין" error message
 
   @form

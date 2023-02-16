@@ -30,7 +30,7 @@ Feature: Basic Test for PlaceContainer Form Page
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
-    Then Validate that you are in the same page
+    Then Validate that we are in step "פרטי הבקשה" of the page
     And Check if "סוג זהות" has "חובה לבחור סוג זהות" error message
     And Check if "מספר מזהה" has "יש למלא מספר מזהה" error message
     And Check if "שם פרטי" has "יש למלא שם פרטי" error message
@@ -85,6 +85,8 @@ Feature: Basic Test for PlaceContainer Form Page
 
   @form
   # excel sheet rule number 3
+  # BUG:
+  # Another BUG : the id accept id that contains one number until unlimited
   Scenario Outline: id value test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
@@ -92,7 +94,28 @@ Feature: Basic Test for PlaceContainer Form Page
     Then Check field "מספר מזהה" has invalid value
     Examples:
     | id  |
-    | 000000001                     |
+    | 000000000                     |
+    | 000000018                     |
+    | 3327981827336443728282        |
+    | 12321323142133                |
+    | 12345678934567467788998       |
+    | 33279618433                   |
+    | 22345567754                   |
+    | 2323443211343355              |
+    | 33344557897                   |
+    | 00                            |
+
+  @form
+  # excel sheet rule number 18
+  Scenario Outline: id error message test (invalid) and id value test (invalid)
+    Given I navigate to "PlaceContainer" page
+    When Choose "ת.ז." in "סוג זהות"
+    And I write "<id>" in "מספר מזהה"
+    Then Check field "מספר מזהה" has invalid value
+    And Check if error message is "עוסק זה אינו מוכר במערכת רישוי עסקים"
+    Examples:
+    | id  |
+        | 000000001                     |
     | 000000118                     |
     | 000000009                     |
     | 3121                          |
@@ -128,49 +151,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 233243236                    |
     | 154528136                    |
     | 160786030                    |
-
-  @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the id accept id that contains one number until unlimited
-  Scenario Outline: id value test (invalid)
-    Given I navigate to "PlaceContainer" page
-    When Choose "ת.ז." in "סוג זהות"
-    And I write "<id>" in "מספר מזהה"
-    Then Check field "מספר מזהה" has invalid value
-    Examples:
-    | id  |
-    | 000000000                     |
-    | 000000018                     |
-    | 3327981827336443728282        |
-    | 12321323142133                |
-    | 12345678934567467788998       |
-    | 33279618433                   |
-    | 22345567754                   |
-    | 2323443211343355              |
-    | 33344557897                   |
-    | 00                            |
-
-  @form
-  # excel sheet rule number 18
-  Scenario Outline: id error message test (invalid)
-    Given I navigate to "PlaceContainer" page
-    When Choose "ת.ז." in "סוג זהות"
-    And I write "<id>" in "מספר מזהה"
-    Then Check field "מספר מזהה" has invalid value
-    And Check if error message is "עוסק זה אינו מוכר במערכת רישוי עסקים"
-    Examples:
-    | id  |
-    | 000000001                     |
-    | 000000118                     |
-    | 000000009                     |
-    | 3121                          |
-    | 92443232                      |
-    | 3219                          |
-    | 8883                          |
-    | 0157                          |
-    | 0180                          |
-    | 01                            |
 
   @form
   # excel sheet rule number 18

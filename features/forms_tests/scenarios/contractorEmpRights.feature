@@ -69,7 +69,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
-    Then Validate that you are in the same page
+    Then Validate that we are in step "פרטי העובד/ת, המעסיק והתלונה" of the page
     And Check if "מספר זהות" has "יש להזין מספר זהות" error message
     And Check if "שם פרטי" has "יש למלא שם פרטי" error message
     And Check if "שם משפחה" has "יש למלא שם משפחה" error message
@@ -105,15 +105,39 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 752123133 |
     | 165786534 |
 
+
+
   @form
   # excel sheet rule number 3
+  # BUG:
+  # Another BUG : the id that contains one number until unlimited
   Scenario Outline: id value test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
     Examples:
     | id  |
-    | 000000001                    |
+    | 000000000                     |
+    | 000000018                     |
+    | 3327981827336443728282        |
+    | 12321323142133                |
+    | 12345678934567467788998       |
+    | 33279618433                   |
+    | 22345567754                   |
+    | 2323443211343355              |
+    | 33344557897                   |
+    | 00                            |
+
+  @form
+  # excel sheet rule number 18
+  Scenario Outline: id error message test (invalid) and id value test (invalid)
+    Given I navigate to "ContractorEmpRights" page
+    When I write "<id>" in "מספר זהות"
+    Then Check field "מספר זהות" has invalid value
+    And Check if error message is "מספר זהות לא תקין"
+    Examples:
+    | id  |
+     | 000000001                    |
     | 000000118                    |
     | 000000009                    |
     | 3121                         |
@@ -149,47 +173,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 233243236                    |
     | 154528136                    |
     | 160786030                    |
-
-  @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the id that contains one number until unlimited
-  Scenario Outline: id value test (invalid)
-    Given I navigate to "ContractorEmpRights" page
-    When I write "<id>" in "מספר זהות"
-    Then Check field "מספר זהות" has invalid value
-    Examples:
-    | id  |
-    | 000000000                     |
-    | 000000018                     |
-    | 3327981827336443728282        |
-    | 12321323142133                |
-    | 12345678934567467788998       |
-    | 33279618433                   |
-    | 22345567754                   |
-    | 2323443211343355              |
-    | 33344557897                   |
-    | 00                            |
-
-  @form
-  # excel sheet rule number 18
-  Scenario Outline: id error message test (invalid)
-    Given I navigate to "ContractorEmpRights" page
-    When I write "<id>" in "מספר זהות"
-    Then Check field "מספר זהות" has invalid value
-    And Check if error message is "מספר זהות לא תקין"
-    Examples:
-    | id  |
-    | 000000001                     |
-    | 000000118                     |
-    | 000000009                     |
-    | 3121                          |
-    | 92443232                      |
-    | 3219                          |
-    | 8883                          |
-    | 0157                          |
-    | 0180                          |
-    | 01                            |
 
   @form
   # excel sheet rule number 18
