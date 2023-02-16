@@ -22,7 +22,6 @@ Feature: Basic Test for BetterTaxPtor Form Page
     And I click on "שמור" button
     Then validate that you have information in the fields that you filled
 
-
     @form
    # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
@@ -74,7 +73,6 @@ Feature: Basic Test for BetterTaxPtor Form Page
     | 433$%&4333 |
     | 752123)(36 |
     | 16578%5347 |
-
 
   @form
   # excel sheet rule number 18

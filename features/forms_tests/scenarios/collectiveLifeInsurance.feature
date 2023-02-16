@@ -30,9 +30,6 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Then Validate that you are in the same page
     And Check if "מספר זהות" has "חובה למלא מספר זהות" message
 
-
-
-
   @form
   # excel sheet rule number 3
   Scenario Outline: id value test (valid)
@@ -168,7 +165,6 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 331133232ssd24312233         |
     | 01                           |
 
-
   @form
    # excel sheet rule number 18
    # error message for empty input
@@ -178,7 +174,6 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I write " " in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
     And Check if error message is "חובה למלא מספר זהות"
-
 
   @form
   # excel sheet rule number 18

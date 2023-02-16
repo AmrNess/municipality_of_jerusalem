@@ -14,7 +14,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     When I click on "הדפס" button
     And Check if Print display is clear
 
-
   @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
@@ -28,8 +27,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     And I click on "שמור" button
     Then validate that you have information in the fields that you filled
 
-
-
   @form
   # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
@@ -38,8 +35,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     Then Validate that you are in the same page
     And Check if "מספר זהות תלמיד" has "יש להזין מספר זהות" message
     And Check if "מספר זהות הורה" has "יש להזין מספר זהות" message
-
-
 
     @form
    # excel sheet rule number 3
@@ -116,7 +111,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 154528136                    |154528136                     |
     | 160786030                    |160786030                     |
 
-
   @form
   # excel sheet rule number 3
   # BUG:
@@ -141,7 +135,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 2323443211343355              |2323443211343355               |
     | 33344557897                   |33344557897                    |
     | 00                            |00                             |
-
 
     @form
     # excel sheet rule number 18
@@ -177,8 +170,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 331133232ssd2321312233        |
     | 00                            |
 
-
-
     @form
     # excel sheet rule number 18
     # BUG:
@@ -212,7 +203,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 22345567754                   |
     | 331133232ssd2321312233        |
     | 00                            |
-
 
   @form
   # excel sheet rule number 5
@@ -249,7 +239,6 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | ראטוןןלםם    | !@#$%^&*        |
     | المينسةؤن    | ][لأأٌلأاـ،/        |
     | dlkjhokjl   | !َ@#$%^ٌغهع        |
-
 
   @form
   Scenario: year and reason check value test (valid)

@@ -15,9 +15,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     When I click on "הדפס" button
     And Check if Print display is clear
 
-
-
-
   @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
@@ -46,7 +43,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And I click on "שמור" button
     Then validate that you have information in the fields that you filled
 
-
   @form
   # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
@@ -65,9 +61,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Check if "פרטי התלונה" has "יש למלא את פרטי התלונה" message
     And Check if "חודשים לבדיקה" has "נא למלא שנה נא למלא חודש/ים" message
     And Check if "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "יש לסמן האם היתה פניה למעסיק קודם הגשת תלונה זו" message
-
-
-
 
    @form
    # excel sheet rule number 3
@@ -90,8 +83,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 433243433 |
     | 752123133 |
     | 165786534 |
-
-
 
   @form
   # excel sheet rule number 3
@@ -138,7 +129,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 154528136                    |
     | 160786030                    |
 
-
   @form
   # excel sheet rule number 3
   # BUG:
@@ -180,8 +170,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 0180                          |
     | 01                            |
 
-
-
   @form
   # excel sheet rule number 18
   # BUG:
@@ -199,8 +187,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 22345567754                   |
     | 331133232ssd2321312233        |
     | 00                            |
-
-
 
   @form
   # excel sheet rule number 5
@@ -233,7 +219,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 356534567 | ראטוןןלםם    | ראטוןןלםם         |
     | 356534567 | المينسةؤن    | المينسةؤن         |
     | 356534567 | dlkjhokjl   | dlkjhokjl        |
-
 
    @form
   # excel sheet rule number 5
@@ -272,9 +257,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | المينسةؤن  | 5e6787679    | 45658987e        |
     | dlkjhokjl | 5e6787679    | 45658987e        |
 
-
-
-
     @form
    # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
@@ -298,8 +280,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | שדג_שגדג     | שדגשדג       |  אבו דגככ     | אבעכגקו דגככ     |
     | דכ.כשכד      | דשכשד)כדכ    |  אבו דג_ככ    | אבו דגק'כ'קככ    |
     | דש)כדשכדכ    | דכדש-דככד    |  אבו דגככ     | כקכאבו דגככ      |
-
-
 
    @form
   # excel sheet rule number 4
@@ -329,7 +309,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | ertyuh$%^       | $%^&FGHcvbn      |  $%^&FGHcvbn      | ertyuh$%^        |
     | כעיחRTYU4%^&%^  | $%^&RTYقفغfghعه   |  $%^&RTYقفغfghعه  |כעיחRTYU4%^        |
 
-
   @form
   # excel sheet rule number 18
   # error message for empty field
@@ -338,7 +317,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     When I write " " in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
     And Check if error message is "יש למלא שם פרטי"
-
 
   @form
   # excel sheet rule number 18
@@ -469,7 +447,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | a+r@b.com               |
     |A@b.cOm                  |
 
-
   @form
   # excel sheet rule number 18
   # error message for wrong input
@@ -486,7 +463,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | aس@b.com                     |
     | A$h@B.com                    |
     | A@f@h$.com                   |
-
 
   @form
   # excel sheet rule number 18
@@ -521,7 +497,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 0778748576   |
     | 0597247857   |
 
-
   @form
   # excel sheet rule number 5
   # the field refuse all the letters
@@ -537,8 +512,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | sdsasasdd    |
     | gregwe$%f    |
     | @#$%^&*(7    |
-
-
 
   @form
   # excel sheet rule number 18
@@ -565,7 +538,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 035יעחלךןח    |
     | 077تلاتتاتن    |
 
-
   @form
   # excel sheet rule number 18
   # error message for incomplete phone number
@@ -580,7 +552,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 0522   |
     | 05234  |
     | 054567 |
-
 
   @form
   # excel sheet rule number 5
@@ -597,7 +568,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 078748576   |
     | 053247857   |
 
-
   @form
   # excel sheet rule number 5
   # the field refuse all the letters
@@ -613,7 +583,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | sdsasasdd    |
     | gregwe$%f    |
     | @#$%^&*(7    |
-
 
   @form
   # excel sheet rule number 18
@@ -646,8 +615,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 05234  |
     | 054567 |
 
-
-
   @form
   Scenario Outline: birthday date value test (valid)
     Given I navigate to "ContractorEmpRights" page
@@ -660,8 +627,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 4/7/2020   |
     | 3/12/2017  |
     | 2/1/2018   |
-
-
 
   @form
   Scenario Outline: branch value test (valid)
@@ -699,8 +664,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 3/12/2017              |
     | 2/1/2018               |
 
-
-
   @form
   Scenario Outline: company name value test (valid)
     Given I navigate to "PlaceContainer" page
@@ -711,10 +674,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | תשלומי שכר בגין השתתפות במטווחים, השתלמויות וקורסי ריענון ירי  |
     | מתן הודעה לעובד                                             |
     | דמי נסיעות                                                  |
-
-
-
-
 
     @form
    # excel sheet rule number 4
@@ -730,7 +689,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | שדג_שגדג            |
     | דכ.כשכד             |
     | דש)כדשכדכ           |
-
 
   @form
   # excel sheet rule number 4
@@ -776,15 +734,10 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   firdasd3r3ras        |
     |   بلاتنمؤبلاتنمكلات        |
 
-
-
   @form
   Scenario: question value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When Choose "כן" in "האם היתה פניה למעסיק קודם הגשת תלונה זו"
-
-
-
 
   @form
   # excel sheet rule number 4
@@ -800,7 +753,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | שדג_שגדג         |
     | דכ.כשכד          |
     | דש)כדשכדכ        |
-
 
   @form
   # excel sheet rule number 4
@@ -821,7 +773,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | ertyuh$%^        |
     | כעיחRTYU4%^&%^   |
 
-
   @form
   # excel sheet rule number 18
   # error message for wrong input
@@ -838,7 +789,6 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   fiwrqrwwras       |
     |   firdasd3r3ras     |
     |   بلاتنمؤبلاتنمكلات     |
-
 
     @form
     Scenario Outline: months to check value test (valid)

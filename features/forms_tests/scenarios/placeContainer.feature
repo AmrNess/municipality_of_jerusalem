@@ -25,7 +25,6 @@ Feature: Basic Test for PlaceContainer Form Page
     Then Check field "מספר מזהה" has valid value
     And Click on "המשך"
 
-
   @form
   # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
@@ -47,8 +46,6 @@ Feature: Basic Test for PlaceContainer Form Page
     And Check if "עד תאריך" has "חובה לבחור תאריך" message
     And Check if "סוג החניה" has "חובה לבחור את סוג החניה" message
     And Check if "כתובת האתר לשפיכת הפסולת" has "חובה להזין כתובת" message
-
-
 
    @form
   # excel sheet rule number 11
@@ -72,8 +69,6 @@ Feature: Basic Test for PlaceContainer Form Page
     And I write "www.ss.com" in "כתובת האתר לשפיכת הפסולת"
     And I click on "שמור" button
     Then validate that you have information in the fields that you filled
-
-
 
    @form
   # excel sheet rule number 3
@@ -121,7 +116,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 154528136                    |
     | 160786030                    |
 
-
    @form
   # excel sheet rule number 3
   # BUG:
@@ -165,8 +159,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 0180                          |
     | 01                            |
 
-
-
   @form
   # excel sheet rule number 18
   # BUG:
@@ -188,7 +180,6 @@ Feature: Basic Test for PlaceContainer Form Page
     # this inputs give us different error msg "יש למלא מספר מזהה"
     | salem12321342133              |
     | 356e34567                     |
-
 
    @form
   # excel sheet rule number 5
@@ -225,7 +216,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | المينسةؤن  | المينسةؤن    | المينسةؤن         | المينسةؤن         |
     | dlkjhokjl | dlkjhokjl    | dlkjhokjl        | dlkjhokjl        |
 
-
   @form
   # excel sheet rule number 5
   # BUG:
@@ -253,7 +243,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 45658987e  | 45658987e    | 45658987e        | 45658987e        |
     | 5e6787679  | 5e6787679    | 5e6787679        | 5e6787679        |
 
-
     @form
    # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
@@ -267,7 +256,6 @@ Feature: Basic Test for PlaceContainer Form Page
     And Validate that "שם פרטי" have the input only Hebrew with the allowed signs
     And Validate that "שם משפחה" have the input only Hebrew with the allowed signs
     And Validate that "כתובת האתר לשפיכת הפסולת" have the input only Hebrew with the allowed signs
-
     Examples:
     | first_name   | last_name   | web_url     |
     | פראס         | א-בו דגככ    |  אבו דגככ   |
@@ -275,8 +263,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | שדג_שגדג     | שדגשדג       |  אבו דגככ    |
     | דכ.כשכד      | דשכשד)כדכ    |  אבו דג_ככ   |
     | דש)כדשכדכ    | דכדש-דככד    |  אבו דגככ    |
-
-
 
   @form
   # excel sheet rule number 4
@@ -302,7 +288,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | dfghj$%^&*     | DFGHJrtyj$%^6    |  DFGHJrtyj$%^6   |
     | ertyuh$%^      | $%^&FGHcvbn      |  $%^&FGHcvbn     |
     | כעיחRTYU4%^&%^ | $%^&RTYقفغfghعه   |  $%^&RTYقفغfghعه |
-
 
    @form
   # excel sheet rule number 18
@@ -363,7 +348,6 @@ Feature: Basic Test for PlaceContainer Form Page
     Then Check field "כתובת האתר לשפיכת הפסולת" has invalid value
     And Check if error message is "חובה להזין כתובת"
 
-
    @form
   # excel sheet rule number 18
   # error message for wrong input
@@ -400,8 +384,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | fewfas@fefsab.com  |
     | awdas@efadsb.com   |
 
-
-
   @form
   # excel sheet rule number 6
   Scenario Outline: email field allow to write just english and numbers test (invalid)
@@ -420,7 +402,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | a.b@c.d@d.com                |
     | dgh.@gjj.com                 |
     | dfghj.dfghj@@j.com           |
-
 
    @form
   # excel sheet rule number 6
@@ -441,8 +422,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | a+r@b.com                      |
     |A@b.cOm                         |
 
-
-
   @form
   # excel sheet rule number 18
   # error message for wrong input
@@ -459,8 +438,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | aس@b.com                     |
     | A$h@B.com                    |
     | A@f@h$.com                   |
-
-
 
   @form
   # excel sheet rule number 18
@@ -481,7 +458,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | a+r@b.com                       |
     |A@b.cOm                          |
 
-
   @form
  # excel sheet rule number 5
   Scenario Outline: phone number field allow to write just numbers test (valid)
@@ -495,7 +471,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 056-8907495   |
     | 077-8748576   |
     | 059-3247857   |
-
 
    @form
   # excel sheet rule number 5
@@ -511,7 +486,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | gregwe$%f    |
     | @#$%^&*(7    |
 
-
   @form
   # excel sheet rule number 5
   # the field refuse all the letters
@@ -521,9 +495,6 @@ Feature: Basic Test for PlaceContainer Form Page
     Then Check field "מספר טלפון נייד" has valid value
     And Validate that "מספר טלפון נייד" have the input with only numbers
 
-
-
-
   @form
   # excel sheet rule number 18
   # error message for empty phone number
@@ -532,9 +503,6 @@ Feature: Basic Test for PlaceContainer Form Page
     When I write " " in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
     And Check if error message is "חובה להזין מספר טלפון נייד"
-
-
-
 
   @form
   # excel sheet rule number 18
@@ -551,7 +519,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 054-394832j   |
     | 035-יעחלךןח    |
     | 077-تلاتتاتن    |
-
 
   @form
   Scenario Outline: street value test (valid)
@@ -570,9 +537,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | אורי בן ארי          |
     | אחמד אסעד דארי סמטה 7|
 
-
-
-
   @form
   Scenario Outline: container placement street value test (valid)
     Given I navigate to "PlaceContainer" page
@@ -590,8 +554,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | אורי בן ארי           |
     | אחמד אסעד דארי סמטה 7  |
 
-
-
   @form
   Scenario Outline: start placement date value test (valid)
     Given I navigate to "PlaceContainer" page
@@ -604,8 +566,6 @@ Feature: Basic Test for PlaceContainer Form Page
     | 4/7/2023 12:00            |
     | 3/12/2023 14:13           |
     | 2/1/2023 12:55            |
-
-
 
   @form
   Scenario Outline: finish placement date value test (valid)
