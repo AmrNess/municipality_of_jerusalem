@@ -31,44 +31,57 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
     Then Validate that you are in the same page
-    And Check if "סוג זהות" has "חובה לבחור סוג זהות" message
-    And Check if "מספר מזהה" has "יש למלא מספר מזהה" message
-    And Check if "שם פרטי" has "יש למלא שם פרטי" message
-    And Check if "שם משפחה" has "יש למלא שם משפחה" message
-    And Check if "מספר טלפון נייד" has "חובה להזין מספר טלפון נייד" message
-    And Check if "אימייל" has "חובה להזין כתובת אימייל" message
-    And Check if "רחוב" has "חובה לבחור רחוב" message
-    And Check if "מספר בית" has "חובה להזין מספר בית" message
-    And Check if "מספר דירה" has "חובה להזין מספר דירה" message
-    And Check if "רחוב הצבת המכולה" has "חובה להזין כתובת" message
-    And Check if "מספר מכולה" has "חובה להזין מספר מכולה" message
-    And Check if "מתאריך" has "חובה לבחור תאריך" message
-    And Check if "עד תאריך" has "חובה לבחור תאריך" message
-    And Check if "סוג החניה" has "חובה לבחור את סוג החניה" message
-    And Check if "כתובת האתר לשפיכת הפסולת" has "חובה להזין כתובת" message
+    And Check if "סוג זהות" has "חובה לבחור סוג זהות" error message
+    And Check if "מספר מזהה" has "יש למלא מספר מזהה" error message
+    And Check if "שם פרטי" has "יש למלא שם פרטי" error message
+    And Check if "שם משפחה" has "יש למלא שם משפחה" error message
+    And Check if "מספר טלפון נייד" has "חובה להזין מספר טלפון נייד" error message
+    And Check if "אימייל" has "חובה להזין כתובת אימייל" error message
+    And Check if "רחוב" has "חובה לבחור רחוב" error message
+    And Check if "מספר בית" of "כתובת מקום העבודה" has "חובה להזין מספר בית" error message
+    And Check if "מספר דירה" has "חובה להזין מספר דירה" error message
+    And Check if "רחוב הצבת המכולה" has "חובה להזין כתובת" error message
+    And Check if "מספר מכולה" has "חובה להזין מספר מכולה" error message
+    And Check if "מתאריך" has "חובה לבחור תאריך" error message
+    And Check if "עד תאריך" has "חובה לבחור תאריך" error message
+    And Check if "סוג החניה" has "חובה לבחור את סוג החניה" error message
+    And Check if "כתובת האתר לשפיכת הפסולת" has "חובה להזין כתובת" error message
 
    @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
-    Given I navigate to "PlaceContainer" page
-    When Choose "ת.ז." in "סוג זהות"
-    And I write "332796184" in "מספר מזהה"
-    And I write "פראס" in "שם פרטי"
-    And I write "אבו סנינה" in "שם משפחה"
-    And I write "0528076374" in "מספר טלפון נייד"
-    And I write "firas@ab.com" in "אימייל"
-    And I pick "א - זבאדי" in "רחוב"
-    And I write "2" in "מספר בית"
-    And I write "1" in "מספר דירה"
-    And I pick "א - זבאדי" in "רחוב הצבת המכולה"
-    And I write "4" in "מספר בית"
-    And I write "2" in "מספר מכולה"
-    And I pick date of "12/4/2023 16:00 " in "מתאריך"
-    And I pick date of "12/5/2023 16:00 " in "עד תאריך"
-    And I pick "מותרת" in "סוג החניה"
-    And I write "www.ss.com" in "כתובת האתר לשפיכת הפסולת"
-    And I click on "שמור" button
-    Then validate that you have information in the fields that you filled
+     Given I navigate to "PlaceContainer" page
+     When Choose "ת.ז." in "סוג זהות"
+     And I write "332796184" in "מספר מזהה"
+     And I write "פראס" in "שם פרטי"
+     And I write "אבו סנינה" in "שם משפחה"
+     And I write "0528076374" in "מספר טלפון נייד"
+     And I write "firas@ab.com" in "אימייל"
+     And I pick "א - זבאדי" in "רחוב"
+     And I write "2" in "מספר בית" of "כתובת מקום העבודה"
+     And I write "1" in "מספר דירה"
+     And I pick "א - זבאדי" in "רחוב הצבת המכולה"
+     And I write "4" in "מספר בית" of "פרטי הצבת המכולה"
+     And I write "2" in "מספר מכולה"
+     And I pick date of "12/4/2023 16:00 " in "מתאריך"
+     And I pick date of "12/5/2023 16:00 " in "עד תאריך"
+     And I pick "מותרת" in "סוג החניה"
+     And I write "www.ss.com" in "כתובת האתר לשפיכת הפסולת"
+     And I click on "שמור" button
+     Then validate that field "מספר מזהה" has "332796184"
+     And validate that field "שם פרטי" has "פראס"
+     And validate that field "שם משפחה" has "אבו סנינה"
+     And validate that field "מספר טלפון נייד" has "0528076374"
+     And validate that field "אימייל" has "firas@ab.com"
+     And validate that field "רחוב" has "א - זבאדי"
+     And validate that field "מספר בית" of "כתובת מקום העבודה" has "2" of
+     And validate that field "מספר דירה" has "1"
+     And validate that field "רחוב הצבת המכולה" has "א - זבאדי"
+     And validate that field "מספר בית"  of "פרטי הצבת המכולה" has "4"
+     And validate that field "מספר מכולה" has "1"
+     And validate that field "מתאריך" has "12/4/2023 16:00 "
+     And validate that field "עד תאריך" has "12/5/2023 16:00 "
+
 
    @form
   # excel sheet rule number 3
@@ -187,17 +200,20 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
-    And I write "<house_number>" in "מספר בית"
+    And I write "<house_number>" in "מספר בית" of "כתובת מקום העבודה"
     And I write "<apartment_number>" in "מספר דירה"
     And I write "<container_number>" in "מספר מכולה"
+    And I write "<house_number>" in "מספר בית" of "פרטי הצבת המכולה"
     Then Check field "מספר מזהה" has valid value
-    And Check field "מספר בית" has valid value
+    And Check field "מספר בית" of "כתובת מקום העבודה" has valid value
     And Check field "מספר דירה" has valid value
     And Check field "מספר מכולה" has valid value
+     And Check field "מספר בית" of "פרטי הצבת המכולה" has valid value
     And Validate that "מספר מזהה" have the input with only numbers
-    And Validate that "מספר בית" have the input with only numbers
+    And Validate that "מספר בית" of "כתובת מקום העבודה" have the input with only numbers
     And Validate that "מספר דירה" have the input with only numbers
     And Validate that "מספר מכולה" have the input with only numbers
+     And Validate that "מספר בית" of "פרטי הצבת המכולה" have the input with only numbers
     Examples:
     | id        |house_number  | apartment_number | container_number |
     | 356534567 | 356534567    | 356534567        | 356534567        |
@@ -224,17 +240,20 @@ Feature: Basic Test for PlaceContainer Form Page
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
-    And I write "<house_number>" in "מספר בית"
+    And I write "<house_number>" in "מספר בית" of "כתובת מקום העבודה"
     And I write "<apartment_number>" in "מספר דירה"
     And I write "<container_number>" in "מספר מכולה"
+    And I write "<house_number>" in "מספר בית" of "פרטי הצבת המכולה"
     Then Check field "מספר מזהה" has invalid value
-    And Check field "מספר בית" has valid value
+    And Check field "מספר בית" of "כתובת מקום העבודה" has valid value
     And Check field "מספר דירה" has valid value
     And Check field "מספר מכולה" has valid value
+    And Check field "מספר בית" of "פרטי הצבת המכולה" has valid value
     And Validate that "מספר מזהה" have the input with only numbers
-    And Validate that "מספר בית" have the input with only numbers
+    And Validate that "מספר בית" of "כתובת מקום העבודה" have the input with only numbers
     And Validate that "מספר דירה" have the input with only numbers
     And Validate that "מספר מכולה" have the input with only numbers
+    And Validate that "מספר בית" of "פרטי הצבת המכולה" have the input with only numbers
     Examples:
     | id  |house_number  | apartment_number        | container_number |
     | 457756e67  | 457756e67    | 457756e67        | 457756e67        |

@@ -20,7 +20,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
     Given I navigate to "BetterTaxPtor" page
     When I write "3327961844" in "מספר תיק בנין"
     And I click on "שמור" button
-    Then validate that you have information in the fields that you filled
+    Then validate that field "מספר תיק בנין" has "3327961844"
 
     @form
    # excel sheet rule number 18
@@ -28,7 +28,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
     Then Validate that you are in the same page
-    And Check if "מספר תיק בנין" has "חובה לבחור תיק קווי בנין" message
+    And Check if "מספר תיק בנין" has "חובה לבחור תיק קווי בנין" error message
 
    @form
   # excel sheet rule number 5

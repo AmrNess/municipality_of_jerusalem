@@ -41,7 +41,28 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Choose "כן" in "האם היתה פניה למעסיק קודם הגשת תלונה זו"
     And I write "שדכשד__שדג " in "התשובה שקיבלתי"
     And I click on "שמור" button
-    Then validate that you have information in the fields that you filled
+    Then validate that field "מספר זהות" has "332796184"
+    And validate that field "שם פרטי" has "פראס"
+    And validate that field "שם משפחה" has "אבו סנינה"
+    And validate that field "תאריך לידה" has "14/02/2023"
+    And validate that field "רחוב" has "א - זבאדי"
+    And validate that field "מספר בית" has "2"
+    And validate that field "מספר דירה" has "1"
+    And validate that field "מספר טלפון" has "028076374"
+    And validate that field "מספר טלפון נייד" has "0528076374"
+    And validate that field "אימייל" has "firas@ab.com"
+    And validate that field "ענף" has "הסעדה"
+    And validate that field "שם חברה" has "גורמה ארוחות בע"מ "
+    And validate that field "שם אתר עירוני" has "אבו דגשדגשדככ"
+    And validate that field "תאריך תחילת העבודה בחברה" has "12/4/1990 "
+    And validate that field "נושא התלונה" has "ניהול פנקס שעות עבודה "
+    And validate that field "פרטי התלונה" has "פראס"
+    And validate that field "חודשים" has "1"
+    And validate that field "שנה" has "2023"
+    And validate that field "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "כן"
+    And validate that field "התשובה שקיבלתי" has "שדכשד__שדג "
+
+
 
   @form
   # excel sheet rule number 18
@@ -49,18 +70,18 @@ Feature: Basic Test for ContractorEmpRights Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
     Then Validate that you are in the same page
-    And Check if "מספר זהות" has "יש להזין מספר זהות" message
-    And Check if "שם פרטי" has "יש למלא שם פרטי" message
-    And Check if "שם משפחה" has "יש למלא שם משפחה" message
-    And Check if "מספר טלפון נייד" has "חובה להזין מספר טלפון נייד" message
-    And Check if "אימייל" has "חובה להזין כתובת אימייל" message
-    And Check if "ענף" has "יש לבחור ענף" message
-    And Check if "שם חברה" has "יש לבחור שם חברה" message
-    And Check if "תאריך תחילת העבודה בחברה" has "יש לסמן תאריך תחילת עבודה" message
-    And Check if "נושא התלונה" has "יש לבחור את נושא/י התלונה" message
-    And Check if "פרטי התלונה" has "יש למלא את פרטי התלונה" message
-    And Check if "חודשים לבדיקה" has "נא למלא שנה נא למלא חודש/ים" message
-    And Check if "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "יש לסמן האם היתה פניה למעסיק קודם הגשת תלונה זו" message
+    And Check if "מספר זהות" has "יש להזין מספר זהות" error message
+    And Check if "שם פרטי" has "יש למלא שם פרטי" error message
+    And Check if "שם משפחה" has "יש למלא שם משפחה" error message
+    And Check if "מספר טלפון נייד" has "חובה להזין מספר טלפון נייד" error message
+    And Check if "אימייל" has "חובה להזין כתובת אימייל" error message
+    And Check if "ענף" has "יש לבחור ענף" error message
+    And Check if "שם חברה" has "יש לבחור שם חברה" error message
+    And Check if "תאריך תחילת העבודה בחברה" has "יש לסמן תאריך תחילת עבודה" error message
+    And Check if "נושא התלונה" has "יש לבחור את נושא/י התלונה" error message
+    And Check if "פרטי התלונה" has "יש למלא את פרטי התלונה" error message
+    And Check if "חודשים לבדיקה" has "נא למלא שנה נא למלא חודש/ים" error message
+    And Check if "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "יש לסמן האם היתה פניה למעסיק קודם הגשת תלונה זו" error message
 
    @form
    # excel sheet rule number 3

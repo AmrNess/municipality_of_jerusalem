@@ -1,5 +1,6 @@
 Feature: Basic Test for CollectiveLifeInsurance Form Page
 
+  @Major
   @header
   # excel sheet rule number 1
   Scenario: Check explanation of form
@@ -7,6 +8,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
+  @Major
   @header
   # excel sheet rule number 21
   Scenario: Check Print display
@@ -14,21 +16,23 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I click on "הדפס" button
     Then Check if Print display is clear
 
-  @form
+    @Critical
+    @form
    # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "332796184" in "מספר זהות"
     And I click on "שמור" button
-    Then validate that you have information in the fields that you filled
+    Then validate that field "מספר זהות" has "332796184"
 
+  @Critical
   @form
    # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
     Then Validate that you are in the same page
-    And Check if "מספר זהות" has "חובה למלא מספר זהות" message
+    And Check if "מספר זהות" has "חובה למלא מספר זהות" error message
 
   @form
   # excel sheet rule number 3

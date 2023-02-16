@@ -25,7 +25,12 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     And I pick "תשפ"ד - 2024" in "שנת רישום"
     And I pick "ערעור על החלטת הוועדה" in "סוג הפניה"
     And I click on "שמור" button
-    Then validate that you have information in the fields that you filled
+    Then validate that field "סוג זהות תלמיד" has "ת.ז."
+    And validate that field "מספר זהות תלמיד" has "332796184"
+    And validate that field "סוג זהות הורה" has "ת.ז."
+    And validate that field "מספר זהות הורה" has "334496184"
+    And validate that field "שנת רישום" has "תשפ"ד - 2024"
+    And validate that field "סוג הפניה" has "ערעור על החלטת הוועדה"
 
   @form
   # excel sheet rule number 18
@@ -33,8 +38,8 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
     Then Validate that you are in the same page
-    And Check if "מספר זהות תלמיד" has "יש להזין מספר זהות" message
-    And Check if "מספר זהות הורה" has "יש להזין מספר זהות" message
+    And Check if "מספר זהות תלמיד" has "יש להזין מספר זהות" error message
+    And Check if "מספר זהות הורה" has "יש להזין מספר זהות" error message
 
     @form
    # excel sheet rule number 3
