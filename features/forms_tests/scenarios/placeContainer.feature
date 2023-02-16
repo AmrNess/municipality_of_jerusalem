@@ -73,6 +73,7 @@ Feature: Basic Test for PlaceContainer Form Page
 
   # excel sheet rule number 3
   # BUG:
+  # Another BUG : the id accept id that contains one number until unlimited
   Scenario Outline: id value test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
@@ -168,6 +169,7 @@ Feature: Basic Test for PlaceContainer Form Page
 
   # excel sheet rule number 5
   # BUG:
+  # Another BUG : the id accept id that contains one number until unlimited
   Scenario Outline: id,house number, apartment_number, container_number value allow to write just numbers test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
@@ -212,6 +214,7 @@ Feature: Basic Test for PlaceContainer Form Page
   # excel sheet rule number 4
   # fields of first name and last name and web_url accept all languages and signs
   # BUG:
+  # Another BUG : the first name accept first name, last name, web url that contains one letter until unlimited
   Scenario Outline: all text field allow to write just Hebrew test (invalid)
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
@@ -344,6 +347,7 @@ Feature: Basic Test for PlaceContainer Form Page
 
   # excel sheet rule number 6
   # BUG:
+  # Another BUG : the first name accept first name, last name, web url that contains one letter until unlimited
   Scenario Outline: email field allow to write just english and numbers test (invalid)
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
@@ -460,7 +464,7 @@ Feature: Basic Test for PlaceContainer Form Page
     | 077-تلاتتاتن    |
 
 
-      Scenario Outline: street value test (valid)
+  Scenario Outline: street value test (valid)
     Given I navigate to "PlaceContainer" page
     When I pick "<street>" in "רחוב"
     Examples:

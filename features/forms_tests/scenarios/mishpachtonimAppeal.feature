@@ -92,6 +92,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
 
   # excel sheet rule number 3
   # BUG:
+  # Another BUG : the student, parent id that contains one letter until 16 number
   Scenario Outline: id value test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"

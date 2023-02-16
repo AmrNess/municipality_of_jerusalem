@@ -34,6 +34,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 433243433 |
     | 752123133 |
     | 165786534 |
+    | 0 |
 
 
   # excel sheet rule number 3
@@ -83,6 +84,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
 
   # excel sheet rule number 3
   # BUG:
+  # Another BUG : the id accept id that contains one number until unlimited
   Scenario Outline: id value test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"

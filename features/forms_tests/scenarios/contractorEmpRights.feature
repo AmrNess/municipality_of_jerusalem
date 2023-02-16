@@ -85,6 +85,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
   # excel sheet rule number 3
   # BUG:
+  # Another BUG : the id that contains one number until unlimited
   Scenario Outline: id value test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
@@ -231,6 +232,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
   # excel sheet rule number 4
   # fields of first name and last name and street accept all languages and signs
   # BUG:
+  # Another BUG : the first name accept first name, last name,street, city site name that contains one letter until unlimited
   Scenario Outline: all text field allow to write just Hebrew test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
@@ -368,6 +370,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
 
   # excel sheet rule number 6
   # BUG:
+  # Another BUG : the email that contains one letter until unlimited
   Scenario Outline: email field allow to write just english and numbers test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
@@ -711,6 +714,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
   # excel sheet rule number 4
   # field of Details of the complaint accept all languages and signs
   # BUG:
+  # Another BUG : the answer you got that contains one letter until unlimited
   Scenario Outline: all text field allow to write just Hebrew test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
