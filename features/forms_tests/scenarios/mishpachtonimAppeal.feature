@@ -67,7 +67,7 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 752123133 | 112233440 |
     | 165786534 | 223344557 |
 
-   @form
+  @form
   # excel sheet rule number 3
   Scenario Outline:  student, parent id value test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
@@ -141,10 +141,10 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 33344557897                   |33344557897                    |
     | 00                            |00                             |
 
-    @form
-    # excel sheet rule number 18
-    # BUG:
-    Scenario Outline: student id error message test (invalid)
+  @form
+  # excel sheet rule number 18
+  # BUG:
+  Scenario Outline: student id error message test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
     And I write "<student_id>" in "מספר זהות תלמיד"
@@ -175,9 +175,9 @@ Feature: Basic Test for MishpachtonimAppeal Form Page
     | 331133232ssd2321312233        |
     | 00                            |
 
-    @form
-    # excel sheet rule number 18
-    # BUG:
+  @form
+  # excel sheet rule number 18
+  # BUG:
   Scenario Outline: parent_id error message test (invalid)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "מספר זהות הורה"

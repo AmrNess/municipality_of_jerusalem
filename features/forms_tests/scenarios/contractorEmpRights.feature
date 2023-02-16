@@ -83,8 +83,8 @@ Feature: Basic Test for ContractorEmpRights Form Page
     And Check if "חודשים לבדיקה" has "נא למלא שנה נא למלא חודש/ים" error message
     And Check if "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "יש לסמן האם היתה פניה למעסיק קודם הגשת תלונה זו" error message
 
-   @form
-   # excel sheet rule number 3
+  @form
+  # excel sheet rule number 3
   Scenario Outline: id value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
@@ -171,9 +171,9 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 33344557897                   |
     | 00                            |
 
-    @form
-    # excel sheet rule number 18
-    Scenario Outline: id error message test (invalid)
+  @form
+  # excel sheet rule number 18
+  Scenario Outline: id error message test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
@@ -241,7 +241,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | 356534567 | المينسةؤن    | المينسةؤن         |
     | 356534567 | dlkjhokjl   | dlkjhokjl        |
 
-   @form
+  @form
   # excel sheet rule number 5
   # BUG:
   Scenario Outline: id,house number, apartment_number value allow to write just numbers test (invalid)
@@ -278,8 +278,8 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | المينسةؤن  | 5e6787679    | 45658987e        |
     | dlkjhokjl | 5e6787679    | 45658987e        |
 
-    @form
-   # excel sheet rule number 4
+  @form
+  # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
@@ -302,7 +302,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | דכ.כשכד      | דשכשד)כדכ    |  אבו דג_ככ    | אבו דגק'כ'קככ    |
     | דש)כדשכדכ    | דכדש-דככד    |  אבו דגככ     | כקכאבו דגככ      |
 
-   @form
+  @form
   # excel sheet rule number 4
   # fields of first name and last name and street accept all languages and signs
   # BUG:
@@ -505,7 +505,7 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |A@b.cOm                       |
 
   @form
- # excel sheet rule number 5
+  # excel sheet rule number 5
   Scenario Outline: phone number field allow to write just numbers test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
@@ -696,8 +696,8 @@ Feature: Basic Test for ContractorEmpRights Form Page
     | מתן הודעה לעובד                                             |
     | דמי נסיעות                                                  |
 
-    @form
-   # excel sheet rule number 4
+  @form
+  # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
@@ -811,8 +811,8 @@ Feature: Basic Test for ContractorEmpRights Form Page
     |   firdasd3r3ras     |
     |   بلاتنمؤبلاتنمكلات     |
 
-    @form
-    Scenario Outline: months to check value test (valid)
+  @form
+  Scenario Outline: months to check value test (valid)
     Given I navigate to "ContractorEmpRights" page
     When Click On "+" sign in "חודשים לבדיקה"
     And I pick "<year>" in "שנה"

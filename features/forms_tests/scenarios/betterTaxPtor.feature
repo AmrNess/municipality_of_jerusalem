@@ -1,7 +1,7 @@
 Feature: Basic Test for BetterTaxPtor Form Page
 
   @header
- # excel sheet rule number 1
+  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "BetterTaxPtor" page
     Then Is application information tittle is "הסבר למילוי הטופס:"
@@ -22,15 +22,15 @@ Feature: Basic Test for BetterTaxPtor Form Page
     And I click on "שמור" button
     Then validate that field "מספר תיק בנין" has "3327961844"
 
-    @form
-   # excel sheet rule number 18
+  @form
+  # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
     Then Validate that you are in the same page
     And Check if "מספר תיק בנין" has "חובה לבחור תיק קווי בנין" error message
 
-   @form
+  @form
   # excel sheet rule number 5
   Scenario Outline: case number value test (valid)
     Given I navigate to "BetterTaxPtor" page
@@ -52,7 +52,7 @@ Feature: Basic Test for BetterTaxPtor Form Page
     | 7521231336 |
     | 1657865347 |
 
-  @form
+ @form
  # excel sheet rule number 5
  Scenario Outline: case number value test (invalid)
     Given I navigate to "BetterTaxPtor" page

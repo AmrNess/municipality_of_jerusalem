@@ -47,7 +47,7 @@ Feature: Basic Test for PlaceContainer Form Page
     And Check if "סוג החניה" has "חובה לבחור את סוג החניה" error message
     And Check if "כתובת האתר לשפיכת הפסולת" has "חובה להזין כתובת" error message
 
-   @form
+  @form
   # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
      Given I navigate to "PlaceContainer" page
@@ -83,7 +83,7 @@ Feature: Basic Test for PlaceContainer Form Page
      And validate that field "עד תאריך" has "12/5/2023 16:00 "
 
 
-   @form
+  @form
   # excel sheet rule number 3
   Scenario Outline: id value test (invalid)
     Given I navigate to "PlaceContainer" page
@@ -129,7 +129,7 @@ Feature: Basic Test for PlaceContainer Form Page
     | 154528136                    |
     | 160786030                    |
 
-   @form
+  @form
   # excel sheet rule number 3
   # BUG:
   # Another BUG : the id accept id that contains one number until unlimited
@@ -151,9 +151,9 @@ Feature: Basic Test for PlaceContainer Form Page
     | 33344557897                   |
     | 00                            |
 
-    @form
-    # excel sheet rule number 18
-    Scenario Outline: id error message test (invalid)
+  @form
+  # excel sheet rule number 18
+  Scenario Outline: id error message test (invalid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
@@ -194,7 +194,7 @@ Feature: Basic Test for PlaceContainer Form Page
     | salem12321342133              |
     | 356e34567                     |
 
-   @form
+  @form
   # excel sheet rule number 5
   Scenario Outline: id,house number, apartment_number, container_number value allow to write just numbers test (valid)
     Given I navigate to "PlaceContainer" page
@@ -208,12 +208,12 @@ Feature: Basic Test for PlaceContainer Form Page
     And Check field "מספר בית" of "כתובת מקום העבודה" has valid value
     And Check field "מספר דירה" has valid value
     And Check field "מספר מכולה" has valid value
-     And Check field "מספר בית" of "פרטי הצבת המכולה" has valid value
+    And Check field "מספר בית" of "פרטי הצבת המכולה" has valid value
     And Validate that "מספר מזהה" have the input with only numbers
     And Validate that "מספר בית" of "כתובת מקום העבודה" have the input with only numbers
     And Validate that "מספר דירה" have the input with only numbers
     And Validate that "מספר מכולה" have the input with only numbers
-     And Validate that "מספר בית" of "פרטי הצבת המכולה" have the input with only numbers
+    And Validate that "מספר בית" of "פרטי הצבת המכולה" have the input with only numbers
     Examples:
     | id        |house_number  | apartment_number | container_number |
     | 356534567 | 356534567    | 356534567        | 356534567        |
@@ -262,8 +262,8 @@ Feature: Basic Test for PlaceContainer Form Page
     | 45658987e  | 45658987e    | 45658987e        | 45658987e        |
     | 5e6787679  | 5e6787679    | 5e6787679        | 5e6787679        |
 
-    @form
-   # excel sheet rule number 4
+  @form
+  # excel sheet rule number 4
   Scenario Outline: all text field allow to write just Hebrew test (valid)
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
@@ -308,7 +308,7 @@ Feature: Basic Test for PlaceContainer Form Page
     | ertyuh$%^      | $%^&FGHcvbn      |  $%^&FGHcvbn     |
     | כעיחRTYU4%^&%^ | $%^&RTYقفغfghعه   |  $%^&RTYقفغfghعه |
 
-   @form
+  @form
   # excel sheet rule number 18
   # error message for empty field
   Scenario: error message for first name field (invalid)
@@ -422,7 +422,7 @@ Feature: Basic Test for PlaceContainer Form Page
     | dgh.@gjj.com                 |
     | dfghj.dfghj@@j.com           |
 
-   @form
+  @form
   # excel sheet rule number 6
   # BUG:
   # Another BUG : the first name accept first name, last name, web url that contains one letter until unlimited

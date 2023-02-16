@@ -16,9 +16,9 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I click on "הדפס" button
     Then Check if Print display is clear
 
-    @Critical
-    @form
-   # excel sheet rule number 11
+  @Critical
+  @form
+  # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "332796184" in "מספר זהות"
@@ -27,7 +27,7 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
 
   @Critical
   @form
-   # excel sheet rule number 18
+  # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
@@ -135,10 +135,10 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 331133232ssd2321312233       |
     | 00                           |
 
-    @form
-    # excel sheet rule number 18
-    # error message for wrong input
-    Scenario Outline: id error message test (invalid)
+  @form
+  # excel sheet rule number 18
+  # error message for wrong input
+  Scenario Outline: id error message test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
@@ -170,10 +170,10 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     | 01                           |
 
   @form
-   # excel sheet rule number 18
-   # error message for empty input
-   # click on field and then leave it without writing anything
-    Scenario: id error message test (invalid)
+  # excel sheet rule number 18
+  # error message for empty input
+  # click on field and then leave it without writing anything
+  Scenario: id error message test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write " " in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
