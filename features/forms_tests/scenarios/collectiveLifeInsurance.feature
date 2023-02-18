@@ -1,4 +1,12 @@
-Feature: Basic Test for CollectiveLifeInsurance Form Page
+Feature: header, fields test of CollectiveLifeInsurance Form Page
+
+  """
+  - Feature file name: collectiveLifeInsurance.feature
+  - Form link: https://jeronlineforms.jerusalem.muni.il/CollectiveLifeInsurance
+  - Number of Pages is : 1, We are at Page: 1
+  - mandatory fields are: מספר זהות
+  """
+
 
   @Major
   @header
@@ -24,6 +32,13 @@ Feature: Basic Test for CollectiveLifeInsurance Form Page
     When I write "332796184" in "מספר זהות"
     And I click on "שמור" button
     Then validate that field "מספר זהות" has "332796184"
+
+
+  # BUG:
+  Scenario : full scenario for the page with sve click test (valid)
+    Given I navigate to "CollectiveLifeInsurance" page
+    And I click on "שמור" button
+    Then Accept Alert message
 
   @Critical
   @form

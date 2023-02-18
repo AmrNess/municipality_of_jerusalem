@@ -1,5 +1,12 @@
 Feature: Basic Test for MishpachtonimAppeal Form Page
 
+  """
+  - Feature file name: mishpachtonimAppeal.feature
+  - Form link: https://jeronlineforms.jerusalem.muni.il/MishpachtonimAppeal
+  - Number of Pages is : 2, We are at Page: 1
+  - mandatory fields are: מספר זהות תלמיד, מספר זהות הורה
+  """
+
   @header
   # excel sheet rule number 1
   Scenario: Check explanation of form

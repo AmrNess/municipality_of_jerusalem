@@ -1,5 +1,11 @@
-Feature: Basic Test for BetterTaxPtor Form Page
+Feature: header, fields test of BetterTaxPtor Form Page
 
+  """
+  - Feature file name: betterTaxPtor.feature
+  - Form link: https://jeronlineforms.jerusalem.muni.il/BetterTaxPtor
+  - Number of Pages is : 1, We are at Page: 1
+  - mandatory fields are: מספר תיק בנין
+  """
   @header
   # excel sheet rule number 1
   Scenario: Check explanation of form

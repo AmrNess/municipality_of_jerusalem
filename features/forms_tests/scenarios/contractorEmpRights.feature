@@ -1,5 +1,13 @@
 Feature: Basic Test for ContractorEmpRights Form Page
 
+  """
+  - Feature file name: contractorEmpRights.feature
+  - Form link: https://jeronlineforms.jerusalem.muni.il/ContractorEmpRights
+  - Number of Pages is : 2, We are at Page: 1
+  - mandatory fields are: מספר זהות, שם פרטי, שם משפחה,
+מספר טלפון נייד, אימייל, ענף, שם חברה, תאריך תחילת העבודה בחברה, נושא התלונה, פרטי התלונה, חודשים לבדיקה,
+   האם היתה פניה למעסיק קודם הגשת תלונה זו
+  """
 
   @header
   # excel sheet rule number 1

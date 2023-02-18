@@ -1,5 +1,12 @@
-Feature: Basic Test for PlaceContainer Form Page
+Feature: header, fields test of PlaceContainer Form Page
 
+  """
+    - Feature file name: placeContainer.feature
+    - Form link: https://jeronlineforms.jerusalem.muni.il/PlaceContainer
+    - Number of Pages is : 2, We are at Page: 1
+    - mandatory fields are: סוג זהות, מספר מזהה, שם פרטי, שם משפחה, מספר טלפון נייד, אימייל,
+    רחוב, מספר בית, מספר דירה, רחוב הצבת המכולה, מספר מכולה, מתאריך, עד תאריך, סוג החניה, כתובת האתר לשפיכת הפסולת
+  """
 
   @header
   # excel sheet rule number 1
