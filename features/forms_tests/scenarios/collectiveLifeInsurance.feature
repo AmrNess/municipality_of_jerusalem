@@ -242,7 +242,7 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
 
   @form
   # excel sheet rule number 5
-  # this field allow to write in all languages and signs
+  # id field allow to write in all languages and signs
   # BUG:
   Scenario Outline: id value allow to write just numbers test (invalid)
     Given I navigate to "CollectiveLifeInsurance" page

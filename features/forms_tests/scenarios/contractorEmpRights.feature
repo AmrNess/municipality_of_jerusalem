@@ -295,9 +295,9 @@ Feature: header, fields test of ContractorEmpRights Form Page
 
   @form
   # excel sheet rule number 4
-  # fields of first name and last name and street accept all languages and signs
+  # fields of first name, last name,street, city site name  accept all languages and signs
   # BUG:
-  # Another BUG : the first name accept first name, last name,street, city site name that contains one letter until unlimited
+  # Another BUG : first name, last name,street, city site name that contains one letter until unlimited
   Scenario Outline: all text field allow to write just Hebrew test (invalid)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
