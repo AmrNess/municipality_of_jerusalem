@@ -27,15 +27,15 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
   @Critical
   @form
   # excel sheet rule number 11
-  Scenario : full scenario for the page with sve click test (valid)
+  Scenario : full scenario for the page with save click test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "332796184" in "מספר זהות"
     And I click on "שמור" button
     Then validate that field "מספר זהות" has "332796184"
 
 
-  # BUG:
-  Scenario : full scenario for the page with sve click test (valid)
+  # BUG: the save button dose not work
+  Scenario : full scenario for the page with save click test
     Given I navigate to "CollectiveLifeInsurance" page
     And I click on "שמור" button
     Then Accept Alert message
