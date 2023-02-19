@@ -1,4 +1,4 @@
-Feature: Basic Test for MishpachtonimAppeal Form Page
+Feature: header, fields test of MishpachtonimAppeal Form Page
 
   """
   - Feature file name: mishpachtonimAppeal.feature

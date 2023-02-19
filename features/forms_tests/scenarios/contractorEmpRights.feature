@@ -1,4 +1,4 @@
-Feature: Basic Test for ContractorEmpRights Form Page
+Feature: header, fields test of ContractorEmpRights Form Page
 
   """
   - Feature file name: contractorEmpRights.feature
