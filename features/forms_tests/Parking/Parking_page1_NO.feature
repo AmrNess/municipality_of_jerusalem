@@ -272,7 +272,7 @@ Feature: Testing and validation according to municipality requests list
     |דרוויש,קימרי|
     |דחכלמהלגחכלמהלגלכחהמגלכחמהלגחכמהלגחכמהלגחכמהלגחכמ|
 
-
+# family name field
   Scenario: Family Name test with invalid Value (Empty space)
     Given Navigate to "Parking" Page
     When Click on "שם משפחה" field
@@ -303,49 +303,245 @@ Feature: Testing and validation according to municipality requests list
     |1234567|
     |درويش|
 
-
- # Email field test
-  Scenario: Email test with valid Value
+# סוג זיהוי dropdown menu
+  #pick option from סוג זיהוי
+  Scenario Outline: pick option from סוג זיהוי
     Given Navigate to "Parking" Page
-    When Click on "דוא"ל" field
-    And Clear "דוא"ל" field
-    And Fill "דוא"ל" field with "darweeshq@gmail.com"
-    Then Validate if "דוא"ל" field has valid value
-
-  Scenario: Email test with invalid Value (Empty space)
-    Given Navigate to "Parking" Page
-    When Click on "דוא"ל" field
-    And Clear "דוא"ל" field
-    And Fill "דוא"ל" field with " "
-    Then Validate if "דוא"ל" field has invalid value
-    And Validate if "דוא"ל" field has "שדה חובה" alert
-
-
-  Scenario Outline: Email test with invalid Values (Numbers and Symbols or letters)
-    Given Navigate to "Parking" Page
-    When Click on "דוא"ל" field
-    And Clear "דוא"ל" field
-    And Fill "דוא"ל" field with "<Text>"
-    Then Validate if "דוא"ל" field has invalid value
-    And Validate if "דוא"ל" field has "שדה לא תקין" alert
-    When Clear "דוא"ל" field
+    When Click on "סוג זיהוי" field
+    And choose "<option>" field with "סוג זיהוי"
+    And Click on "<option>"
+    Then Validate "<option>" if correctly displayed
     Examples:
-      |Text|
+    |option|
+    | ת.ז.|
+    | דרכון|
+    | ח.פ.|
+    | ח.פ. של חברה|
+    |אחר      |
+
+  #pick ת.ז. from סוג זיהוי
+  Scenario: pick ת.ז. from סוג זיהוי and fill ת.ז. with valid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "ת.ז." field from "סוג זיהוי"
+    And Click on "ת.ז."
+    When Click on "מספר ת.ז." field
+    And Clear "מספר ת.ז." field
+    And Fill "מספר ת.ז." field with "039886544"
+
+   Scenario Outline: pick ת.ז. from סוג זיהוי and fill ת.ז. with invalid value (Only numbers)
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "ת.ז." field from "סוג זיהוי"
+    And Click on "ת.ז."
+    When Click on "מספר ת.ז." field
+    And Clear "מספר ת.ז." field
+    And Fill "מספר ת.ז." field with "<num>"
+    Then Validate if "מספר ת.ז." field has invalid value
+    And Validate if "מספר ת.ז." field has "מספר זהות לא תקין" alert
+    And Clear "מספר ת.ז." field
+    Examples:
+      |num|
+      |000000000|
+      |000000009|
+      |000000018|
       |0        |
-      |abc      |
-      |גגגג     |
+      |01       |
+      |012      |
+      |6544     |
+      |01234    |
+      |012345   |
+      |0123456  |
       |01234567 |
-      |darweesh.|
-      |.com     |
-      |@.com    |
-      |.@.com    |
-      |email#example.com|
-      |email address@example.com|
-      |.email@example.com       |
-      |e..mail@example.com      |
-      |email@example            |
+
+ Scenario Outline: pick ת.ז. from סוג זיהוי and fill ת.ז. with invalid value (Numbers and text)
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "ת.ז." field from "סוג זיהוי"
+    And Click on "ת.ז."
+    When Click on "מספר ת.ז." field
+    And Clear "מספר ת.ז." field
+    And Fill "מספר ת.ז." field with "<text>"
+    Then Validate if "מספר ת.ז." field has invalid value
+    And Validate if "מספר ת.ז." field has "מספר זהות לא תקין" alert
+    And Clear "מספר ת.ז." field
+    Examples:
+      |text|
+      |a        |
+      |א        |
+      |ا        |
+      |-        |
+      |.        |
+      |1/1/1/1/1|
+      |@11111111|
+      |11111111.|
+      |a12345678|
+      |12345678a|
+      |123456789|
+      |03988654a|
+      |03988654-|
+      |-03988644|
+
+ #pick דרכון from סוג זיהוי
+  Scenario Outline: pick דרכון from סוג זיהוי and fill ת.ז. with valid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "דרכון" field from "סוג זיהוי"
+    And Click on "דרכון"
+    When Click on "מספר דרכון" field
+    And Clear "מספר דרכון" field
+    And Fill "מספר דרכון" field with "<num>"
+    Then Validate if "מספר דרכון" field has valid value
+    Examples:
+    |num|
+    |IS0123456789|
+    |IS123456789012345678|
+    |0123456789          |
+
+  Scenario Outline: pick דרכון from סוג זיהוי and fill ת.ז. with invalid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "דרכון" field from "סוג זיהוי"
+    And Click on "דרכון"
+    When Click on "מספר דרכון" field
+    And Clear "מספר דרכון" field
+    And Fill "מספר דרכון" field with "<num>"
+    Then Validate if "מספר דרכון" field has invalid value
+    And Validate if "מספר דרכון" field has "מספר דרכון לא תקין" alert
+    Examples:
+    |num|
+    |00000000000!|
+    |0000000000012@|
+    |אבגד|
+    |abc----123445|
+    |===          |
+    |@            |
+    |abcdefg      |
+    |abcdefghIjk1 |
+    |00000000     |
+    |a            |
+    |1            |
+
+ #pick  ח.פ. from סוג זיהוי
+  Scenario Outline: pick  ח.פ.   from סוג זיהוי and fill ת.ז. with valid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "ח.פ." field from "סוג זיהוי"
+    And Click on "ח.פ."
+    When Click on "מספר ח.פ." field
+    And Clear "מספר ח.פ." field
+    And Fill "מספר ח.פ." field with "<num>"
+    Then Validate if "מספר ח.פ." field has valid value
+    Examples:
+    |num|
+    |12345678|
+
+  Scenario Outline: pick  ח.פ.  from סוג זיהוי and fill ת.ז. with invalid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "ח.פ." field from "סוג זיהוי"
+    And Click on "ח.פ."
+    When Click on "מספר ח.פ." field
+    And Clear "מספר ח.פ." field
+    And Fill "מספר ח.פ." field with "<num>"
+    Then Validate if "מספר ח.פ." field has invalid value
+    And Validate if "מספר ח.פ." field has "מספר חברה לא תקין" alert
+    Examples:
+    |num|
+    |12345678ש|
+    |12345678901234567890|
+    |1|
+    |123|
+    |1234|
+    |12345|
+    |123456|
+    |1234567|
+    |00000000     |
+    |a            |
+    |@12345       |
+    |-1234567     |
+    |12345678__   |
+    |חפ1234567    |
+
+ #pick ח.פ. של חברה from סוג זיהוי
+  Scenario Outline: pick  ח.פ. של חברה from סוג זיהוי and fill ת.ז. with valid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose " ח.פ. של חברה" field from "סוג זיהוי"
+    And Click on "ח.פ. של חברה"
+    When Click on "מספר ח.פ. של חברה" field
+    And Clear "מספר ח.פ. של חברה" field
+    And Fill "מספר ח.פ. של חברה" field with "<num>"
+    Then Validate if "מספר ח.פ. של חברה" field has valid value
+    Examples:
+    |num|
+    |12345678|
+
+  Scenario Outline: pick ח.פ. של חברה from סוג זיהוי and fill ת.ז. with invalid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "ח.פ. של חברה" field from "סוג זיהוי"
+    And Click on "ח.פ. של חברה"
+    When Click on "מספר ח.פ. של חברה" field
+    And Clear "מספר ח.פ. של חברה" field
+    And Fill "מספר ח.פ. של חברה" field with "<num>"
+    Then Validate if "מספר ח.פ. של חברה" field has invalid value
+    And Validate if "מספר ח.פ. של חברה" field has "מספר חברה לא תקין" alert
+    Examples:
+    |num|
+    |12345678ש|
+    |12345678901234567890|
+    |1|
+    |123|
+    |1234|
+    |12345|
+    |123456|
+    |1234567|
+    |00000000     |
+    |a            |
+    |@12345       |
+    |-1234567     |
+    |12345678__   |
+    |חפ1234567    |
+
+ #pick אחר from סוג זיהוי
+  Scenario Outline: pick  ח.פ. של חברה from סוג זיהוי and fill ת.ז. with valid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "אחר" field from "סוג זיהוי"
+    And Click on "אחר"
+    When Click on "מספר עמותה" field
+    And Clear "מספר עמותה" field
+    And Fill "מספר עמותה" field with "<num>"
+    Then Validate if "מספר עמותה" field has valid value
+    Examples:
+    |num|
+    |12345678|
+
+  Scenario Outline: pick  ח.פ. של חברה from סוג זיהוי and fill ת.ז. with invalid value
+    Given Navigate to "Parking" Page
+    When Click on "סוג זיהוי" field
+    And choose "אחר" field from "סוג זיהוי"
+    And Click on "אחר"
+    When Click on "מספר עמותה" field
+    And Clear "מספר עמותה" field
+    And Fill "מספר עמותה" field with "<num>"
+    Then Validate if "מספר עמותה" field has invalid value
+    And Validate if "מספר ח.פ. של חברה" field has "שדה לא תקין" alert
+    Examples:
+    |num|
+    |12345678ש|
+    |12345678901234567890|
+    |00000000     |
+    |a            |
+    |@12345       |
+    |-1234567     |
+    |12345678__   |
+    |חפ    |
+
 
  # Test Cellphone field
+  @Form
   Scenario: Cellphone suffix test with valid Value
     Given Navigate to "Parking" Page
     When Click on "טלפון נייד" field
@@ -353,6 +549,7 @@ Feature: Testing and validation according to municipality requests list
     And Fill "טלפון נייד" field with "5768719"
     Then Validate if "טלפון נייד" field has valid value
 
+  @Form
   Scenario: Cellphone test with invalid Value (Empty space)
     Given Navigate to "Parking" Page
     When Click on "טלפון נייד" field
@@ -379,6 +576,7 @@ Feature: Testing and validation according to municipality requests list
       |012345   |
       |0123456  |
 
+  @Critical
   Scenario Outline: Cellphone test with invalid Values (Numbers and Symbols or letters)
     # In this scenario, two red label appears (complete the missing numbers, only numbers accepted)
     Given Navigate to "Parking" Page
@@ -400,7 +598,8 @@ Feature: Testing and validation according to municipality requests list
       |@12345   |
       |333 33   |
 
-     Scenario Outline: Cellphone test with invalid Values (Numbers and Symbols or letters)
+  @Critical
+  Scenario Outline: Cellphone test with invalid Values (Numbers and Symbols or letters)
     Given Navigate to "Parking" Page
     When Click on "טלפון נייד" field
     And Clear "טלפון נייד" field
@@ -418,6 +617,7 @@ Feature: Testing and validation according to municipality requests list
       |-03988644|
 
 # Test Cellphone prefix
+  @Critical
   Scenario Outline: Cellphone prefix test
     Given Navigate to "Parking" Page
     When Click on "pre_cellphone" field
@@ -438,7 +638,138 @@ Feature: Testing and validation according to municipality requests list
       |059|
       |077|
 
-# Send message to test button
+# Telephone field
+  @Critical
+  Scenario: Telephone suffix test with valid Value
+    Given Navigate to "Parking" Page
+    When Click on "טלפון קווי" field
+    And Clear "טלפון קווי" field
+    And Fill "טלפון קווי" field with "6287296"
+    Then Validate if "טלפון קווי" field has valid value
+
+  @Critical
+  Scenario Outline: Telephone test with invalid Values (Only Numbers)
+    Given Navigate to "Parking" Page
+    When Click on "טלפון קווי" field
+    And Clear "טלפון קווי" field
+    And Fill "טלפון קווי" field with "<Text>"
+    Then Validate if "טלפון קווי" field has invalid value
+    And Validate if "טלפון קווי" field has "יש להשלים את הספרות החסרות" alert
+    When Clear "טלפון קווי" field
+    Examples:
+      |Text|
+      |0        |
+      |01       |
+      |012      |
+      |0123     |
+      |01234    |
+      |012345   |
+
+  @Critical
+  Scenario Outline: Telephone test with invalid Values (Numbers and Symbols or letters)
+    # In this scenario, two red label appears (complete the missing numbers, only numbers accepted)
+    Given Navigate to "Parking" Page
+    When Click on "טלפון קווי" field
+    And Clear "טלפון קווי" field
+    And Fill "טלפון קווי" field with "<Text>"
+    Then Validate if "טלפון קווי" field has invalid value
+    And Validate if "טלפון קווי" field has "יש להזין ספרות בלבד" alert
+    And Validate if "טלפון קווי" field has "יש להשלים את הספרות החסרות" alert
+    When Clear "טלפון קווי" field
+    Examples:
+      |Text|
+      |abcd     |
+      |א        |
+      |ا        |
+      |-        |
+      |.        |
+      |ש12345   |
+      |@12345   |
+      |333 33   |
+
+  @Critical
+  Scenario Outline: Telephone test with invalid Values (Numbers and Symbols or letters)
+    Given Navigate to "Parking" Page
+    When Click on "טלפון קווי" field
+    And Clear "טלפון קווי" field
+    And Fill "טלפון קווי" field with "<Text>"
+    Then Validate if "טלפון קווי" field has invalid value
+    And Validate if "טלפון קווי" field has "מספר לא תקין" alert
+    When Clear "טלפון קווי" field
+    Examples:
+      |Text|
+      |a123456|
+      |ששששששש|
+      |ششششششش|
+      |aaaaaaa|
+      |628729-|
+      |-628729|
+
+# Test Telephone prefix
+  @Critical
+  Scenario Outline: Telephone prefix test
+    Given Navigate to "Parking" Page
+    When Click on "pre_telephone" field
+    And Fill "pre_telephone" field with "<num>"
+    And Click on "<num>"
+    Then Validate "pre_telephone"if correctly displayed
+    Examples:
+      |num|
+      |02|
+      |03|
+      |04|
+      |06|
+      |08|
+      |09|
+      |072|
+      |073|
+      |077|
+
+ # Email field test
+  @Critical
+  Scenario: Email test with valid Value
+    Given Navigate to "Parking" Page
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+    Then Validate if "דוא"ל" field has valid value
+
+  @Critical
+  Scenario: Email test with invalid Value (Empty space)
+    Given Navigate to "Parking" Page
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with " "
+    Then Validate if "דוא"ל" field has invalid value
+    And Validate if "דוא"ל" field has "שדה חובה" alert
+
+  @Critical
+  Scenario Outline: Email test with invalid Values (Numbers and Symbols or letters)
+    Given Navigate to "Parking" Page
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "<Text>"
+    Then Validate if "דוא"ל" field has invalid value
+    And Validate if "דוא"ל" field has "שדה לא תקין" alert
+    When Clear "דוא"ל" field
+    Examples:
+      |Text|
+      |0        |
+      |abc      |
+      |גגגג     |
+      |01234567 |
+      |darweesh.|
+      |.com     |
+      |@.com    |
+      |.@.com    |
+      |email#example.com|
+      |email address@example.com|
+      |.email@example.com       |
+      |e..mail@example.com      |
+      |email@example            |
+
+  # Cellphone Button test button
+  @Critical
   Scenario: Pressing Cellphone Button
     Given Navigate to "Parking" Page
     When Press on "Cellphone" button
@@ -447,6 +778,8 @@ Feature: Testing and validation according to municipality requests list
     And Validate if "Email" Button is NOT pressed
     And Validate if color of "Email" button is NOT highlighted
 
+  # Email Button test button
+ @Critical
  Scenario: Pressing Email Button
     Given Navigate to "Parking" Page
     When Press on "Email" button
@@ -455,88 +788,58 @@ Feature: Testing and validation according to municipality requests list
     And Validate if "Cellphone" Button is NOT pressed
     And Validate if color of "Cellphone" button is NOT highlighted
 
+ @Sanity
+ @Critical
  Scenario: Press continue button with valid test (Fill all fields with correct values)
     Given Navigate to "Parking" Page
-    When Click on "תעודת זהות" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with "039886544"
-    When Click on "תאריך לידה" field
-    And Clear "תאריך לידה" field
-    And Fill "תאריך לידה" field with "04051983"
-    When We click on "רחוב" field
-    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
-    And Click on "אבו אלעלא אל מערי"
-    When Click on "מספר בית" field
-    And Clear "מספר בית" field
-    And Fill "מספר בית" field with "61"
-    When Click on "דוא"ל" field
-    And Clear "דוא"ל" field
-    And Fill "דוא"ל" field with "darweeshq@gmail.com"
-    When Click on "טלפון נייד" field
-    And Clear "טלפון נייד" field
-    And Fill "טלפון נייד" field with "5768719"
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "123456"
+    When Click on "מס' דוח" field
+    And Clear "מס' דוח" field
+    And Fill "מס' דוח" field with "123456"
+    When Click on "שם פרטי" field
+    And Clear "שם פרטי" field
+    And Fill "שם פרטי" field with "דרוויש"
+    When Click on "שם משפחה" field
+    And Clear "שם משפחה" field
+    And Fill "שם משפחה" field with "קימרי"
+    When Click on "סוג זיהוי" field
+    And choose "ת.ז." field from "סוג זיהוי"
+    And Click on "ת.ז."
+    When Click on "מספר ת.ז." field
+    And Clear "מספר ת.ז." field
+    And Fill "מספר ת.ז." field with "039886544"
     When Click on "pre_cellphone" field
     And Fill "pre_cellphone" field with "052"
     And Click on "052"
-    When Press on "Email" button
+    When Click on "טלפון נייד" field
+    And Clear "טלפון נייד" field
+    And Fill "טלפון נייד" field with "5768719"
+    When Click on "pre_telephone" field
+    And Fill "pre_telephone" field with "02"
+    And Click on "02"
+    When Click on "טלפון קווי" field
+    And Clear "טלפון קווי" field
+    And Fill "טלפון קווי" field with "6287296"
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+    When Press on "Cellphone" button
     When Press on "המשך" button
-    Then Validate if page number "2" is highlighted
+    Then Validate if we are at page no. "2"
     #We can validate from page number
 
-  Scenario: Press continue button with invalid test (Fill all fields correct values except I.D)
+  Scenario: Press continue button with empty values
     Given Navigate to "Parking" Page
-    When Click on "תעודת זהות" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with "000"
-    #Invalid I.D number
-    When Click on "תאריך לידה" field
-    And Clear "תאריך לידה" field
-    And Fill "תאריך לידה" field with "04051983"
-    When We click on "רחוב" field
-    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
-    And Click on "אבו אלעלא אל מערי"
-    When Click on "מספר בית" field
-    And Clear "מספר בית" field
-    And Fill "מספר בית" field with "61"
-    When Click on "דוא"ל" field
-    And Clear "דוא"ל" field
-    And Fill "דוא"ל" field with "darweeshq@gmail.com"
-    When Click on "טלפון נייד" field
-    And Clear "טלפון נייד" field
-    And Fill "טלפון נייד" field with "5768719"
-    When Click on "pre_cellphone" field
-    And Fill "pre_cellphone" field with "052"
-    And Click on "052"
-    When Press on "Email" button
     When Press on "המשך" button
-    Then Validate if page number "1" is highlighted
-    #We can validate from page number
-
- Scenario: Press continue button with invalid test (Fill all fields correct values except Date of Birth)
-    Given Navigate to "Parking" Page
-    When Click on "תעודת זהות" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with "039886544"
-    When Click on "תאריך לידה" field
-    And Clear "תאריך לידה" field
-    And Fill "תאריך לידה" field with "040583"
-    #Invalid date
-    When We click on "רחוב" field
-    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
-    And Click on "אבו אלעלא אל מערי"
-    When Click on "מספר בית" field
-    And Clear "מספר בית" field
-    And Fill "מספר בית" field with "61"
-    When Click on "דוא"ל" field
-    And Clear "דוא"ל" field
-    And Fill "דוא"ל" field with "darweeshq@gmail.com"
-    When Click on "טלפון נייד" field
-    And Clear "טלפון נייד" field
-    And Fill "טלפון נייד" field with "5768719"
-    When Click on "pre_cellphone" field
-    And Fill "pre_cellphone" field with "052"
-    And Click on "052"
-    When Press on "Email" button
-    When Press on "המשך" button
-    Then Validate if page number "1" is highlighted
+    Then Validate if "מס' רכב" field has invalid value
+    Then Validate if "מס' דוח" field has invalid value
+    Then Validate if "שם פרטי" field has invalid value
+    Then Validate if "שם משפחה" field has invalid value
+    Then Validate if "מספר ת.ז." field has invalid value
+    Then Validate if "טלפון נייד" field has invalid value
+    Then Validate if "דוא"ל" field has invalid value
+    Then Validate if "מס' זיהוי" field has invalid value
+    Then Validate if we are at page no. "2"
     #We can validate from page number
