@@ -1,8 +1,8 @@
-Feature: Basic Test for Parking form, Page 1, [NO] option
+Feature: Testing and validation according to municipality requests list
 
 - Feature file name: Parking_pages1_NO.feature
 - Form link: https://jeronlineforms-test.jerweb.jer/Parking
-- Number of Pages is : 5, We are at Page: 1
+- Number of Pages is : 5, We are at Page: 1 [No]
 - All fields are mandatory. (except: Telephone no.)
 - The first Page has two options, [Yes] or [No], we should choose one of them to
   be able to fill the form, each option has different fields.
@@ -19,53 +19,51 @@ Feature: Basic Test for Parking form, Page 1, [NO] option
 
 # Checking the Car number field
 #BUG: Identity field accepts only numbers, but it allows us to write letters and special characters.
-  Scenario: Car number test with valid Value
+  Scenario Outline: Car number test with valid Value
     Given Navigate to "Parking" Page
-    When Click on "" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with "039886544"
-    Then Validate if "תעודת זהות" field has valid value
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "<text>"
+    Then Validate if "מס' רכב" field has valid value
+    Examples:
+    |text|
+    |123456|
+    |1234567|
+    |12345678|
 
-  Scenario: I.D. Number test with invalid Value (Empty space)
+  Scenario: Car Number test with invalid Value (Empty space)
     Given Navigate to "Parking" Page
-    When Click on "תעודת זהות" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with " "
-    Then Validate if "תעודת זהות" field has invalid value
-    And Validate if "תעודת זהות" field has "שדה חובה" alert
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with " "
+    Then Validate if "מס' רכב" field has invalid value
+    And Validate if "מס' רכב" field has "שדה חובה" alert
 
-  Scenario Outline: I.D. Number test with invalid Values (Only Numbers)
+  Scenario Outline: Car number test with invalid Values (Only Numbers)
     Given Navigate to "Parking" Page
-    When Click on "תעודת זהות" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with "<Text>"
-    Then Validate if "תעודת זהות" field has invalid value
-    And Validate if "תעודת זהות" field has "מספר זהות לא תקין" alert
-    When Clear "תעודת זהות" field
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "<Text>"
+    Then Validate if "מס' רכב" field has invalid value
+    And Validate if "מס' רכב" field has "מס' רכב לא תקין" alert
+    When Clear "מס' רכב" field
     Examples:
       |Text|
-      |000000000|
-      |000000009|
-      |000000018|
-      |0        |
-      |01       |
-      |012      |
-      |6544     |
-      |01234    |
-      |012345   |
-      |0123456  |
-      |01234567 |
-      |012345678|
+      |1|
+      |12|
+      |123|
+      |1234  |
+      |12345 |
 
-  Scenario Outline: I.D. Number test with invalid Values (Numbers and Symbols or letters)
+  Scenario Outline: Car number test with invalid Values (Numbers and Symbols or letters)
     Given Navigate to "Parking" Page
-    When Click on "תעודת זהות" field
-    And Clear "תעודת זהות" field
-    And Fill "תעודת זהות" field with "<Text>"
-    Then Validate if "תעודת זהות" field has invalid value
-    And Validate if "תעודת זהות" field has "מספר זהות לא תקין" alert
-    And Validate if "תעודת זהות" field has "יש להזין ספרות בלבד" alert
-    When Clear "תעודת זהות" field
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "<Text>"
+    Then Validate if "מס' רכב" field has invalid value
+    And Validate if "מס' רכב" field has "מס' רכב לא תקין" alert
+    And Validate if "מס' רכב" field has "יש להזין ספרות בלבד" alert
+    When Clear "מס' רכב" field
     Examples:
       |Text|
       |a        |
@@ -73,110 +71,238 @@ Feature: Basic Test for Parking form, Page 1, [NO] option
       |ا        |
       |-        |
       |.        |
-      |1/1/1/1/1|
-      |@11111111|
-      |11111111.|
-      |a12345678|
-      |12345678a|
-      |123456789|
-      |03988654a|
-      |03988654-|
-      |-03988644|
+      |1/1/1/1/|
+      |@1111111|
+      |11111111|
+      |20-200-20|
+      |0398865-|
+      |-0398864|
 
-# Checking the Date field
-  Scenario Outline: Date test with valid values
+  Scenario Outline: Car number test with valid Value
     Given Navigate to "Parking" Page
-    When Click on "תאריך לידה" field
-    And Clear "תאריך לידה" field
-    And Fill "תאריך לידה" field with "<Date>"
-    Then Validate if "תאריך לידה" field has valid value
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "<text>"
+    Then Validate if "מס' רכב" field has valid value
     Examples:
-    |Date|
-    |12/12/1988|
-    |04/05/2000|
-    |04042005  |
-    |04-04-2000|
-    |04/04.2000|
-    |24/12/2001|
-    |3012/2000 |
-    |a22/11/a2022|
+    |text|
+    |123456|
+    |1234567|
+    |12345678|
 
-  Scenario: Date test with invalid value (Empty space)
+  Scenario: Car Number test with invalid Value (Empty space)
     Given Navigate to "Parking" Page
-    When Click on "תאריך לידה" field
-    And Clear "תאריך לידה" field
-    And Fill "תאריך לידה" field with "  "
-    Then Validate if "תאריך לידה" field has invalid value
-    And Validate if "תאריך לידה" field has "שדה חובה" alert
-    When Clear "תעודת זהות" field
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with " "
+    Then Validate if "מס' רכב" field has invalid value
+    And Validate if "מס' רכב" field has "שדה חובה" alert
 
-  Scenario Outline: Date test with invalid values (Only Numbers)
+  Scenario Outline: Car number test with invalid Values (Only Numbers)
     Given Navigate to "Parking" Page
-    When Click on "תאריך לידה" field
-    And Fill "תאריך לידה" field with "<Text>"
-    Then Validate if "תאריך לידה" field has invalid value
-    And Validate if "תאריך לידה" field has "תאריך לא תקין" alert
-    When Clear "תעודת זהות" field
-
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "<Text>"
+    Then Validate if "מס' רכב" field has invalid value
+    And Validate if "מס' רכב" field has "מס' רכב לא תקין" alert
+    When Clear "מס' רכב" field
     Examples:
       |Text|
-      |1        |
-      |11       |
-      |111      |
-      |1111     |
-      |11111    |
-      |20201989 |
-      |40402000 |
-      |40101000 |
-      |0123456  |
+      |1|
+      |12|
+      |123|
+      |1234  |
+      |12345 |
 
-# Checking street field
-  Scenario: Street test dropdown menu
+  Scenario Outline: Car number test with invalid Values (Numbers and Symbols or letters)
     Given Navigate to "Parking" Page
-    When We click on "רחוב" field
-    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
-    And Click on "אבו אלעלא אל מערי"
-    Then validate "אבו אלעלא אל מערי" if correctly displayed
-
-  Scenario: Street test dropdown menu (Scroll method)
-    Given Navigate to "Parking" Page
-    When We click on "רחוב" field
-    And Scroll "רחוב" search field until "אבו אלעלא אל מערי" appear
-    Then validate "אבו אלעלא אל מערי" with shown result in search field
-    And Validate text under "רחוב" field with "יש להזין כתובת רשימת המופיעה בתעודת הזהות"
-
-  Scenario: Street test check test bellow field
-    Given Navigate to "Parking" Page
-    Then Validate text under "רחוב" field with "יש להזין כתובת רשימת המופיעה בתעודת הזהות"
-
-  Scenario: Street test dropdown menu
-    Given Navigate to "Parking" Page
-    When We click on "רחוב" field
-    And Fill "רחוב" search field with "text in english"
-    Then validate "לא נמצאו תוצאות" with shown text under search field
-
-# Test house number field
-# BUG: Maximum allowed characters is 15, and that is too much for a house number
-  Scenario Outline: House number test with valid Value
-    Given Navigate to "Parking" Page
-    When Click on "מספר בית" field
-    And Clear "מספר בית" field
-    And Fill "מספר בית" field with "<number>"
-    Then Validate if "מספר בית" field has valid value
+    When Click on "מס' רכב" field
+    And Clear "מס' רכב" field
+    And Fill "מס' רכב" field with "<Text>"
+    Then Validate if "מס' רכב" field has invalid value
+    And Validate if "מס' רכב" field has "מס' רכב לא תקין" alert
+    And Validate if "מס' רכב" field has "יש להזין ספרות בלבד" alert
+    When Clear "מס' רכב" field
     Examples:
-    |number| comment |
-    |01    |         |
-    |1234  |         |
-    |3a1234|It will accept the number values, it writes "31234"|
-    |11-11 |It will accept the number values, it writes "1111"|
+      |Text|
+      |a        |
+      |א        |
+      |ا        |
+      |-        |
+      |.        |
+      |1/1/1/1/|
+      |@1111111|
+      |11111111|
+      |20-200-20|
+      |0398865-|
+      |-0398864|
 
-  Scenario: House number test with invalid Value (Empty space)
+# Checking מס' דוח field
+  Scenario Outline: Ticket number test with valid Value
     Given Navigate to "Parking" Page
-    When Click on "מספר בית" field
-    And Clear "מספר בית" field
-    And Fill ""מספר בית" field with " "
-    Then Validate if "מספר בית" field has invalid value
-    And Validate if "מספר בית" field has "שדה חובה" alert
+    When Click on "מס' דוח" field
+    And Clear "מס' דוח" field
+    And Fill "מס' דוח" field with "<text>"
+    Then Validate if "מס' דוח" field has valid value
+    Examples:
+    |text|
+    |123456|
+    |1234567|
+
+  Scenario: Ticket number test with invalid Value (Empty space)
+    Given Navigate to "Parking" Page
+    When Click on "מס' דוח" field
+    And Clear "מס' דוח" field
+    And Fill "מס' דוח" field with " "
+    Then Validate if "מס' דוח" field has invalid value
+    And Validate if "מס' דוח" field has "שדה חובה" alert
+
+  Scenario Outline: Ticket number test with invalid Values (Only Numbers)
+    Given Navigate to "Parking" Page
+    When Click on "מס' דוח" field
+    And Clear "מס' דוח" field
+    And Fill "מס' דוח" field with "<Text>"
+    Then Validate if "מס' דוח" field has invalid value
+    And Validate if "מס' דוח" field has "מס' דוח לא תקין" alert
+    When Clear "מס' דוח" field
+    Examples:
+      |Text|
+      |1|
+      |12|
+      |123|
+      |1234  |
+      |12345 |
+      |12345678|
+
+  Scenario Outline: Ticket number test with invalid Values (Numbers and Symbols or letters)
+    Given Navigate to "Parking" Page
+    When Click on "מס' דוח" field
+    And Clear "מס' דוח" field
+    And Fill "מס' דוח" field with "<Text>"
+    Then Validate if "מס' דוח" field has invalid value
+    And Validate if "מס' דוח" field has "מס' דוח לא תקין" alert
+    And Validate if "מס' דוח" field has "יש להזין ספרות בלבד" alert
+    When Clear "מס' דוח" field
+    Examples:
+      |Text|
+      |a        |
+      |א        |
+      |ا        |
+      |-        |
+      |.        |
+      |1/1/1/1/|
+      |@1111111|
+      |11111111|
+      |20-200-20|
+      |0398865-|
+      |-0398864|
+
+# First Name Field
+  Scenario Outline: First Name test with valid Value
+    Given Navigate to "Parking" Page
+    When Click on "שם פרטי" field
+    And Clear "שם פרטי" field
+    And Fill "שם פרטי" field with "<text>"
+    Then Validate if "שם פרטי" field has valid value
+    Examples:
+    |text|
+    |דרוויש|
+    |דרוויש נאסיר|
+    |דרוויש.קימרי|
+    |דרוויש-קימרי|
+    |דרוויש/קימרי|
+    |דרוויש(קימרי|
+    |דרוויש)קימרי|
+    |דרוויש'קימרי|
+    |דרוויِש"קימרי|
+    |דרוויש_קימרי|
+    |דרוויש,קימרי|
+    |דחכלמהלגחכלמהלגלכחהמגלכחמהלגחכמהלגחכמהלגחכמהלגחכמ|
+
+
+  Scenario: First Name test with invalid Value (Empty space)
+    Given Navigate to "Parking" Page
+    When Click on "שם פרטי" field
+    And Clear "שם פרטי" field
+    And Fill "שם פרטי" field with " "
+    Then Validate if "שם פרטי" field has invalid value
+    And Validate if "שם פרטי" field has "שדה חובה" alert
+
+  Scenario Outline: First Name test with invalid Values (Numbers, letters and special characters)
+    Given Navigate to "Parking" Page
+    When Click on "שם פרטי" field
+    And Clear "שם פרטי" field
+    And Fill "שם פרטי" field with "<Text>"
+    Then Validate if "שם פרטי" field has invalid value
+    And Validate if "שם פרטי" field has "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -" alert
+    When Clear "שם פרטי" field
+    Examples:
+      |Text|
+    |1דרוויש|
+    |דרוויש@נאסיר|
+    |דרוויש#קימרי|
+    |דרוויש$קימרי|
+    |דרוויש%קימרי|
+    |דרוויש^קימרי|
+    |דרוויש&קימרי|
+    |דרוויש*קימרי|
+    |darweesh|
+    |1234567|
+    |درويش|
+
+# Family Name Field
+  Scenario Outline: Family Name test with valid Value
+    Given Navigate to "Parking" Page
+    When Click on "שם משפחה" field
+    And Clear "שם משפחה" field
+    And Fill "שם משפחה" field with "<text>"
+    Then Validate if "שם משפחה" field has valid value
+    Examples:
+    |text|
+    |דרוויש|
+    |דרוויש נאסיר|
+    |דרוויש.קימרי|
+    |דרוויש-קימרי|
+    |דרוויש/קימרי|
+    |דרוויש(קימרי|
+    |דרוויש)קימרי|
+    |דרוויש'קימרי|
+    |דרוויِש"קימרי|
+    |דרוויש_קימרי|
+    |דרוויש,קימרי|
+    |דחכלמהלגחכלמהלגלכחהמגלכחמהלגחכמהלגחכמהלגחכמהלגחכמ|
+
+
+  Scenario: Family Name test with invalid Value (Empty space)
+    Given Navigate to "Parking" Page
+    When Click on "שם משפחה" field
+    And Clear "שם משפחה" field
+    And Fill "שם משפחה" field with " "
+    Then Validate if "שם משפחה" field has invalid value
+    And Validate if "שם משפחה" field has "שדה חובה" alert
+
+  Scenario Outline: Family Name test with invalid Values (Numbers, letters and special characters)
+    Given Navigate to "Parking" Page
+    When Click on "שם משפחה" field
+    And Clear "שם משפחה" field
+    And Fill "שם משפחה" field with "<Text>"
+    Then Validate if "שם משפחה" field has invalid value
+    And Validate if "שם משפחה" field has "יש להזין אותיות בעברית בלבד ותווים מיוחדים " / () ' . , _ -" alert
+    When Clear "שם משפחה" field
+    Examples:
+      |Text|
+    |1דרוויש|
+    |דרוויש@נאסיר|
+    |דרוויש#קימרי|
+    |דרוויש$קימרי|
+    |דרוויש%קימרי|
+    |דרוויש^קימרי|
+    |דרוויש&קימרי|
+    |דרוויש*קימרי|
+    |darweesh|
+    |1234567|
+    |درويش|
+
 
  # Email field test
   Scenario: Email test with valid Value

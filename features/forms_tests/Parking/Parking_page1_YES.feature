@@ -71,7 +71,6 @@ Feature: Testing and validation according to municipality requests list
       |012345   |
       |0123456  |
       |01234567 |
-      |012345678|
 
   @Critical
   Scenario Outline: I.D. Number test with invalid Values (Numbers with Symbols or letters)
@@ -395,6 +394,7 @@ Feature: Testing and validation according to municipality requests list
     Then Validate if we are at page no. "2"
     #We can check that from the status of the element if (aria-selected-true)
 
+  #Check each mandatory field if it continues after click the continue button
   @Critical
   Scenario: Press continue button with invalid test (Fill all fields correct values except I.D)
     Given Navigate to "Parking" Page
@@ -454,3 +454,154 @@ Feature: Testing and validation according to municipality requests list
     When Press on "המשך" button
     Then Validate if we are at page no. "1"
     #We can check that from the status of the element if (aria-selected-true)
+
+  @Critical
+  Scenario: Press continue button with invalid test (Fill all fields correct values except Date of Birth)
+    Given Navigate to "Parking" Page
+    When Click on "תעודת זהות" field
+    And Clear "תעודת זהות" field
+    And Fill "תעודת זהות" field with "039886544"
+    When Click on "תאריך לידה" field
+    And Clear "תאריך לידה" field
+    And Fill "תאריך לידה" field with "04051983"
+#    When We click on "רחוב" field
+#    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
+#    And Click on "אבו אלעלא אל מערי"
+     # Invaalid street
+    When Click on "מספר בית" field
+    And Clear "מספר בית" field
+    And Fill "מספר בית" field with "61"
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+    When Click on "טלפון נייד" field
+    And Clear "טלפון נייד" field
+    And Fill "טלפון נייד" field with "5768719"
+    When Click on "pre_cellphone" field
+    And Fill "pre_cellphone" field with "052"
+    And Click on "052"
+    When Press on "Email" button
+    When Press on "המשך" button
+    Then Validate if we are at page no. "1"
+    #We can check that from the status of the element if (aria-selected-true)
+
+  @Critical
+  Scenario: Press continue button with invalid test (Fill all fields correct values except Date of Birth)
+    Given Navigate to "Parking" Page
+    When Click on "תעודת זהות" field
+    And Clear "תעודת זהות" field
+    And Fill "תעודת זהות" field with "039886544"
+    When Click on "תאריך לידה" field
+    And Clear "תאריך לידה" field
+    And Fill "תאריך לידה" field with "04051983"
+    When We click on "רחוב" field
+    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
+    And Click on "אבו אלעלא אל מערי"
+#    When Click on "מספר בית" field
+#    And Clear "מספר בית" field
+#    And Fill "מספר בית" field with "61"
+    #Invalid house number
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+    When Click on "טלפון נייד" field
+    And Clear "טלפון נייד" field
+    And Fill "טלפון נייד" field with "5768719"
+    When Click on "pre_cellphone" field
+    And Fill "pre_cellphone" field with "052"
+    And Click on "052"
+    When Press on "Email" button
+    When Press on "המשך" button
+    Then Validate if we are at page no. "1"
+    #We can check that from the status of the element if (aria-selected-true)
+
+   @Critical
+  Scenario: Press continue button with invalid test (Fill all fields correct values except Date of Birth)
+    Given Navigate to "Parking" Page
+    When Click on "תעודת זהות" field
+    And Clear "תעודת זהות" field
+    And Fill "תעודת זהות" field with "039886544"
+    When Click on "תאריך לידה" field
+    And Clear "תאריך לידה" field
+    And Fill "תאריך לידה" field with "04051983"
+    When We click on "רחוב" field
+    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
+    And Click on "אבו אלעלא אל מערי"
+    When Click on "מספר בית" field
+    And Clear "מספר בית" field
+    And Fill "מספר בית" field with "61"
+#    When Click on "דוא"ל" field
+#    And Clear "דוא"ל" field
+#    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+     #Invalid email
+    When Click on "טלפון נייד" field
+    And Clear "טלפון נייד" field
+    And Fill "טלפון נייד" field with "5768719"
+    When Click on "pre_cellphone" field
+    And Fill "pre_cellphone" field with "052"
+    And Click on "052"
+    When Press on "Email" button
+    When Press on "המשך" button
+    Then Validate if we are at page no. "1"
+    #We can check that from the status of the element if (aria-selected-true)
+
+  @Critical
+  Scenario: Press continue button with invalid test (Fill all fields correct values except Date of Birth)
+    Given Navigate to "Parking" Page
+    When Click on "תעודת זהות" field
+    And Clear "תעודת זהות" field
+    And Fill "תעודת זהות" field with "039886544"
+    When Click on "תאריך לידה" field
+    And Clear "תאריך לידה" field
+    And Fill "תאריך לידה" field with "04051983"
+    When We click on "רחוב" field
+    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
+    And Click on "אבו אלעלא אל מערי"
+    When Click on "מספר בית" field
+    And Clear "מספר בית" field
+    And Fill "מספר בית" field with "61"
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+#    When Click on "טלפון נייד" field
+#    And Clear "טלפון נייד" field
+#    And Fill "טלפון נייד" field with "5768719"
+#    When Click on "pre_cellphone" field
+#    And Fill "pre_cellphone" field with "052"
+#    And Click on "052"
+    #invalid cellphone number
+    When Press on "Email" button
+    When Press on "המשך" button
+    Then Validate if we are at page no. "1"
+    #We can check that from the status of the element if (aria-selected-true)
+
+  @Critical
+  Scenario: Press continue button with invalid test (Fill all fields correct values except Date of Birth)
+    Given Navigate to "Parking" Page
+    When Click on "תעודת זהות" field
+    And Clear "תעודת זהות" field
+    And Fill "תעודת זהות" field with "039886544"
+    When Click on "תאריך לידה" field
+    And Clear "תאריך לידה" field
+    And Fill "תאריך לידה" field with "04051983"
+    When We click on "רחוב" field
+    And Fill "רחוב" search field with "אבו אלעלא אל מערי"
+    And Click on "אבו אלעלא אל מערי"
+    When Click on "מספר בית" field
+    And Clear "מספר בית" field
+    And Fill "מספר בית" field with "61"
+    When Click on "דוא"ל" field
+    And Clear "דוא"ל" field
+    And Fill "דוא"ל" field with "darweeshq@gmail.com"
+    When Click on "טלפון נייד" field
+    And Clear "טלפון נייד" field
+    And Fill "טלפון נייד" field with "5768719"
+    When Click on "pre_cellphone" field
+    And Fill "pre_cellphone" field with "052"
+    And Click on "052"
+  #When Press on "Email" button
+  #invalid button
+    When Press on "המשך" button
+    Then Validate if we are at page no. "1"
+    #We can check that from the status of the element if (aria-selected-true)
+
