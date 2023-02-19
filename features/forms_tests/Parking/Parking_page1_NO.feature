@@ -272,7 +272,6 @@ Feature: Testing and validation according to municipality requests list
     |דרוויש,קימרי|
     |דחכלמהלגחכלמהלגלכחהמגלכחמהלגחכמהלגחכמהלגחכמהלגחכמ|
 
-# family name field
   Scenario: Family Name test with invalid Value (Empty space)
     Given Navigate to "Parking" Page
     When Click on "שם משפחה" field
