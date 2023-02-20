@@ -10,7 +10,6 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
 
   @Major
   @header
-  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "CollectiveLifeInsurance" page
     Then Is application information tittle is "הסבר למילוי הטופס:"
@@ -18,7 +17,6 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
 
   @Major
   @header
-  # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "הדפס" button
@@ -26,7 +24,6 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
 
   @Critical
   @form
-  # excel sheet rule number 11
   Scenario : full scenario for the page with save click test (valid)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "332796184" in "מספר זהות"
@@ -34,15 +31,13 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     Then validate that field "מספר זהות" has "332796184"
 
 
-  # BUG: the save button dose not work
-  Scenario : full scenario for the page with save click test
+  Scenario : save button  click test (BUG: the save button not working)
     Given I navigate to "CollectiveLifeInsurance" page
     And I click on "שמור" button
     Then Accept Alert message
 
   @Critical
   @form
-  # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "המשך" button
@@ -50,8 +45,7 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     And Check if "מספר זהות" has "חובה למלא מספר זהות" error message
 
   @form
-  # excel sheet rule number 3
-  Scenario Outline: id value test (valid)
+  Scenario Outline: id valid value test
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
@@ -74,10 +68,7 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     | 2345678234567823456782345678234567823456789345678 |
 
   @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the id accept id that contains one number until unlimited
-  Scenario Outline: id value test (invalid)
+  Scenario Outline: id invalid value test (BUG)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
@@ -107,9 +98,7 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     | 00                           |
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  Scenario Outline: id error message test (invalid) and id value test (invalid)
+  Scenario Outline: id wrong input error message test
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
@@ -152,21 +141,26 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     | 233243236                    |
     | 154528136                    |
     | 160786030                    |
+    | 33ק'/דגגבשד34455789           |
+    | 33ק'سببسث34455789             |
+    | 33ק'/דגגכבבשד3445578          |
+    | 33!@#$%34455789              |
+    | 33زسيhhjכעיח!@#$%34455789     |
+    | 233243423                    |
+    | 223234545                    |
+    | 344423542                    |
+    | 679857840                    |
+    | 887799887                    |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty input
-  # click on field and then leave it without writing anything
-  Scenario: id error message test (invalid)
+  Scenario: id empty error message test
     Given I navigate to "CollectiveLifeInsurance" page
     When I write " " in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
     And Check if error message  of "מספר זהות" is "חובה למלא מספר זהות"
 
   @form
-  # excel sheet rule number 18
-  # BUG:
-  Scenario Outline: id error message test (invalid)
+  Scenario Outline: id wrong input error message test (BUG)
     Given I navigate to "CollectiveLifeInsurance" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
@@ -195,68 +189,11 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     | 33زسيhhjכעיח!@#$%344557897    |
     | 331133232ssd2321312233       |
     | 00                           |
-
-  @form
-  # excel sheet rule number 5
-  Scenario Outline: id value allow to write just numbers test (valid)
-    Given I navigate to "CollectiveLifeInsurance" page
-    When I write "<id>" in "מספר זהות"
-    Then Check field "מספר זהות" has valid value
-    And Validate that "מספר זהות" have the input with only numbers
-    Examples:
-    | id        |
-    | 331212324 |
-    | 223344557 |
-    | 112233440 |
-    | 223311440 |
-    | 111111100 |
-    | 223344557 |
-    | 223342239 |
-    | 533456745 |
-    | 121212120 |
-    | 008800880 |
-    | 433243433 |
-    | 752123133 |
-    | 165786534 |
-
-  @form
-  # excel sheet rule number 5
-  Scenario Outline: id value allow to write just numbers test (invalid)
-    Given I navigate to "CollectiveLifeInsurance" page
-    When I write "<id>" in "מספר זהות"
-    Then Check field "מספר זהות" has valid value
-    And Validate that "מספר זהות" have the input with only numbers
-    Examples:
-    | id                            |
-    | 33ק'/דגגבשד34455789           |
-    | 33ק'سببسث34455789             |
-    | 33ק'/דגגכבבשד3445578          |
-    | 33!@#$%34455789              |
-    | 33زسيhhjכעיח!@#$%34455789     |
-    | 233243423                    |
-    | 223234545                    |
-    | 344423542                    |
-    | 679857840                    |
-    | 887799887                    |
-
-
-  @form
-  # excel sheet rule number 5
-  # id field allow to write in all languages and signs
-  # BUG:
-  Scenario Outline: id value allow to write just numbers test (invalid)
-    Given I navigate to "CollectiveLifeInsurance" page
-    When I write "<id>" in "מספר זהות"
-    Then Check field "מספר זהות" has valid value
-    And Validate that "מספר זהות" have the input with only numbers
-    Examples:
-    | id                            |
     | 33ק'/דגגבשד344557897          |
     | 33ק'سببسث344557897            |
     | 33ק'/דגגכבבשד344557897        |
     | 33!@#$%344557897             |
     | 33زسيhhjכעיח!@#$%344557897    |
-
 
 
 

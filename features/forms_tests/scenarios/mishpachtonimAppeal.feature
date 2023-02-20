@@ -8,21 +8,18 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
   """
 
   @header
-  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "MishpachtonimAppeal" page
     Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
   @header
-  # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "MishpachtonimAppeal" page
     When I click on "הדפס" button
     And Check if Print display is clear
 
   @form
-  # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
@@ -40,7 +37,6 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
     And validate that field "סוג הפניה" has "ערעור על החלטת הוועדה"
 
   @form
-  # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
@@ -48,9 +44,8 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
     And Check if "מספר זהות תלמיד" has "יש להזין מספר זהות" error message
     And Check if "מספר זהות הורה" has "יש להזין מספר זהות" error message
 
-    @form
-   # excel sheet rule number 3
-  Scenario Outline: student, parent id value test (valid)
+  @form
+  Scenario Outline: student, parent id valid value test
     Given I navigate to "ContractorEmpRights" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
     And I write "<student_id>" in "מספר זהות תלמיד"
@@ -77,10 +72,7 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
 
 
   @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the student, parent id that contains one letter until 16 number
-  Scenario Outline: id value test (invalid)
+  Scenario Outline: student, parent id invalid value test (BUG)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
     And I write "<student_id>" in "מספר זהות תלמיד"
@@ -100,11 +92,29 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
     | 2323443211343355              |2323443211343355               |
     | 33344557897                   |33344557897                    |
     | 00                            |00                             |
+    | 3456789فغع                    | فب7ل8هةخسخ                     |
+    | صثقفغعهنن                      | 5d5f6g8i9k                    |
+    | wadwdwwdd                     | erty#$%^                      |
+    | 45658987e                     | ר6ע789חח0                      |
+    | awdawdadd                     | ג56כעי**                       |
+    | 356534567                     | rtnml,.g@#                     |
+    | 22334ttfd                     | $%^&*بلات7هi                    |
+    | esfsefsff                     | דגכעיחחלךן                      |
+    | 22sdfs440                     | r6tu6t8iii                     |
+    | 111#$%&00                     | e456rtyui                      |
+    | 223עיחל57                      | rtyuighj                       |
+    | 223بتتن39                      | 567g09ujko                     |
+    | 5$^%rtyh                      | 456fg7hjkcf6g7u                 |
+    | 1212@@$20                     | s45fygu$%^                      |
+    | 0088OIk80                     | ertyuifgh                       |
+    | 433opl433                     | ft6ty7huj9iko                   |
+    | 75כע23133                     | يبلاتنيبلاتن                       |
+    | ראטוןןלםם                      | !@#$%^&*                        |
+    | المينسةؤن                      | ][لأأٌلأاـ،/                        |
+    | dlkjhokjl                     | !َ@#$%^ٌغهع                        |
 
   @form
-  # excel sheet rule number 18
-  # BUG:
-  Scenario Outline: student, parent id error message test (invalid) and student, parent id value test (invalid)
+  Scenario Outline: student, parent id wrong input error message test (BUG)
     Given I navigate to "MishpachtonimAppeal" page
     When Choose "ת.ז." in "סוג זהות תלמיד"
     And I write "<student_id>" in "מספר זהות תלמיד"
@@ -115,7 +125,7 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
     And Check if error message of "מספר זהות תלמיד" is "מספר זהות לא תקין"
     And Check if error message of "מספר זהות הורה" is "מספר זהות לא תקין"
     Examples:
-        |student_id                     |parent_id                    |
+    |student_id                     |parent_id                    |
     | 000000001                     |000000001                    |
     | 000000118                     |000000118                    |
     | 000000009                     |000000009                    |
@@ -153,42 +163,6 @@ Feature: header, fields test of MishpachtonimAppeal Form Page
     | 154528136                    |154528136                     |
     | 160786030                    |160786030                     |
 
-
-  @form
-  # excel sheet rule number 5
-  # BUG:
-  Scenario Outline: student, parent id value allow to write just numbers test (invalid)
-    Given I navigate to "MishpachtonimAppeal" page
-    When Choose "ת.ז." in "סוג זהות תלמיד"
-    And I write "<student_id>" in "מספר זהות תלמיד"
-    Then Check field "מספר זהות תלמיד" has invalid value
-    When Choose "ת.ז." in "מספר זהות הורה"
-    And I write "<parent_id>" in "מספר זהות הורה"
-    Then Check field "מספר זהות הורה" has invalid value
-    And Validate that "מספר זהות תלמיד" have the input with only numbers
-    And Validate that "מספר זהות הורה" have the input with only numbers
-    Examples:
-    | student_id  |parent_id      |
-    | 3456789فغع  | فب7ل8هةخسخ     |
-    | صثقفغعهنن    | 5d5f6g8i9k    |
-    | wadwdwwdd   | erty#$%^      |
-    | 45658987e   | ר6ע789חח0      |
-    | awdawdadd   | ג56כעי**       |
-    | 356534567   | rtnml,.g@#     |
-    | 22334ttfd   | $%^&*بلات7هi     |
-    | esfsefsff   | דגכעיחחלךן      |
-    | 22sdfs440   | r6tu6t8iii     |
-    | 111#$%&00   | e456rtyui       |
-    | 223עיחל57   | rtyuighj        |
-    | 223بتتن39   | 567g09ujko      |
-    | 5$^%rtyh    | 456fg7hjkcf6g7u |
-    | 1212@@$20   | s45fygu$%^      |
-    | 0088OIk80   | ertyuifgh       |
-    | 433opl433   | ft6ty7huj9iko   |
-    | 75כע23133   | يبلاتنيبلاتن       |
-    | ראטוןןלםם    | !@#$%^&*        |
-    | المينسةؤن    | ][لأأٌلأاـ،/        |
-    | dlkjhokjl   | !َ@#$%^ٌغهع        |
 
   @form
   Scenario: year and reason check value test (valid)

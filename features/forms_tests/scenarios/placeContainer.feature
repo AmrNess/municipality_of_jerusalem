@@ -9,21 +9,18 @@ Feature: header, fields test of PlaceContainer Form Page
   """
 
   @header
-  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "PlaceContainer" page
     Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
   @header
-  # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "PlaceContainer" page
     When I click on "הדפס" button
     And Check if Print display is clear
 
   @form
-  # excel sheet rule number 3
   # we need a recognized ת.ז.\.ח.פ number to be able to check
   Scenario: id value test (valid)
     Given I navigate to "PlaceContainer" page
@@ -33,10 +30,9 @@ Feature: header, fields test of PlaceContainer Form Page
     And Click on "המשך"
 
   @form
-  # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
-    When I click on "שמור" button
+    When I click on "המשך" button
     Then Validate that we are in step "פרטי הבקשה" of the page
     And Check if "סוג זהות" has "חובה לבחור סוג זהות" error message
     And Check if "מספר מזהה" has "יש למלא מספר מזהה" error message
@@ -55,7 +51,6 @@ Feature: header, fields test of PlaceContainer Form Page
     And Check if "כתובת האתר לשפיכת הפסולת" has "חובה להזין כתובת" error message
 
   @form
-  # excel sheet rule number 11
   Scenario : full scenario for the page test (valid)
      Given I navigate to "PlaceContainer" page
      When Choose "ת.ז." in "סוג זהות"
@@ -89,40 +84,16 @@ Feature: header, fields test of PlaceContainer Form Page
      And validate that field "מתאריך" has "12/4/2023 16:00 "
      And validate that field "עד תאריך" has "12/5/2023 16:00 "
 
-
   @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the id accept id that contains one number until unlimited
-  Scenario Outline: id value test (invalid)
-    Given I navigate to "PlaceContainer" page
-    When Choose "ת.ז." in "סוג זהות"
-    And I write "<id>" in "מספר מזהה"
-    Then Check field "מספר מזהה" has invalid value
-    Examples:
-    | id  |
-    | 000000000                     |
-    | 000000018                     |
-    | 3327981827336443728282        |
-    | 12321323142133                |
-    | 12345678934567467788998       |
-    | 33279618433                   |
-    | 22345567754                   |
-    | 2323443211343355              |
-    | 33344557897                   |
-    | 00                            |
-
-  @form
-  # excel sheet rule number 18
-  Scenario Outline: id error message test (invalid) and id value test (invalid)
+  Scenario Outline: id invalid value error message test
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
     Then Check field "מספר מזהה" has invalid value
     And Check if error message of "מספר מזהה" is "עוסק זה אינו מוכר במערכת רישוי עסקים"
     Examples:
-    | id  |
-        | 000000001                 |
+    | id                            |
+    | 000000001                     |
     | 000000118                     |
     | 000000009                     |
     | 3121                          |
@@ -160,9 +131,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | 160786030                    |
 
   @form
-  # excel sheet rule number 18
-  # BUG:
-  Scenario Outline: id error message test (invalid)
+  Scenario Outline: id invalid value test (BUG)
     Given I navigate to "PlaceContainer" page
     When Choose "ת.ז." in "סוג זהות"
     And I write "<id>" in "מספר מזהה"
@@ -173,85 +142,81 @@ Feature: header, fields test of PlaceContainer Form Page
     | 000000000                     |
     | 000000018                     |
     | 3327981827336443728282        |
+    | 12321323142133                |
+    | 12345678934567467788998       |
     | 33279618433                   |
     | 22345567754                   |
-    | 331133232ssd2321312233        |
+    | 2323443211343355              |
+    | 33344557897                   |
     | 00                            |
+    | 3327981827336443728282        |
+    | 331133232ssd2321312233        |
     # this inputs give us different error msg "יש למלא מספר מזהה"
     | salem12321342133              |
     | 356e34567                     |
 
+
+
+
+
   @form
-  # excel sheet rule number 5
-  Scenario Outline: id,house number, apartment_number, container_number value allow to write just numbers test (valid)
+  Scenario Outline: house number, apartment_number, container_number valid value test
     Given I navigate to "PlaceContainer" page
-    When Choose "ת.ז." in "סוג זהות"
-    And I write "<id>" in "מספר מזהה"
-    And I write "<house_number>" in "מספר בית" of "כתובת מקום העבודה"
+    When I write "<house_number>" in "מספר בית" of "כתובת מקום העבודה"
     And I write "<apartment_number>" in "מספר דירה"
     And I write "<container_number>" in "מספר מכולה"
     And I write "<house_number>" in "מספר בית" of "פרטי הצבת המכולה"
-    Then Check field "מספר מזהה" has valid value
-    And Check field "מספר בית" of "כתובת מקום העבודה" has valid value
+    Then Check field "מספר בית" of "כתובת מקום העבודה" has valid value
     And Check field "מספר דירה" has valid value
     And Check field "מספר מכולה" has valid value
     And Check field "מספר בית" of "פרטי הצבת המכולה" has valid value
-    And Validate that "מספר מזהה" have the input with only numbers
     And Validate that "מספר בית" of "כתובת מקום העבודה" have the input with only numbers
     And Validate that "מספר דירה" have the input with only numbers
     And Validate that "מספר מכולה" have the input with only numbers
     And Validate that "מספר בית" of "פרטי הצבת המכולה" have the input with only numbers
     Examples:
-    | id        |house_number  | apartment_number | container_number |
-    | 356534567 | 356534567    | 356534567        | 356534567        |
-    | 22334ttfd | 22334ttfd    | 22334ttfd        |  22334ttfd       |
-    | 112gdds40 | 112gdds40    | 112gdds40        | 112gdds40        |
-    | 22sdfs440 | 22sdfs440    | 22sdfs440        | 22sdfs440        |
-    | 111#$%&00 | 111#$%&00    | 111#$%&00        | 111#$%&00        |
-    | 223עיחל57 | 223עיחל57     | 223עיחל57        | 223עיחל57        |
-    | 223بتتن39 | 223بتتن39     | 223بتتن39        | 223بتتن39        |
-    | 5$^%56745 | 5$^%56745    | 5$^%56745        | 5$^%56745        |
-    | 1212@@$20 | 1212@@$20    | 1212@@$20        | 1212@@$20        |
-    | 0088OIk80 | 0088OIk80    | 0088OIk80        | 0088OIk80        |
-    | 433opl433 | 433opl433    | 433opl433        | 433opl433        |
-    | 75כע23133 | 75כע23133    | 75כע23133         | 75כע23133        |
-    | ראטוןןלםם  | ראטוןןלםם    | ראטוןןלםם         | ראטוןןלםם         |
-    | المينسةؤن  | المينسةؤن    | المينسةؤن         | المينسةؤن         |
-    | dlkjhokjl | dlkjhokjl    | dlkjhokjl        | dlkjhokjl        |
+    |house_number  | apartment_number | container_number |
+    | 356534567    | 356534567        | 356534567        |
+    | 22334ttfd    | 22334ttfd        |  22334ttfd       |
+    | 112gdds40    | 112gdds40        | 112gdds40        |
+    | 22sdfs440    | 22sdfs440        | 22sdfs440        |
+    | 111#$%&00    | 111#$%&00        | 111#$%&00        |
+    | 223עיחל57     | 223עיחל57        | 223עיחל57        |
+    | 223بتتن39     | 223بتتن39        | 223بتتن39        |
+    | 5$^%56745    | 5$^%56745        | 5$^%56745        |
+    | 1212@@$20    | 1212@@$20        | 1212@@$20        |
+    | 0088OIk80    | 0088OIk80        | 0088OIk80        |
+    | 433opl433    | 433opl433        | 433opl433        |
+    | 75כע23133    | 75כע23133         | 75כע23133        |
+    | ראטוןןלםם    | ראטוןןלםם         | ראטוןןלםם         |
+    | المينسةؤن    | المينسةؤن         | المينسةؤن         |
+    | dlkjhokjl    | dlkjhokjl        | dlkjhokjl        |
 
   @form
-  # excel sheet rule number 5
-  # BUG:
-  # Another BUG : the id,house number, apartment_number, container_number accepts input that contains one number until unlimited
-  Scenario Outline: id,house number, apartment_number, container_number value allow to write just numbers test (invalid)
+  Scenario Outline: house number, apartment_number, container_number invalid value (BUG: Allows to write letter e)
     Given I navigate to "PlaceContainer" page
-    When Choose "ת.ז." in "סוג זהות"
-    And I write "<id>" in "מספר מזהה"
-    And I write "<house_number>" in "מספר בית" of "כתובת מקום העבודה"
+    When I write "<house_number>" in "מספר בית" of "כתובת מקום העבודה"
     And I write "<apartment_number>" in "מספר דירה"
     And I write "<container_number>" in "מספר מכולה"
     And I write "<house_number>" in "מספר בית" of "פרטי הצבת המכולה"
-    Then Check field "מספר מזהה" has invalid value
-    And Check field "מספר בית" of "כתובת מקום העבודה" has valid value
+    Then Check field "מספר בית" of "כתובת מקום העבודה" has valid value
     And Check field "מספר דירה" has valid value
     And Check field "מספר מכולה" has valid value
     And Check field "מספר בית" of "פרטי הצבת המכולה" has valid value
-    And Validate that "מספר מזהה" have the input with only numbers
     And Validate that "מספר בית" of "כתובת מקום העבודה" have the input with only numbers
     And Validate that "מספר דירה" have the input with only numbers
     And Validate that "מספר מכולה" have the input with only numbers
     And Validate that "מספר בית" of "פרטי הצבת המכולה" have the input with only numbers
     Examples:
-    | id  |house_number  | apartment_number        | container_number |
-    | 457756e67  | 457756e67    | 457756e67        | 457756e67        |
-    | e56765786  | e56765786    | e56765786        | e56765786        |
-    | 56877e456  | 56877e456    | 56877e456        | 56877e456        |
-    | 45658987e  | 45658987e    | 45658987e        | 45658987e        |
-    | 5e6787679  | 5e6787679    | 5e6787679        | 5e6787679        |
+    |house_number  | apartment_number | container_number |
+    | 457756e67    | 457756e67        | 457756e67        |
+    | e56765786    | e56765786        | e56765786        |
+    | 56877e456    | 56877e456        | 56877e456        |
+    | 45658987e    | 45658987e        | 45658987e        |
+    | 5e6787679    | 5e6787679        | 5e6787679        |
 
   @form
-  # excel sheet rule number 4
-  Scenario Outline: all text field allow to write just Hebrew test (valid)
+  Scenario Outline: first name, last name, web url valid value test
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
     And I write "<last_name>" in "שם משפחה"
@@ -271,11 +236,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | דש)כדשכדכ    | דכדש-דככד    |  אבו דגככ    |
 
   @form
-  # excel sheet rule number 4
-  # fields of first name and last name and web_url accept all languages and signs
-  # BUG:
-  # Another BUG : the first name, last name, web url that contains one letter until unlimited
-  Scenario Outline: all text field allow to write just Hebrew test (invalid)
+  Scenario Outline: first name, last name, web url invalid value test (BUG)
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
     And I write "<last_name>" in "שם משפחה"
@@ -296,19 +257,14 @@ Feature: header, fields test of PlaceContainer Form Page
     | כעיחRTYU4%^&%^ | $%^&RTYقفغfghعه   |  $%^&RTYقفغfghعه |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty field
-  Scenario: error message for first name field (invalid)
+  Scenario: first name empty field error message
     Given I navigate to "PlaceContainer" page
     When I write " " in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
     And Check if error message of "שם פרטי" is "יש למלא שם פרטי"
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for first name field (invalid)
+  Scenario Outline: first name wrong inout error message (BUG)
     Given I navigate to "PlaceContainer" page
     When I write "<first_name>" in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
@@ -321,19 +277,14 @@ Feature: header, fields test of PlaceContainer Form Page
     |   firawتفغ$%^&efwegfs       |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty field
-  Scenario: error message for last name field (invalid)
+  Scenario: last name empty field error message
     Given I navigate to "PlaceContainer" page
     When I write " " in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
     And Check if error message of "שם משפחה" is "יש למלא שם משפחה"
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for last name field (invalid)
+  Scenario Outline:  last name wrong inout error message (BUG)
     Given I navigate to "PlaceContainer" page
     When I write "<last_name>" in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
@@ -346,19 +297,14 @@ Feature: header, fields test of PlaceContainer Form Page
     |   firawتفغ$%^&efwegfs       |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty field
-  Scenario: error message for web_url field (invalid)
+  Scenario: web url empty field error message
     Given I navigate to "PlaceContainer" page
     When I write " " in "כתובת האתר לשפיכת הפסולת"
     Then Check field "כתובת האתר לשפיכת הפסולת" has invalid value
     And Check if error message of "כתובת האתר לשפיכת הפסולת" is "חובה להזין כתובת"
 
-   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for web url field (invalid)
+  @form
+  Scenario Outline: web url wrong inout error message (BUG)
     Given I navigate to "PlaceContainer" page
     When I write "<web_url>" in "כתובת האתר לשפיכת הפסולת"
     Then Check field "כתובת האתר לשפיכת הפסולת" has invalid value
@@ -371,8 +317,7 @@ Feature: header, fields test of PlaceContainer Form Page
     |   بلاتنم%^&*[لأأـ،قفإ‘÷  |
 
   @form
-  # excel sheet rule number 6
-  Scenario Outline: email field allow to write just english and numbers test (valid)
+  Scenario Outline: email valid value test
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has valid value
@@ -391,8 +336,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | awdas@efadsb.com   |
 
   @form
-  # excel sheet rule number 6
-  Scenario Outline: email field allow to write just english and numbers test (invalid)
+  Scenario Outline: email invalid value test
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
@@ -410,10 +354,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | dfghj.dfghj@@j.com           |
 
   @form
-  # excel sheet rule number 6
-  # BUG:
-  # Another BUG : email accept that contains one letter until unlimited
-  Scenario Outline: email field allow to write just english and numbers test (invalid)
+  Scenario Outline: email invalid value test (BUG)
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
@@ -429,9 +370,7 @@ Feature: header, fields test of PlaceContainer Form Page
     |A@b.cOm                         |
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  Scenario Outline: email error message test for wrong input (invalid)
+  Scenario Outline: email wrong input error message test
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
@@ -446,10 +385,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | A@f@h$.com                   |
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: email error message test (invalid)
+  Scenario Outline: email wrong input error message test (BUG)
     Given I navigate to "PlaceContainer" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
@@ -462,11 +398,10 @@ Feature: header, fields test of PlaceContainer Form Page
     | a%@b.com                        |
     | a_----___---_____r@b.com        |
     | a+r@b.com                       |
-    |A@b.cOm                          |
+    | A@b.cOm                         |
 
   @form
- # excel sheet rule number 5
-  Scenario Outline: phone number field allow to write just numbers test (valid)
+  Scenario Outline: phoneNumber valid value test
     Given I navigate to "PlaceContainer" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has valid value
@@ -479,8 +414,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | 059-3247857   |
 
    @form
-  # excel sheet rule number 5
-  Scenario Outline: phone number field allow to write just numbers test (invalid)
+  Scenario Outline: phoneNumber invalid value test
     Given I navigate to "PlaceContainer" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has valid value
@@ -491,43 +425,23 @@ Feature: header, fields test of PlaceContainer Form Page
     | sdsasasdd    |
     | gregwe$%f    |
     | @#$%^&*(7    |
-
-  @form
-  # excel sheet rule number 5
-  # the field refuse all the letters
-  Scenario: phone number field allow to write just numbers test (invalid)
-    Given I navigate to "PlaceContainer" page
-    When I write " " in "מספר טלפון נייד"
-    Then Check field "מספר טלפון נייד" has valid value
-    And Validate that "מספר טלפון נייד" have the input with only numbers
-
-  @form
-  # excel sheet rule number 18
-  # error message for empty phone number
-  Scenario: phone number error message test (invalid)
-    Given I navigate to "PlaceContainer" page
-    When I write " " in "מספר טלפון נייד"
-    Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message of "מספר טלפון נייד" is "חובה להזין מספר טלפון נייד"
-
-  @form
-  # excel sheet rule number 18
-  # error message for wrong\incomplete phone number
-  Scenario Outline: phone number error message test (invalid)
-    Given I navigate to "PlaceContainer" page
-    When I write "<phone_number>" in "מספר טלפון נייד"
-    Then Check field "מספר טלפון נייד" has invalid value
-    And Check if error message of "מספר טלפון נייד" is "מספר טלפון נייד לא תקין"
-    Examples:
-    | phone_number  |
     | dka-dsasdas   |
     | 052-sdks2j2   |
     | 054-394832j   |
     | 035-יעחלךןח    |
     | 077-تلاتتاتن    |
 
+
   @form
-  Scenario Outline: street value test (valid)
+  Scenario: phoneNumber empty field error message test
+    Given I navigate to "PlaceContainer" page
+    When I write " " in "מספר טלפון נייד"
+    Then Check field "מספר טלפון נייד" has invalid value
+    And Check if error message of "מספר טלפון נייד" is "חובה להזין מספר טלפון נייד"
+
+
+  @form
+  Scenario Outline: street valid value test
     Given I navigate to "PlaceContainer" page
     When I pick "<street>" in "רחוב"
     Examples:
@@ -544,7 +458,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | אחמד אסעד דארי סמטה 7|
 
   @form
-  Scenario Outline: container placement street value test (valid)
+  Scenario Outline: container placement street valid value test
     Given I navigate to "PlaceContainer" page
     When I pick "<container_placement>" in "רחוב הצבת המכולה"
     Examples:
@@ -561,7 +475,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | אחמד אסעד דארי סמטה 7  |
 
   @form
-  Scenario Outline: start placement date value test (valid)
+  Scenario Outline: start placement date valid value test
     Given I navigate to "PlaceContainer" page
     When I pick date of "<container_placement_date>" in "מתאריך"
     Examples:
@@ -574,7 +488,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | 2/1/2023 12:55            |
 
   @form
-  Scenario Outline: finish placement date value test (valid)
+  Scenario Outline: finish placement date valid value test
     Given I navigate to "PlaceContainer" page
     When I pick date of "<container_placement_date>" in "עד תאריך"
     Examples:
@@ -587,7 +501,7 @@ Feature: header, fields test of PlaceContainer Form Page
     | 2/1/2023 12:55            |
 
   @form
-  Scenario Outline: type of parking value test (valid)
+  Scenario Outline: type of parking valid value test
     Given I navigate to "PlaceContainer" page
     When I pick "<parking_type>" in "סוג החניה"
     Examples:

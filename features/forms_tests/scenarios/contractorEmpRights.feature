@@ -5,27 +5,24 @@ Feature: header, fields test of ContractorEmpRights Form Page
   - Form link: https://jeronlineforms.jerusalem.muni.il/ContractorEmpRights
   - Number of Pages is : 2, We are at Page: 1
   - mandatory fields are: מספר זהות, שם פרטי, שם משפחה,
-מספר טלפון נייד, אימייל, ענף, שם חברה, תאריך תחילת העבודה בחברה, נושא התלונה, פרטי התלונה, חודשים לבדיקה,
+   מספר טלפון נייד, אימייל, ענף, שם חברה, תאריך תחילת העבודה בחברה, נושא התלונה, פרטי התלונה, חודשים לבדיקה,
    האם היתה פניה למעסיק קודם הגשת תלונה זו
   """
 
   @header
-  # excel sheet rule number 1
   Scenario: Check explanation of form
     Given I navigate to "ContractorEmpRights" page
     Then Is application information tittle is "הסבר למילוי הטופס:"
     And Check if application explanation have text
 
   @header
-  # excel sheet rule number 21
   Scenario: Check Print display
     Given I navigate to "ContractorEmpRights" page
     When I click on "הדפס" button
     And Check if Print display is clear
 
   @form
-  # excel sheet rule number 11
-  Scenario : full scenario for the page test (valid)
+  Scenario : full scenario for the page test
     Given I navigate to "PlaceContainer" page
     When I write "332796184" in "מספר זהות"
     And I write "פראס" in "שם פרטי"
@@ -73,7 +70,6 @@ Feature: header, fields test of ContractorEmpRights Form Page
 
 
   @form
-  # excel sheet rule number 18
   Scenario : Check if the mandatory are invalid
     Given I navigate to "CollectiveLifeInsurance" page
     When I click on "שמור" button
@@ -92,8 +88,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     And Check if "האם היתה פניה למעסיק קודם הגשת תלונה זו" has "יש לסמן האם היתה פניה למעסיק קודם הגשת תלונה זו" error message
 
   @form
-  # excel sheet rule number 3
-  Scenario Outline: id value test (valid)
+  Scenario Outline: id valid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has valid value
@@ -116,29 +111,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
 
 
   @form
-  # excel sheet rule number 3
-  # BUG:
-  # Another BUG : the id that contains one number until unlimited
-  Scenario Outline: id value test (invalid)
-    Given I navigate to "ContractorEmpRights" page
-    When I write "<id>" in "מספר זהות"
-    Then Check field "מספר זהות" has invalid value
-    Examples:
-    | id                            |
-    | 000000000                     |
-    | 000000018                     |
-    | 3327981827336443728282        |
-    | 12321323142133                |
-    | 12345678934567467788998       |
-    | 33279618433                   |
-    | 22345567754                   |
-    | 2323443211343355              |
-    | 33344557897                   |
-    | 00                            |
-
-  @form
-  # excel sheet rule number 18
-  Scenario Outline: id error message test (invalid) and id value test (invalid)
+  Scenario Outline: id invalid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
@@ -182,96 +155,93 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 154528136                    |
     | 160786030                    |
 
+
+
+
   @form
-  # excel sheet rule number 18
-  # BUG:
-  Scenario Outline: id error message test (invalid)
+  Scenario Outline: id invalid value test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<id>" in "מספר זהות"
     Then Check field "מספר זהות" has invalid value
-    And Check if error message of "מספר זהות" is "מספר זהות לא תקין"
     Examples:
     | id                            |
     | 000000000                     |
     | 000000018                     |
     | 3327981827336443728282        |
+    | 12321323142133                |
+    | 12345678934567467788998       |
+    | 33279618433                   |
+    | 22345567754                   |
+    | 2323443211343355              |
+    | 33344557897                   |
+    | 00                            |
     | 33279618433                   |
     | 22345567754                   |
     | 331133232ssd2321312233        |
-    | 00                            |
+
 
   @form
-  # excel sheet rule number 5
-  Scenario Outline: id,house number, apartment_number value allow to write just numbers test (valid)
+  Scenario Outline: house number, apartment_number valid value test
     Given I navigate to "ContractorEmpRights" page
-    When I write "<id>" in "מספר זהות"
-    And I write "<house_number>" in "מספר בית"
+    When I write "<house_number>" in "מספר בית"
     And I write "<apartment_number>" in "מספר דירה"
-    Then Check field "מספר זהות" has valid value
-    And Check field "מספר בית" has valid value
+    Then Check field "מספר בית" has valid value
     And Check field "מספר דירה" has valid value
-    And Validate that "מספר זהות" have the input with only numbers
-    And Validate that "מספר בית" have the input with only numbers
-    And Validate that "מספר דירה" have the input with only numbers
-    # the id field accept all letters in all languages and signs, for that i put just numbers in the id field
-    Examples:
-    | id        |house_number  | apartment_number |
-    | 356534567 | 356534567    | 356534567        |
-    | 356534567 | 22334ttfd    | 22334ttfd        |
-    | 356534567 | 112gdds40    | 112gdds40        |
-    | 356534567 | 22sdfs440    | 22sdfs440        |
-    | 356534567 | 111#$%&00    | 111#$%&00        |
-    | 356534567 | 223עיחל57    | 223עיחל57         |
-    | 356534567 | 223بتتن39    | 223بتتن39         |
-    | 356534567 | 5$^%56745    | 5$^%56745        |
-    | 356534567 | 1212@@$20    | 1212@@$20        |
-    | 356534567 | 0088OIk80    | 0088OIk80        |
-    | 356534567 | 433opl433    | 433opl433        |
-    | 356534567 | 75כע23133    | 75כע23133        |
-    | 356534567 | ראטוןןלםם    | ראטוןןלםם         |
-    | 356534567 | المينسةؤن    | المينسةؤن         |
-    | 356534567 | dlkjhokjl   | dlkjhokjl         |
-
-  @form
-  # excel sheet rule number 5
-  # BUG:
-  Scenario Outline: id,house number, apartment_number value allow to write just numbers test (invalid)
-    Given I navigate to "ContractorEmpRights" page
-    When I write "<id>" in "מספר זהות"
-    And I write "<house_number>" in "מספר בית"
-    And I write "<apartment_number>" in "מספר דירה"
-    Then Check field "מספר זהות" has invalid value
-    And Check field "מספר בית" has valid value
-    And Check field "מספר דירה" has valid value
-    And Validate that "מספר זהות" have the input with only numbers
     And Validate that "מספר בית" have the input with only numbers
     And Validate that "מספר דירה" have the input with only numbers
     Examples:
-    | id         |house_number  | apartment_number|
-    | 457756e67  | 457756e67    | 457756e67       |
-    | e56765786  | e56765786    | e56765786       |
-    | 56877e456  | 56877e456    | 56877e456       |
-    | 45658987e  | 45658987e    | 45658987e       |
-    | 5e6787679  | 5e6787679    | 5e6787679       |
-    | 356534567 | 5e6787679    | 45658987e        |
-    | 22334ttfd | 5e6787679    | 45658987e        |
-    | 112gdds40 | 5e6787679    | 45658987e        |
-    | 22sdfs440 | 5e6787679    | 45658987e        |
-    | 111#$%&00 | 5e6787679    | 45658987e        |
-    | 223עיחל57 | 5e6787679     | 45658987e       |
-    | 223بتتن39 | 5e6787679     | 45658987e       |
-    | 5$^%56745 | 5e6787679    | 45658987e        |
-    | 1212@@$20 | 5e6787679    | 45658987e        |
-    | 0088OIk80 | 5e6787679    | 45658987e        |
-    | 433opl433 | 5e6787679    | 45658987e        |
-    | 75כע23133 | 5e6787679    | 45658987e        |
-    | ראטוןןלםם  | 5e6787679    | 45658987e        |
-    | المينسةؤن  | 5e6787679    | 45658987e        |
-    | dlkjhokjl | 5e6787679    | 45658987e        |
+    |house_number  | apartment_number |
+    | 356534567    | 356534567        |
+    | 22334ttfd    | 22334ttfd        |
+    | 112gdds40    | 112gdds40        |
+    | 22sdfs440    | 22sdfs440        |
+    | 111#$%&00    | 111#$%&00        |
+    | 223עיחל57    | 223עיחל57         |
+    | 223بتتن39    | 223بتتن39         |
+    | 5$^%56745    | 5$^%56745        |
+    | 1212@@$20    | 1212@@$20        |
+    | 0088OIk80    | 0088OIk80        |
+    | 433opl433    | 433opl433        |
+    | 75כע23133    | 75כע23133        |
+    | ראטוןןלםם    | ראטוןןלםם         |
+    | المينسةؤن    | المينسةؤن         |
+    | dlkjhokjl   | dlkjhokjl         |
+
+  @form
+  Scenario Outline: house number, apartment_number invalid value test (BUG)
+    Given I navigate to "ContractorEmpRights" page
+    When I write "<house_number>" in "מספר בית"
+    And I write "<apartment_number>" in "מספר דירה"
+    Then Check field "מספר בית" has valid value
+    And Check field "מספר דירה" has valid value
+    And Validate that "מספר בית" have the input with only numbers
+    And Validate that "מספר דירה" have the input with only numbers
+    Examples:
+    |house_number  | apartment_number|
+    | 457756e67    | 457756e67       |
+    | e56765786    | e56765786       |
+    | 56877e456    | 56877e456       |
+    | 45658987e    | 45658987e       |
+    | 5e6787679    | 5e6787679       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
+    | 5e6787679    | 45658987e       |
 
   @form
   # excel sheet rule number 4
-  Scenario Outline: all text field allow to write just Hebrew test (valid)
+  Scenario Outline: first name, last name, street, city name valid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
     And I write "<last_name>" in "שם משפחה"
@@ -294,11 +264,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | דש)כדשכדכ    | דכדש-דככד    |  אבו דגככ     | כקכאבו דגככ      |
 
   @form
-  # excel sheet rule number 4
-  # fields of first name, last name,street, city site name  accept all languages and signs
-  # BUG:
-  # Another BUG : first name, last name,street, city site name that contains one letter until unlimited
-  Scenario Outline: all text field allow to write just Hebrew test (invalid)
+  Scenario Outline: first name, last name, street, city name invalid value test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
     And I write "<last_name>" in "שם משפחה"
@@ -322,19 +288,14 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | כעיחRTYU4%^&%^  | $%^&RTYقفغfghعه   |  $%^&RTYقفغfghعه  |כעיחRTYU4%^        |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty field
-  Scenario: error message for first name field (invalid)
+  Scenario: first name empty field error message test
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
     And Check if error message of "שם פרטי" is "יש למלא שם פרטי"
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for first name field (invalid)
+  Scenario Outline: first name wrong input error message test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<first_name>" in "שם פרטי"
     Then Check field "שם פרטי" has invalid value
@@ -347,19 +308,14 @@ Feature: header, fields test of ContractorEmpRights Form Page
     |   firdasd3r3ras       |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty field
-  Scenario: error message for last name field (invalid)
+  Scenario: last name empty field error message test
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
     And Check if error message of "שם משפחה" is "יש למלא שם משפחה"
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for last name field (invalid)
+  Scenario Outline: last name wrong input error message test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<last_name>" in "שם משפחה"
     Then Check field "שם משפחה" has invalid value
@@ -372,10 +328,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     |   firdasd3r3ras       |
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for web url field (invalid)
+  Scenario Outline: street wrong input error message test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<street>" in "רחוב"
     Then Check field "רחוב" has invalid value
@@ -387,10 +340,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     |   بلاتنم%^&*[لأأـ،قفإ‘÷  |
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for web url field (invalid)
+  Scenario Outline: city site name wrong input error message test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<city_site_name>" in "שם אתר עירוני"
     Then Check field "שם אתר עירוני" has invalid value
@@ -402,8 +352,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     |   بلاتنم%^&*[لأأـ،قفإ‘÷  |
 
   @form
-  # excel sheet rule number 6
-  Scenario Outline: email field allow to write just english and numbers test (valid)
+  Scenario Outline: email valid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has valid value
@@ -422,8 +371,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | awdas@efadsb.com   |
 
   @form
-  # excel sheet rule number 6
-  Scenario Outline: email field allow to write just english and numbers test (invalid)
+  Scenario Outline: email invalid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
@@ -441,28 +389,25 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | dfghj.dfghj@@j.com           |
 
   @form
-  # excel sheet rule number 6
-  # BUG:
-  # Another BUG : the email that contains one letter until unlimited
-  Scenario Outline: email field allow to write just english and numbers test (invalid)
+  Scenario Outline: email invalid value test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
     And Validate that "אימייל" have the input only english, numbers with the allowed signs
     Examples:
     | email  |
-    | a@b.com.com.com.com     |
-    | a@b.com.com.comcccc.com |
-    | A@B.COM                 |
-    | a%@b.com                |
-    | a_----___---_____r@b.com|
-    | a+r@b.com               |
-    |A@b.cOm                  |
+    |a@b.com.com.com.com     |
+    |a@b.com.com.comcccc.com |
+    |A@B.COM                 |
+    |a%@b.com                |
+    |a_----___---_____r@b.com|
+    |a+r@b.com               |
+    |A@b.cOm                 |
+    |a@b.com.com.com.com     |
+
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  Scenario Outline: email error message test for wrong input (invalid)
+  Scenario Outline: email wrong input error message test
     Given I navigate to "ContractorEmpRights" page
     When I write "<email>" in "אימייל"
     Then Check field "אימייל" has invalid value
@@ -476,28 +421,10 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | A$h@B.com                    |
     | A@f@h$.com                   |
 
-  @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: email error message test (invalid)
-    Given I navigate to "ContractorEmpRights" page
-    When I write "<email>" in "אימייל"
-    Then Check field "אימייל" has invalid value
-    And Check if error message of "אימייל" is "דוא''ל לא תקין"
-    Examples:
-    | email  |
-    | a@b.com.com.com.com          |
-    | a@b.com.com.comcccc.com      |
-    | A@B.COM                      |
-    | a%@b.com                     |
-    | a_----___---_____r@b.com     |
-    | a+r@b.com                    |
-    |A@b.cOm                       |
+
 
   @form
-  # excel sheet rule number 5
-  Scenario Outline: phone number field allow to write just numbers test (valid)
+  Scenario Outline: phoneNumber valid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has valid value
@@ -510,10 +437,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 0597247857   |
 
   @form
-  # excel sheet rule number 5
-  # the field refuse all the letters
-  # BUG:
-  Scenario Outline: phone number field allow to write just numbers test (invalid)
+  Scenario Outline: phoneNumber invalid value test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has valid value
@@ -526,18 +450,14 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | @#$%^&*(7    |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty phone number
-  Scenario: phone number error message test (invalid)
+  Scenario: phoneNumber empty field error message test
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
     And Check if error message of "מספר טלפון נייד" is "יש להזין מספר טלפון נייד"
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong phone number
-  Scenario Outline: phone number error message test (invalid)
+  Scenario Outline: phoneNumber wrong input error message test
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
@@ -551,10 +471,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 077تلاتتاتن   |
 
   @form
-  # excel sheet rule number 18
-  # error message for incomplete phone number
-  # BUG:
-  Scenario Outline: phone number error message test (invalid)
+  Scenario Outline: phoneNumber wrong input error message test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<phone_number>" in "מספר טלפון נייד"
     Then Check field "מספר טלפון נייד" has invalid value
@@ -566,9 +483,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 054567        |
 
   @form
-  # excel sheet rule number 5
-  # BUG:
-  Scenario Outline: home phone number field allow to write just numbers test (valid)
+  Scenario Outline: HomePhoneNumber valid values test
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has valid value
@@ -581,10 +496,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 053247857          |
 
   @form
-  # excel sheet rule number 5
-  # the field refuse all the letters
-  # BUG:
-  Scenario Outline: home phone number field allow to write just numbers test (invalid)
+  Scenario Outline: HomePhoneNumber invalid values test
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has invalid value
@@ -595,28 +507,14 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | sdsasasdd         |
     | gregwe$%f         |
     | @#$%^&*(7         |
-
-  @form
-  # excel sheet rule number 18
-  # error message for wrong phone number
-  Scenario Outline: home phone number error message test (invalid)
-    Given I navigate to "ContractorEmpRights" page
-    When I write "<home_phone_number>" in "מספר טלפון"
-    Then Check field "מספר טלפון" has invalid value
-    And Check if error message of "מספר טלפון" is "יש להזין ספרות בלבד"
-    Examples:
-    | home_phone_number  |
     | dka-dsasdas        |
     | 052-sdks2j2        |
     | 054-394832j        |
-    | 035-יעחלךןח         |
+    | 035-יעחלךןח        |
     | 077-تلاتتاتن        |
 
   @form
-  # excel sheet rule number 18
-  # error message for incomplete phone number
-  # BUG:
-  Scenario Outline: home phone number error message test (invalid)
+  Scenario Outline: HomePhoneNumber invalid values test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<home_phone_number>" in "מספר טלפון"
     Then Check field "מספר טלפון" has invalid value
@@ -628,7 +526,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 054567             |
 
   @form
-  Scenario Outline: birthday date value test (valid)
+  Scenario Outline: birthday date valid value test
     Given I navigate to "ContractorEmpRights" page
     When I pick date of "<birthday_date>" in "תאריך לידה"
     Examples:
@@ -641,7 +539,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 2/1/2018      |
 
   @form
-  Scenario Outline: branch value test (valid)
+  Scenario Outline: branch valid value test
     Given I navigate to "PlaceContainer" page
     When I pick "<branch>" in "ענף"
     Examples:
@@ -651,7 +549,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | ניקיון  |
 
   @form
-  Scenario Outline: company name value test (valid)
+  Scenario Outline: company name valid value test
     Given I navigate to "PlaceContainer" page
     When I pick "<company_name>" in "שם חברה"
     Examples:
@@ -664,7 +562,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | גורמה ארוחות בע"מ      |
 
   @form
-  Scenario Outline: date of starting work in the company value test (valid)
+  Scenario Outline: date of starting work in the company valid value test
     Given I navigate to "ContractorEmpRights" page
     When I pick date of "<date_of_starting_work>" in "תאריך תחילת העבודה בחברה"
     Examples:
@@ -677,7 +575,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | 2/1/2018               |
 
   @form
-  Scenario Outline: company name value test (valid)
+  Scenario Outline: company name valid value test
     Given I navigate to "PlaceContainer" page
     When I pick "<complaint_subject>" in "נושא התלונה"
     Examples:
@@ -688,8 +586,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | דמי נסיעות                                                  |
 
   @form
-  # excel sheet rule number 4
-  Scenario Outline: all text field allow to write just Hebrew test (valid)
+  Scenario Outline: complaint details valid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
     Then Check field "פרטי התלונה" has valid valid
@@ -703,10 +600,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | דש)כדשכדכ           |
 
   @form
-  # excel sheet rule number 4
-  # field of Details of the complaint accept all languages and signs
-  # BUG:
-  Scenario Outline: all text field allow to write just Hebrew test (invalid)
+  Scenario Outline: complaint details invalid value test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
     Then Check field "פרטי התלונה" has valid valid
@@ -721,19 +615,14 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | כעיחRTYU4%^&%^          |
 
   @form
-  # excel sheet rule number 18
-  # error message for empty field
-  Scenario: error message for complaint details field (invalid)
+  Scenario: complaint details empty field error message
     Given I navigate to "ContractorEmpRights" page
     When I write " " in "פרטי התלונה"
     Then Check field "פרטי התלונה" has invalid value
     And Check if error message of "פרטי התלונה" is "יש למלא את פרטי התלונה"
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for complaint details field (invalid)
+  Scenario Outline: complaint details wrong input error message (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<complaint_details>" in "פרטי התלונה"
     Then Check field "פרטי התלונה" has invalid value
@@ -747,13 +636,12 @@ Feature: header, fields test of ContractorEmpRights Form Page
     |   بلاتنمؤبلاتنمكلات        |
 
   @form
-  Scenario: question value test (valid)
+  Scenario: question value valid value test
     Given I navigate to "ContractorEmpRights" page
     When Choose "כן" in "האם היתה פניה למעסיק קודם הגשת תלונה זו"
 
   @form
-  # excel sheet rule number 4
-  Scenario Outline: all text field allow to write just Hebrew test (valid)
+  Scenario Outline: answer_you_got valid value test
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
     Then Check field "התשובה שקיבלתי" has valid valid
@@ -767,11 +655,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | דש)כדשכדכ        |
 
   @form
-  # excel sheet rule number 4
-  # field of Details of the complaint accept all languages and signs
-  # BUG:
-  # Another BUG : the answer you got that contains one letter until unlimited
-  Scenario Outline: all text field allow to write just Hebrew test (invalid)
+  Scenario Outline: answer_you_got invalid value test (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
     Then Check field "התשובה שקיבלתי" has valid valid
@@ -784,12 +668,14 @@ Feature: header, fields test of ContractorEmpRights Form Page
     | dfghj$%^&*       |
     | ertyuh$%^        |
     | כעיחRTYU4%^&%^   |
+    |   firas             |
+    |   asdas             |
+    |   fiwrqrwwras       |
+    |   firdasd3r3ras     |
+    |   بلاتنمؤبلاتنمكلات     |
 
   @form
-  # excel sheet rule number 18
-  # error message for wrong input
-  # BUG:
-  Scenario Outline: error message for answer you got field (invalid)
+  Scenario Outline: answer_you_got wrong input error message (BUG)
     Given I navigate to "ContractorEmpRights" page
     When I write "<answer_you_got>" in "התשובה שקיבלתי"
     Then Check field "התשובה שקיבלתי" has invalid value
@@ -803,7 +689,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     |   بلاتنمؤبلاتنمكلات     |
 
   @form
-  Scenario Outline: months to check value test (valid)
+  Scenario Outline: months to check valid value test
     Given I navigate to "ContractorEmpRights" page
     When Click On "+" sign in "חודשים לבדיקה"
     And I pick "<year>" in "שנה"
