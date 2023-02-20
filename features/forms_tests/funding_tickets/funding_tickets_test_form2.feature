@@ -147,7 +147,7 @@ Feature: Testing funding tickets page FORM 2 ONLY
     When I choose "ת.ז." in "סוג זיהוי" in part "פרטי הורה"
     Then I check if "מספר ת.ז." is displayed in part "פרטי הורה"
 
-   @critical
+  @critical
   @form
   Scenario Outline: I.D. field test with invalid values to test the alert "not correct" message in parent details
     Given I navigate to "FundingTickets" page
