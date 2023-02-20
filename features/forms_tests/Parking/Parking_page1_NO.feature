@@ -1,5 +1,5 @@
-Feature: Testing and validation according to municipality requests list
-
+Feature: Testing and validation according to municipality requests list.
+Informations about the form:
 - Feature file name: Parking_pages1_NO.feature
 - Form link: https://jeronlineforms-test.jerweb.jer/Parking
 - Number of Pages is : 5, We are at Page: 1 [No]

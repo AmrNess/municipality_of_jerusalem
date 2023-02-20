@@ -1,10 +1,12 @@
-Feature: Testing and validation according to municipality requests list
+Feature: Testing and validation according to municipality requests list.
+  Informations about the form:
+  - Form title: רישום למוסד לימודי
   - Feature file name: EduInstituteRegistration_page1.feature
-  - Form link: https://jeronlineforms-test.jerweb.jer/EduInstituteRegistration
+  - Form link: https://jeronlineforms.jerweb.jer/EduInstituteRegistration
   - Number of Pages is : 5, We are at Page: 1
   - All fields are mandatory.
   Notes:
-  * In this form, all numeric fields accepts only numbers, and doesn't take letters or characters at all.
+  - In this form, all numeric fields accepts only numbers, and doesn't take letters or characters at all.
 
 # Test header
   @Header
@@ -22,11 +24,12 @@ Feature: Testing and validation according to municipality requests list
     Given Navigate to "EduInstituteRegistration" Page
     Then Validate if we are at page number "1"
 
-# פרטי תלמיד/ה
+# פרטי תלמיד/ה should find a different label from the parent one
 # form fields tests
  # סוג זהות dropdown menu
+
   Scenario Outline: pick option from סוג זהות
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "<option>" field with "סוג זהות"
     And Click on "<option>"
@@ -41,7 +44,7 @@ Feature: Testing and validation according to municipality requests list
 
   #pick תעודת זהות from סוג זהות
   Scenario: pick תעודת זהות from סוג זהות and fill תעודת זהות with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -50,7 +53,7 @@ Feature: Testing and validation according to municipality requests list
     And Fill "זהות" field with "039886544"
 
    Scenario Outline: pick תעודת זהות from סוג זהות and fill תעודת זהות with invalid value (Only numbers)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -75,7 +78,7 @@ Feature: Testing and validation according to municipality requests list
       |01234567 |
 
  Scenario Outline: pick תעודת זהות from סוג זהות and fill תעודת זהות with invalid value (Numbers and text)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -104,7 +107,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick דרכון from סוג זהות
   Scenario Outline: pick דרכון from סוג זהות and fill דרכון with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "דרכון" field from "סוג זהות"
     And Click on "דרכון"
@@ -117,7 +120,7 @@ Feature: Testing and validation according to municipality requests list
     |IS0123456|
 
   Scenario Outline: pick דרכון from סוג זהות and fill דרכון with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "דרכון" field from "סוג זהות"
     And Click on "דרכון"
@@ -142,7 +145,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick  אשרת שהייה from סוג זהות
   Scenario Outline: pick  אשרת שהייה   from סוג זהות and fill תעודת זהות with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "אשרת שהייה" field from "סוג זהות"
     And Click on "אשרת שהייה"
@@ -156,7 +159,7 @@ Feature: Testing and validation according to municipality requests list
     |AA1234567|
 
   Scenario Outline: pick  אשרת שהייה  from סוג זהות and fill אשרת שהייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "אשרת שהייה" field from "סוג זהות"
     And Click on "אשרת שהייה"
@@ -174,7 +177,7 @@ Feature: Testing and validation according to municipality requests list
     |a123|
 
   Scenario Outline: pick  אשרת שהייה  from סוג זהות and fill אשרת שהייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "אשרת שהייה" field from "סוג זהות"
     And Click on "אשרת שהייה"
@@ -190,7 +193,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick זהות פקטיבית עירייה from סוג זהות
   Scenario Outline: pick  זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose " זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -203,7 +206,7 @@ Feature: Testing and validation according to municipality requests list
     |1234567890|
 
   Scenario Outline: pick זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -231,7 +234,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick זהות פקטיבית עירייה from סוג זהות
   Scenario Outline: pick  זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -251,7 +254,7 @@ Feature: Testing and validation according to municipality requests list
     |1234567890|
 
   Scenario Outline: pick  זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -269,7 +272,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario Outline: Date test with valid values
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "תאריך לידה" field
     And Clear "תאריך לידה" field
     And Fill "תאריך לידה" field with "<Date>"
@@ -288,7 +291,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario Outline: Date test with invalid values (Only Numbers)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "תאריך לידה" field
     And Fill "תאריך לידה" field with "<Text>"
     Then Validate if "תאריך לידה" field has invalid value
@@ -309,7 +312,7 @@ Feature: Testing and validation according to municipality requests list
   #פרטי הורה המגיש את הרישום
 # סוג זהות dropdown menu
   Scenario Outline: pick option from סוג זהות
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "<option>" field with "סוג זהות"
     And Click on "<option>"
@@ -324,7 +327,7 @@ Feature: Testing and validation according to municipality requests list
 
   #pick תעודת זהות from סוג זהות
   Scenario: pick תעודת זהות from סוג זהות and fill תעודת זהות with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -333,7 +336,7 @@ Feature: Testing and validation according to municipality requests list
     And Fill "זהות" field with "039886544"
 
    Scenario Outline: pick תעודת זהות from סוג זהות and fill תעודת זהות with invalid value (Only numbers)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -358,7 +361,7 @@ Feature: Testing and validation according to municipality requests list
       |01234567 |
 
  Scenario Outline: pick תעודת זהות from סוג זהות and fill תעודת זהות with invalid value (Numbers and text)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -387,7 +390,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick דרכון from סוג זהות
   Scenario Outline: pick דרכון from סוג זהות and fill דרכון with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "דרכון" field from "סוג זהות"
     And Click on "דרכון"
@@ -400,7 +403,7 @@ Feature: Testing and validation according to municipality requests list
     |IS0123456|
 
   Scenario Outline: pick דרכון from סוג זהות and fill דרכון with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "דרכון" field from "סוג זהות"
     And Click on "דרכון"
@@ -425,7 +428,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick  אשרת שהייה from סוג זהות
  Scenario Outline: pick  אשרת שהייה   from סוג זהות and fill תעודת זהות with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "אשרת שהייה" field from "סוג זהות"
     And Click on "אשרת שהייה"
@@ -439,7 +442,7 @@ Feature: Testing and validation according to municipality requests list
     |AA1234567|
 
  Scenario Outline: pick  אשרת שהייה  from סוג זהות and fill אשרת שהייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "אשרת שהייה" field from "סוג זהות"
     And Click on "אשרת שהייה"
@@ -457,7 +460,7 @@ Feature: Testing and validation according to municipality requests list
     |a123|
 
  Scenario Outline: pick  אשרת שהייה  from סוג זהות and fill אשרת שהייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "אשרת שהייה" field from "סוג זהות"
     And Click on "אשרת שהייה"
@@ -473,7 +476,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick זהות פקטיבית עירייה from סוג זהות
  Scenario Outline: pick  זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose " זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -486,7 +489,7 @@ Feature: Testing and validation according to municipality requests list
     |1234567890|
 
  Scenario Outline: pick זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -514,7 +517,7 @@ Feature: Testing and validation according to municipality requests list
 
  #pick זהות פקטיבית עירייה from סוג זהות
  Scenario Outline: pick  זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with valid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -534,7 +537,7 @@ Feature: Testing and validation according to municipality requests list
     |1234567890|
 
  Scenario Outline: pick  זהות פקטיבית עירייה from סוג זהות and fill זהות פקטיבית עירייה with invalid value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "זהות פקטיבית עירייה" field from "סוג זהות"
     And Click on "זהות פקטיבית עירייה"
@@ -552,7 +555,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario: Cellphone suffix test with valid Value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "טלפון נייד" field
     And Clear "טלפון נייד" field
     And Fill "טלפון נייד" field with "5768719"
@@ -561,7 +564,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario: Cellphone test with invalid Value (Empty space)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "טלפון נייד" field
     And Clear "טלפון נייד" field
     And Fill "טלפון נייד" field with " "
@@ -571,7 +574,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario Outline: Cellphone test with invalid Values (Only Numbers)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "טלפון נייד" field
     And Clear "טלפון נייד" field
     And Fill "טלפון נייד" field with "<Text>"
@@ -592,7 +595,7 @@ Feature: Testing and validation according to municipality requests list
   @Critical
   Scenario Outline: Cellphone test with invalid Values (Numbers and Symbols or letters)
     # In this scenario, two red label appears (complete the missing numbers, only numbers accepted)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "טלפון נייד" field
     And Clear "טלפון נייד" field
     And Fill "טלפון נייד" field with "<Text>"
@@ -614,7 +617,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario Outline: Cellphone test with invalid Values (Numbers and Symbols or letters)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "טלפון נייד" field
     And Clear "טלפון נייד" field
     And Fill "טלפון נייד" field with "<Text>"
@@ -634,7 +637,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario Outline: Cellphone prefix test
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "pre_cellphone" field
     And Fill "pre_cellphone" field with "<num>"
     And Click on "<num>"
@@ -657,7 +660,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario: Email test with valid Value
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "דוא"ל" field
     And Clear "דוא"ל" field
     And Fill "דוא"ל" field with "darweeshq@gmail.com"
@@ -666,7 +669,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario: Email test with invalid Value (Empty space)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "דוא"ל" field
     And Clear "דוא"ל" field
     And Fill "דוא"ל" field with " "
@@ -676,7 +679,7 @@ Feature: Testing and validation according to municipality requests list
   @Form
   @Critical
   Scenario Outline: Email test with invalid Values (Numbers and Symbols or letters)
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "דוא"ל" field
     And Clear "דוא"ל" field
     And Fill "דוא"ל" field with "<Text>"
@@ -703,8 +706,10 @@ Feature: Testing and validation according to municipality requests list
   #Todo: Check mandatory fields
 
  # Fill all fields with correct values
+  @form
+  @sanity
   Scenario: Fill all fields with correct values
-    Given Navigate to "Parking" Page
+    Given Navigate to "EduInstituteRegistration" Page
     When Click on "סוג זהות" field
     And choose "תעודת זהות" field from "סוג זהות"
     And Click on "תעודת זהות"
@@ -732,3 +737,19 @@ Feature: Testing and validation according to municipality requests list
     And Fill "דוא"ל" field with "darweeshq@gmail.com"
     When Press on "המשך" button
     Then Validate if we are at page no. "2"
+
+
+  @form
+  Scenario: Press continue button with empty values
+    # by clicking first on continue button we can check all mandatory fields and their response.
+    # all mandatory fields should give red label alert with text "שדה חובה"
+    Given Navigate to "EduInstituteRegistration" Page
+    When Press on "המשך" button
+    Then Validate if "סוג זהות" field has invalid value
+    Then Validate if "זהות" field has invalid value
+    Then Validate if "תאריך לידה" field has invalid value
+    Then Validate if "סוג זהות" field has invalid value
+    Then Validate if "זהות" field has invalid value
+    Then Validate if "דוא"ל" field has invalid value
+    Then Validate if "טלפון נייד" field has invalid value
+    Then Validate if we are at page no. "1"
