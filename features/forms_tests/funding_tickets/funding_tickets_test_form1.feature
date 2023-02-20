@@ -1,18 +1,35 @@
 Feature: Testing funding tickets page FORM 1 ONLY
+  - Feature file name: funding_tickets_test_form1.feature
+  - Form link: https://jeronlineforms-test.jerweb.jer/FundingTickets
+  - Form link: https://jeronlineforms-test.jerweb.jer/FundingTickets
+  - Number of Pages is : 4, We are at Page: 1
+  - All fields are mandatory except "טלפון קווי" text field
 
-  @critical
-  Scenario: explanation is displayed
+  @minor
+  @header
+  Scenario: check header is displayed properly
     Given I navigate to "FundingTickets" page
+    Then I check if the header and is displayed
+    Then I check if the header "logo" ins displayed
+    Then I check if the header "Title" is displayed and have more than "5" character
+    Then I check that this form is form number "4"
     Then I check if the explanation is displayed
 
+  @minor
+  @footer
+   Scenario: check if footer is displayed and have text
+   Given I navigate to "FundingTickets" page
+   Then I check if the footer is displayed and have more than 10 character
 
   @critical
+  @form
   Scenario: check if I.D field  is displayed
     Given I navigate to "FundingTickets" page
     When I choose "ת.ז." in "סוג זיהוי"
     Then I check if "מספר ת.ז." is displayed
 
   @critical
+  @form
   Scenario Outline: I.D. field test with invalid values to test the alert "not correct" message
     Given I navigate to "FundingTickets" page
     When I choose "ת.ז." in "סוג זיהוי"
@@ -41,6 +58,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline: I.D. field test with valid values
     Given I navigate to "FundingTickets" page
     When I choose "ת.ז." in "סוג זיהוי"
@@ -52,12 +70,14 @@ Feature: Testing funding tickets page FORM 1 ONLY
     |32069445|
 
   @critical
+  @form
   Scenario: check passport field  is displayed
     Given I navigate to "FundingTickets" page
     When I choose "דרכון" in "סוג זיהוי"
     Then I check if "מספר דרכון" is displayed
 
   @critical
+  @form
   Scenario Outline: PassPort field test with invalid values to test the alert "not correct" message
     Given I navigate to "FundingTickets" page
     When I choose "דרכון" in "סוג זיהוי"
@@ -86,6 +106,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline: I.D. field test with valid values
     Given I navigate to "FundingTickets" page
     When I choose "דרכון" in "סוג זיהוי"
@@ -97,6 +118,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
     |32069445|
 
   @critical
+  @form
   Scenario Outline: First name field test with invalid values to test the alert "only numbers and special characters allowed" message
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "שם פרטי"
@@ -145,6 +167,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
     | לכמנ#  |
 
   @critical
+  @form
   Scenario Outline: First name field test with valid values
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "שם פרטי"
@@ -160,6 +183,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline: Family name field test with invalid values to test the alert "only numbers and special characters allowed" message
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "שם משפחה"
@@ -208,6 +232,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
     | לכמנ#  |
 
   @critical
+  @form
   Scenario Outline: Family name field test with valid values
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "שם משפחה"
@@ -222,6 +247,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline: Mobile phone field test with invalid values to test the alert "Numbers only" message
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "טלפון נייד"
@@ -235,6 +261,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
       |053-34876556734567 |
 
   @critical
+  @form
   Scenario Outline: Mobile phone field test with invalid values to test "missing numbers" alert
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "טלפון נייד"
@@ -249,6 +276,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline:  Mobile phone field test with valid values
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "טלפון נייד"
@@ -260,6 +288,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
       |077-7383632|
 
   @critical
+  @form
   Scenario Outline: Land-line phone field test with invalid values to test "only numbers" alert
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "טלפון קווי"
@@ -273,6 +302,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
       |053-34876556734567 |
 
   @critical
+  @form
   Scenario Outline: Land-line phone field test with invalid values to test "missing numbers" alert
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "טלפון קווי"
@@ -287,6 +317,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline: Land-line phone field test with valid values
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "טלפון קווי"
@@ -298,6 +329,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
 
 
   @critical
+  @form
   Scenario Outline: Email field test with invalid values to test "incorrect feild" alert
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "דוא"ל"
@@ -323,6 +355,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
       |SDFG56ש@FG5.FG|
 
   @critical
+  @form
   Scenario Outline: Email field test with valid values
     Given I navigate to "FundingTickets" page
     When I write "<text>" in "דוא"ל"

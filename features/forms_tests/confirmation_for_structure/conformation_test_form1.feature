@@ -69,7 +69,7 @@ Feature: Testing confirmation for structure page FORM 1 ONLY
 
   @critical
   @form
-  Scenario Outline: First name field test with invalid values to test the alert "only numbers and special characters allowed" message
+  Scenario Outline: First name field test with invalid values to test the alert "only hebrew  and special characters allowed" message
     Given I navigate to "ConfirmationForStructure" page
     When I write "<text>" in "שם פרטי"
     Then field "שם פרטי" should have invalid value and with alert "יש להזין אותיות בעברית בלבד ותווים מיוחדים"

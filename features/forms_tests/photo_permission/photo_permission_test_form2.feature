@@ -2,7 +2,7 @@ Feature: Testing photo permission page FORM 2 ONLY
 
   - Feature file name: photo_permission_test_form2.feature
   - Form link: https://jeronlineforms-test.jerweb.jer/PhotoPermission
-  - Number of Pages is : 3, We are at Page: 2
+  - Number of Pages is : 4, We are at Page: 2
   - All fields are mandatory.
 
   @minor
@@ -474,7 +474,7 @@ Feature: Testing photo permission page FORM 2 ONLY
 
   @critical
   @form
-  Scenario Outline: Name of the person for whom the photo is taken field test with invalid values to test the alert "only numbers and special characters allowed" message
+  Scenario Outline: Name of the person for whom the photo is taken field test with invalid values to test the alert "language is incorrect" message
     Given I navigate to "PhotoPermission" page
     When I write "<text>" in "שם הגורם עבורו מתבצע הצילום"
     Then field "שם הגורם עבורו מתבצע הצילום" has invalid value and with alert "שפת קלט לא תקינה"
@@ -491,7 +491,7 @@ Feature: Testing photo permission page FORM 2 ONLY
   Scenario Outline: Name of the person for whom the photo is taken field test with valid values
     Given I navigate to "PhotoPermission" page
     When I write "<text>" in "שם הגורם עבורו מתבצע הצילום"
-    Then field "שם הגורם עבורו מתבצע הצילום" has invalid value
+    Then field "שם הגורם עבורו מתבצע הצילום" has valid value
     Examples:
     | text  |
     |גדכגדכ|
@@ -512,3 +512,13 @@ Feature: Testing photo permission page FORM 2 ONLY
    Then check if popup "שמור טיוטה" text includes text "שמירת הטיוטה מאפשרת לך להמשיך במילוי"
    Then I click close button of popup "שמור טיוטה"
    Then check if popup "שמור טיוטה" is not displayed
+
+   @minor
+   @savebutton
+   @popup
+   Scenario: check if clicking save content button return to same page
+   Given I navigate to "PhotoPermission" page
+   Then I check that this form is form number "2"
+   Then I check if i click "שמור טיוטה" a popup with title "שמור טיוטה" is displayed
+   Then at the popup "שמור טיוטה" click button "שמור טיוטה"
+   Then I check that this form is form number "2"

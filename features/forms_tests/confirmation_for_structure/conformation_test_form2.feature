@@ -38,7 +38,7 @@ Feature: Testing confirmation for structure page FORM 2 ONLY
    @minor
    @savebutton
    @popup
-   Scenario: check if save content button shows popup after clicking it
+   Scenario: check if clicking save content button return to same page
    Given I navigate to "ConfirmationForStructure" page
    Then I check that this form is form number "2"
    Then I check if i click "שמור טיוטה" a popup with title "שמור טיוטה" is displayed

@@ -2,7 +2,7 @@ Feature: Testing photo permission page FORM 1 ONLY
 
   - Feature file name: photo_permission_test_form1.feature
   - Form link: https://jeronlineforms-test.jerweb.jer/PhotoPermission
-  - Number of Pages is : 3, We are at Page: 1
+  - Number of Pages is : 4, We are at Page: 1
   - All fields are mandatory except telephone number.
 
   @minor
@@ -239,6 +239,7 @@ Feature: Testing photo permission page FORM 1 ONLY
     When I write "<text>" in "שם משפחה"
     Then field "שם משפחה" has valid value
     Examples:
+    |text|
     |גדכגדכ|
     |דגכככככככככ|
     |םיעןחפםעיח|
