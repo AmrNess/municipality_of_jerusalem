@@ -2,6 +2,7 @@ import os
 import sys
 import socket
 import platform
+import logging_classes
 
 auto_depot_path = os.path.abspath(os.path.join(__file__, os.pardir, os.pardir, os.pardir))
 utilities_folder = os.path.join(auto_depot_path, 'utilities')
