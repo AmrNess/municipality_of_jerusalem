@@ -238,6 +238,7 @@ Feature: Testing funding tickets page FORM 1 ONLY
     When I write "<text>" in "שם משפחה"
     Then field "שם משפחה" has valid value
     Examples:
+    |text|
     |גדכגדכ|
     |דגכככככככככ|
     |םיעןחפםעיח|
