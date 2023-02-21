@@ -1,3 +1,4 @@
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 
@@ -29,23 +30,24 @@ class BaseWidget(object):
     def is_displayed(self):
         return self.web_element.is_displayed()
 
-    def check_error_text(self, error_expectation, type):
-        if type == "text":
-            error_msg = self.web_element.find_element(by=By.XPATH, value=f"./following-sibling::div/div")
-        elif type == "phone":
-            error_msg = self.web_element.find_element(by=By.XPATH, value=f"./following-sibling::div/following-sibling::div")
+    def item_is_displayed(self, element):
+        try:
+            self.web_element.find_element(by=By.XPATH, value=f"{element}")
+            return True
+        except NoSuchElementException:
+            return False
 
-        if "-" in error_expectation and "\n" in error_msg.text:
-            expectation_err = error_expectation.split("-")
-            first_expectation_error = expectation_err[0]
-            second_expectation_error = expectation_err[1]
-
-            real_err = error_msg.text.split("\n")
-            first_real_error = real_err[0]
-            second_real_error = real_err[1]
-            return first_expectation_error == first_real_error and second_expectation_error == second_real_error
-        return error_expectation == error_msg.text
+    def get_text_allert_label(self):
+        try:
+            return  self.web_element.find_element(by=By.XPATH, value=f'.//following-sibling::div/div').text
+        except NoSuchElementException:
+            raise AssertionError("No alert field")
 
 
 
-
+    def allert_label_is_displayed(self):
+        try:
+            self.web_element.find_element(by=By.XPATH , value= f'.//following-sibling::div[@role="alert"]')
+            return True
+        except NoSuchElementException:
+            return False

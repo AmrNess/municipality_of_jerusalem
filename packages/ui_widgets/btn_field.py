@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
+
 from ui_widgets.base_widget import BaseWidget
-from infra import logger
+from infra import logger, custom_exceptions as ce
 
 log = logger.get_logger(__name__)
 
@@ -11,18 +12,16 @@ class BtnField(BaseWidget):
 
     @property
     def get_text(self):
-        return self.web_element.text
+        return self.web_element.get_attribute('value')
 
     @property
     def locator(self):
         return {
-             'By': By.XPATH,
-             'Value': f"//span[contains(text(),'{self.label}')]"
+            'By': By.XPATH,
+            'Value': f"//span[contains(text(),'{self.label}')]",
         }
 
     def clickBtn(self):
-        log.info(f'You clicked on {self.label} button')
         self.web_element.click()
-
 
 

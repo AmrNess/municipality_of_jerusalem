@@ -43,14 +43,44 @@ if current_os == 'Win':
 else:
     local_allure_executable = os.path.join(allure_utils_path, 'bin', 'allure')
 
-field_error = {
-    "empty_field_error": "שדה חובה",
-    "language_error": "יש להזין אותיות בעברית בלבד ותווים מיוחדים",
-    "enter_letters_error": "יש להזין ספרות בלבד",
-    "unclean_id_error": "מספר זהות לא תקין",
-    "empty_unclean_id_error": "שדה חובה-יש להזין ספרות בלבד",
-    "incomplete_phone_number_error": "יש להשלים את הספרות החסרות",
-    "incomplete_unclean_phone_number_error": "יש להזין ספרות בלבד-יש להשלים את הספרות החסרות",
-    "unclean_email_error": "שדה לא תקין",
-    "incomplete_unclean_email_error": "שדה חובה-שדה לא תקין"
+
+implicit_wait = 10
+
+
+text_error={
+    "Must to enter value" : "שדה חובה",
+    "value not in hebrew" : "יש להזין אותיות בעברית בלבד ותווים מיוחדים",
+    "id not valid" : "מספר זהות לא תקין",
+    "not full number phone" : "יש להזין ספרות בלבד  יש להשלים את הספרות החסרות" ,
+    "must to be number" : "יש להזין ספרות בלבד",
+    "email error" : "שדה לא תקין",
 }
+
+
+langauge = {
+    'Arabic' : 'العربية' ,
+    'Hebrew' : 'עברית'
+}
+# langauge = {
+#     'العربية' : 'Arabic' ,
+#     'עברית' : 'Hebrew'
+# }
+
+
+input_form= {
+    'שם פרטי' : {'Arabic' : 'الاسم الشخصي' , 'Hebrew' : 'שם פרטי'},
+    'שם משפחה' : {'Arabic' : 'اسم العائلة' , 'Hebrew' : 'שם משפחה'},
+    'סוג זיהוי' : {'Arabic' : 'نوع الهوية' , 'Hebrew' : 'סוג זיהוי'},
+    'מספר ת.ז.' : {'Arabic' : 'رقم الهوية' , 'Hebrew' : 'מספר ת.ז.'},
+    'טלפון נייד' : {'Arabic' : 'هاتف محمول' , 'Hebrew' : 'טלפון נייד'},
+    'טלפון קווי' : {'Arabic' : 'هاتف ' , 'Hebrew' : 'טלפון קווי'},
+    'דוא"ל' : {'Arabic' : 'البريد الالكتروني' , 'Hebrew' : 'דוא"ל'},
+    'יישוב' : {'Arabic' : 'المدينة' , 'Hebrew' : 'יישוב'},
+    'רחוב' : {'Arabic' : 'شارع: ' , 'Hebrew' : 'רחוב: '},
+    'מספר בית' : {'Arabic' : 'رقم البيت' , 'Hebrew' : 'מספר בית'},
+    'מיקוד' : {'Arabic' : 'الرمز البريدي' , 'Hebrew' : 'מיקוד'},
+    'המשך' : {'Arabic' : 'اكمل ' , 'Hebrew' : 'המשך '},
+    'ת.ז.' : {'Arabic' : 'الهوية ' , 'Hebrew' : 'ת.ז.'},
+    'דרכון' : {'Arabic' : 'جواز السفر' , 'Hebrew' : 'דרכון'}
+}
+

@@ -4,6 +4,7 @@ import os
 import sys
 import traceback
 from argparse import ArgumentParser
+from distutils.dir_util import copy_tree
 from pathlib import Path
 from behave import runner
 from behave import runner_util
@@ -266,17 +267,17 @@ def test_history_exists(opt_dict):
 
     return have_history
 
-#
-# def copy_history_to_current_report_folder():
-#     try:
-#         history_folder = os.path.join(runner.Context.report_path, 'history')
-#         os.makedirs(history_folder, exist_ok=True)
-#         copy_tree(runner.Context.latest_report_time_folder_history_for_feature, history_folder)
-#         log.debug(f'Copied history from path: {runner.Context.latest_report_time_folder_history_for_feature}')
-#     except Exception as e:
-#         log.warning(
-#             f'Failed to copy history from path: {runner.Context.latest_report_time_folder_history_for_feature} ; Exception: {e}')
-#
+
+def copy_history_to_current_report_folder():
+    try:
+        history_folder = os.path.join(runner.Context.report_path, 'history')
+        os.makedirs(history_folder, exist_ok=True)
+        copy_tree(runner.Context.latest_report_time_folder_history_for_feature, history_folder)
+        log.debug(f'Copied history from path: {runner.Context.latest_report_time_folder_history_for_feature}')
+    except Exception as e:
+        log.warning(
+            f'Failed to copy history from path: {runner.Context.latest_report_time_folder_history_for_feature} ; Exception: {e}')
+
 
 def main():
     global exit_code

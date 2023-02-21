@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
+
 from ui_widgets.base_widget import BaseWidget
-from infra import logger
+from infra import logger, custom_exceptions as ce
 
 log = logger.get_logger(__name__)
 
@@ -43,12 +44,8 @@ class TextField(BaseWidget):
     def is_valid(self):
         return 'ng-valid' in self.web_element.get_attribute('class')
 
-
-
-
-
-
-
-
-
+    def check_error_text(self, error_expectation):
+        error_msg = self.web_element.find_element(by=By.XPATH, value=f"./following-sibling::div/div")
+        if error_expectation == error_msg.text:
+            return True
 

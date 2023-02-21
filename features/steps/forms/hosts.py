@@ -1,14 +1,18 @@
 import csv
 from pathlib import Path
+
 import yaml
 from behave import *
 import sys, os
 import time
 import psutil
+
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common import exceptions
+
 from utils.managers.infra import local_server_manager
 
 script_folder = os.path.dirname(__file__)

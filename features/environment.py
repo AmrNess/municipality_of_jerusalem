@@ -1,40 +1,43 @@
 import traceback
 import uuid
+
 import allure
 from allure_commons.types import AttachmentType
 from behave.model_core import Status
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core import driver
 
 from infra import reporter, logger, config
 
 rep = reporter.get_reporter()
 log = logger.get_logger(__name__)
 
-# if there is a failed step in the scenario, the scenario will continue
-def before_scenario(context, scenario):
-    scenario.continue_after_failed_step = True
 
+def before_all(context , langauge='heb'):
+    context._config.langauge = langauge
+    log.info(f"the context._config enviroment is : {context._config.langauge}")
 
-
-
-def before_all(context):
     context._config.current_page = None
     browser = context.opt_dict.get('browser', 'chrome')
     if browser == 'chrome':
         context.driver = webdriver.Chrome(ChromeDriverManager().install())
-        context.driver.implicitly_wait(10)
+        context.driver.implicitly_wait(config.implicit_wait)
 
 
 def before_scenario(context, scenario):
     scenario.starting_scenario_msg = f'----- Starting Scenario - {scenario.name} -----'
     log.info(scenario.starting_scenario_msg)
+    scenario.continue_after_failed_step = True
+
 
 def before_step(context, step):
     log.info(f'----- Starting Step - {step.name} -----')
 
 
 def after_step(context, step):
+    step.continue_after_failed_step = True
+
     step_pass = True
     if step.status != Status.passed:
         step_pass = False

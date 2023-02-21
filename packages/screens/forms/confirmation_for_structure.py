@@ -1,4 +1,5 @@
 from screens.forms.base_page import BasePage
+from ui_widgets.btn_field import BtnField
 from ui_widgets.mobile_field import Mobile_Field
 from ui_widgets.text_field import TextField
 
@@ -15,8 +16,9 @@ class ConfirmationForStructure(BasePage):
         self.widgets['טלפון קווי'] = Mobile_Field('טלפון קווי')
         self.widgets['דוא"ל'] = TextField('דוא"ל')
 
+        #self.widgets['המשך'] = BtnField('המשך') ##### this is in the base page we dont need that here
         self.main_elements_to_wait_when_load = [
             self.widgets['שם פרטי'],
-            self.widgets['המשך'],
-            self.widgets['טלפון נייד']
+            self.widgets['המשך']
         ]
+

@@ -1,8 +1,11 @@
+import time
+
 from behave import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from infra import logger, reporter, config
+from smart_assertions import soft_assert, verify_expectations
 
+from infra import logger, reporter, config, custom_exceptions as ce
 
 rep = reporter.get_reporter()
 log = logger.get_logger(__name__)
@@ -10,23 +13,38 @@ log = logger.get_logger(__name__)
 
 @given('I navigate to "{screen_name}" page')
 def navigate_to_screen(context, screen_name):
-    #create a screen
+    # create a screen
     current_page = context.screens_manager.create_screen([screen_name], driver=context.driver)
-    #check if we opened the browser and if yes check if the tittle we need is the one who opened , or if there is
+    # check if we opened the browser and if yes check if the tittle we need is the one who opened , or if there is
     # no tittle opened then go to the url
-    if (context._config.current_page and context._config.current_page.page_title != current_page.page_title) or context._config.current_page is None:
+    if (
+            context._config.current_page and context._config.current_page.page_title != current_page.page_title) or context._config.current_page is None:
         context._config.current_page = current_page
         current_page.navigate_to_page_url()
         driver = current_page.driver
         for element in current_page.main_elements_to_wait_when_load:
-            # wait method to wait the element
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((element.locator['By'], element.locator['Value'])))
+            WebDriverWait(driver, 30).until(
+                EC.presence_of_element_located((element.locator['By'], element.locator['Value'])))
+
+    context._config.screen_name = screen_name
 
 
 @when('I write "{text}" in "{widget_name}"')
 def write_into_text_field(context, text, widget_name):
-
-    widget = context._config.current_page.widgets[widget_name]
+    """
+    :param widget_name:
+    :param text:
+    :type context: behave.runner.Context
+    """
+    language = context._config.lang
+    label = (config.input_form[widget_name][language])
+    widget = context._config.current_page.widgets[label]
+    # log.info("نشوف شو بجيب الليبل :")
+    # log.info(config.input_form[widget_name])
+    # label = (config.input_form[widget_name]['Arabic'])
+    # log.info(lang_key)
+    # widget = context.current_page.widgets[label]
+    # log.info("نشوف شو صار بالويدجيت : "  + widget)
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
@@ -35,17 +53,19 @@ def write_into_text_field(context, text, widget_name):
 
 @when('I checked if "{text}" is the text of "{widget_name}"')
 def check_text_field(context, text, widget_name):
-
     widget = context._config.current_page.widgets[widget_name]
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_text(text, False)
+    assert widget.check_text(text)
 
 
 @then('field "{widget_name}" has invalid value')
 def field_has_invalid_value(context, widget_name):
-
+    """
+    :param widget_name:
+    :type context: behave.runner.Context
+    """
     widget = context._config.current_page.widgets[widget_name]
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
@@ -55,7 +75,10 @@ def field_has_invalid_value(context, widget_name):
 
 @then('field "{widget_name}" has valid value')
 def field_has_valid_value(context, widget_name):
-
+    """
+    :param widget_name:
+    :type context: behave.runner.Context
+    """
     widget = context._config.current_page.widgets[widget_name]
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
@@ -63,39 +86,8 @@ def field_has_valid_value(context, widget_name):
     assert widget.is_invalid is False and widget.is_valid is True, "Field considered as invalid"
 
 
-@when('Am I in the "{expected_page_number}" page')
-def page_number_checker(context, expected_page_number):
-    widget_name = "pages"
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    page_number = context._config.current_page.get_page_number()
-    assert widget.expanded_checker(expected_page_number), f'Incorrect page number, we are in {page_number}'
-
-@when('We have "{expected_pages_amount:d}" pages in this screen')
-def page_amount_checker(context, expected_pages_amount):
-    widget_name = "pages"
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    pages_amount = context._config.current_page.get_amount_of_pages()
-    assert pages_amount == expected_pages_amount, f'Incorrect we have {pages_amount} pages in this screen'
-
-
-@when('there is a "{widget_name}" in the page')
-def header_check(context, widget_name):
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    assert widget.header_checker is True
-
-
 @then('I click on "{widget_name}" button')
 def click_button(context, widget_name):
-
     widget = context._config.current_page.widgets[widget_name]
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
@@ -103,187 +95,299 @@ def click_button(context, widget_name):
     widget.clickBtn()
 
 
-@then('check if "{widget_name}" error is "{error_expectation}"')
-def error_msg(context, widget_name, error_expectation):
-    if widget_name == "טלפון נייד":
-        type = "phone"
-    elif widget_name == "טלפון קווי":
-        type = "phone"
+@when('I check header')
+def check_header(context):
+    widget = context._config.current_page.widgets['header']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+
+@then('the head should be displayed')
+def is_header_displayed(context):
+    head = context._config.current_page.widgets['header']
+
+    def test_header():
+        soft_assert(head.check_header_element('logo'), "no logo")
+        soft_assert(head.check_header_element('text'), 'no text')
+        soft_assert(head.check_header_element('arabic'), 'no arabic')
+        soft_assert(head.check_header_element('hebrew'), 'no hebrow')
+        verify_expectations()
+
+    test_header()
+    table_name = "HeaderResults"
+    rep.add_table(table_name)
+    rep.add_columns(table_name, ('col1', 'assert'), ('col2', 'log'))
+    rep.add_row(table_name, ("assert: ", "log: " + log.info(test_header())))
+    rep.add_table_to_step(table_name)
+
+
+@when('I check footer')
+def check_footer(context):
+    widget = context._config.current_page.widgets['footer']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value2'])
+        widget.set_web_element(web_element)
+
+
+@then('the footer should be displayed')
+def is_footer_displayed(context):
+    footer = context._config.current_page.widgets['footer']
+
+    def test_footer():
+        soft_assert(footer.check_footer_element('customer_service'), "no customer service")
+        soft_assert(footer.check_footer_element('Privacy'), "no Privacy ")
+        soft_assert(footer.check_footer_element('Terms_of_Service'), "no Terms of Service'")
+        verify_expectations()
+
+    test_footer()
+    table_name = "footerResult"
+    rep.add_table(table_name)
+    rep.add_columns(table_name, ('col1', 'assert'), ('col2', 'log'))
+    rep.add_table_to_step(table_name)
+
+
+@When('I click on "{widget_name}" btn')
+def click_button(context, widget_name):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    widget.clickBtn()
+
+
+@then('close the menu')
+def close_menu(context):
+    widget = context._config.current_page.widgets['SpecialNeeds']
+    if widget.get_web_element() is None:
+        web_element = WebDriverWait(context._config.current_page.driver, config.implicit_wait).until(
+            EC.element_to_be_clickable((widget.locator['By'], widget.locator['Value'])))
+        widget.set_web_element(web_element)
+    widget.clickBtnMenu()
+
+
+@When('I picked value "{prefix_value}" and "{widget_name}"')
+def select_Number(context, widget_name, prefix_value):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+    time.sleep(1)
+    result = widget.pick_element(prefix_value)
+    log.info("result is: " + result + " ?== prefix value " + prefix_value)
+    assert result == prefix_value
+
+
+@When('I search value "{search_value}" and "{widget_name}"')
+def search_city(context, widget_name, search_value):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value2'])
+        widget.set_web_element(web_element)
+    result = widget.search_element(search_value)
+    log.info("result is: " + result + " ?== search_value " + search_value)
+    assert result == search_value
+
+
+@When('I choic id value "{idtype_value}" and "{widget_name}"')
+def select_id(context, widget_name, idtype_value):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value2'])
+        widget.set_web_element(web_element)
+    result = widget.pick_element(idtype_value)
+    log.info("result is: " + result + " ?== idtype " + idtype_value)
+    assert result == idtype_value
+
+
+@Then('check if the "{widget_name}" error is "{error_expectation}"')
+def error_field(context, widget_name, error_expectation):
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value2'])
+        widget.set_web_element(web_element)
+
+    if config.text_error[error_expectation] in widget.get_text_allert_label():
+        log.info(
+            f"the allert msg: {config.text_error[error_expectation]} is = in the allert error: {widget.get_text_allert_label()}")
     else:
-        type = "text"
+        raise AssertionError(
+            f"the allert msg: ({config.text_error[error_expectation]}) doesn't = in the allert error: ({widget.get_text_allert_label()})")
 
-    widget = context._config.current_page.widgets[widget_name]
+
+@When('I check that the page number is  "{number:d}"')
+def current_page_number(context, number):
+    widget = context._config.current_page.widgets['PageNumber']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_error_text(config.field_error[error_expectation], type), "Incorrect error expectation message"
+    widget.check_pages_numbers(number)
 
 
-@when('open disabled list')
-def open_special_list(context):
-    context._config.current_page.open_disabled_list()
-
-
-@when('close disabled list')
-def close_special_list(context):
-    context._config.current_page.close_disabled_list()
-
-
-@when('check if the application tittle is "{tittle_expectation}"')
-def header_tittle_check(context, tittle_expectation):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
+@Then('Am I in page "{number}"')
+def current_page_number(context, number):
+    widget = context._config.current_page.widgets['PageNumber']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_tittle(tittle_expectation), "Error, Incorrect expectation tittle"
+    widget.check_current_page(number)
 
 
-@when('check if  "{language_expectation}" language is in the application')
-def header_lang_check(context, language_expectation):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
+@Then('I check the language is "{lang}"')
+def current_lang(context, lang):
+    widget = context._config.current_page.widgets['Langauge']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_language(language_expectation), "Error, Incorrect  language expectation "
+        log.info(
+            f"the languge we check: {lang} , the language is choices: {widget.check_lang()}")
+    assert widget.check_lang() == lang, f"page languge does not equal {lang}"
 
 
-@when('check if the application pic is available')
-def header_pic_check(context):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
+@When('I switch the language to "{lang}"')
+def switch_lang(context, lang):
+    log.info(f"the context._config now is : {config.langauge}")
+    log.info(f"the lang now is : {lang}")
+    langauge = config.langauge[f"{lang}"]
+    log.info(f"the context._config now is : {langauge}")
+    widget = context._config.current_page.widgets['changeLangauge']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_picture(), "The application logo is not available"
+        if widget.check_lang() == lang:
+            log.info(f"we are in the correct page we need : {lang}")
+        else:
+            log.info(
+                f"the languge we need: {lang} , the language is choices: {widget.check_lang()} , "
+                f"so we changes this to {lang} ")
+    widget.change_lang(langauge)
+    time.sleep(2)
+    context._config.lang = lang
+    current_page = context.screens_manager.create_screen([context._config.screen_name], driver=context.driver,
+                                                         force_create=True, language=lang)
 
 
-@when('check if the application name is "{application_name}"')
-def header_application_name_check(context, application_name):
-    widget_name = "header"
+@When('I scroll to value "{prefix_value}" and "{widget_name}"')
+def scroll_value(context, widget_name, prefix_value):
     widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value2'])
+        widget.set_web_element(web_element)
+    assert widget.scroll_for_ellemnt(prefix_value), "Error, the selected address is not available"
+
+
+### new header ####
+@when('check the header tittle')
+def header_new_tittle_check(context):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_application_name(application_name), "Error, Incorrect  application name"
+    assert widget.check_header_tittle(), "Error, Incorrect expectation tittle"
 
 
-@when('check if the application steps is available')
-def check_header_steps_check(context):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
+@when('check the header logo')
+def header_new_logo_check(context):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_steps(), "The application steps are not available"
+    assert widget.check_header_picture(), "Error, Incorrect expectation logo"
 
 
-@when('check if the application explanation is available')
-def check_header_explanation_check(context):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
+@when('check the header application name is "{appName}"')
+def header_new_application_name_check(context, appName):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_explanation(), "The application explanation are not available"
+    assert widget.check_header_application_name(appName), "Error, Incorrect expectation application name"
 
 
-@when('check if the application rules are "{application_rules}"')
-def check_header_rules_check(context, application_rules):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
+@when('check the header status text')
+def header_new_tittle_status_text(context):
+    widget = context._config.current_page.widgets['titleHeader']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'],
+                                                                       widget.locator['Value'])
+        widget.set_web_element(web_element)
+    assert widget.check_header_status_text(), "Error, Incorrect expectation tittle status text"
+
+
+@when('check the header status date')
+def header_new_tittle_date(context):
+    widget = context._config.current_page.widgets['titleHeader']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'],
+                                                                       widget.locator['Value'])
+        widget.set_web_element(web_element)
+    assert widget.check_header_status_date_text(), "Error, Incorrect expectation tittle date status"
+
+
+@when('check the date')
+def form_date(context):
+    widget = context._config.current_page.widgets['titleHeader']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'],
+                                                                       widget.locator['Value'])
+        widget.set_web_element(web_element)
+    assert widget.check_form_date(), "Error, Incorrect date"
+
+
+@when('check the status is "{status}"')
+def form_date(context, status):
+    widget = context._config.current_page.widgets['titleHeader']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'],
+                                                                       widget.locator['Value'])
+        widget.set_web_element(web_element)
+    assert widget.check_form_status(status), "Error, Incorrect status form"
+
+
+@When('I check that the buttons count is  "{number:d}"')
+def buttons_count(context, number):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_header_rules(application_rules), "Error, Incorrect  application rules"
+    widget.check_header_buttons_count(number)
 
 
-@when('check if the application call us is available')
-def footer_call_us_check(context):
-    widget_name = "footer"
-    widget = context._config.current_page.widgets[widget_name]
+@Then('I click on header "{btn_name}" button')
+def click_button(context, btn_name):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_call_us_is_displayed(), "The application call us footer is not available"
+    widget.click_btn_header(btn_name)
 
 
-@when('check if the application privacy policy is available')
-def footer_privacy_policy_check(context):
-    widget_name = "footer"
-    widget = context._config.current_page.widgets[widget_name]
+@when('check the explanation area')
+def explanation_area_check(context):
+    widget = context._config.current_page.widgets['titleHeader']
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'],
+                                                                       widget.locator['Value'])
+        widget.set_web_element(web_element)
+    assert widget.check_header_explanation_area(), "Error, No explanation area"
+
+
+@when('check the explanation tittle')
+def explanation_tittle_check(context):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
         web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
         widget.set_web_element(web_element)
-    assert widget.check_privacy_policy_is_displayed(), "The application privacy policy footer is not available"
+    assert widget.check_header_explanation_title(), "Error, Incorrect expectation tittle"
 
 
-@when('I select "{selected_id}" in "{widget_name}"')
-def write_id_type(context, selected_id, widget_name):
-    widget = context._config.current_page.widgets[widget_name]
+@when('check the explanation body')
+def explanation_body_check(context):
+    widget = context._config.current_page.widgets['titleHeader']
     if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'],
+                                                                       widget.locator['Value'])
         widget.set_web_element(web_element)
-    widget.set_text(selected_id)
-
-
-@when('I change page language to "{wanted_language}"')
-def change_language(context, wanted_language):
-    widget_name = "header"
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    widget.change_page_language(wanted_language)
-
-
-@when('Is "{selected_language}" language  is selected')
-def is_lang_selected(context, selected_language):
-    widget_name = "header"
-
-    if selected_language == "עברית":
-        lang = 1
-    elif selected_language == "العربية":
-        lang = 2
-    else:
-        raise AssertionError("Error, The selected language is not provided")
-
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    assert widget.is_language_selected(lang), f'Error, The selected language is not {selected_language}'
-
-
-@when('I entered "{phone_number}" in "{widget_name}"')
-def write_phone_number(context, phone_number, widget_name):
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    widget.set_text(phone_number)
-
-
-@when('I write address as "{selected_input}" in "{widget_name}"')
-def write_in_select(context, selected_input, widget_name):
-
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-
-    address = widget.select_input_after_writing(selected_input)
-    assert address == selected_input, "Error, the selected address is not available"
-
-
-@when('I search address as "{selected_input}" in "{widget_name}"')
-def search_in_select(context, selected_input, widget_name):
-    widget = context._config.current_page.widgets[widget_name]
-    if widget.get_web_element() is None:
-        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
-        widget.set_web_element(web_element)
-    assert widget.select_input_without_writing(selected_input), "Error, the selected address is not available"
-
+    assert widget.check_header_explanation_text(), "Error, No explanation body"
 
 
