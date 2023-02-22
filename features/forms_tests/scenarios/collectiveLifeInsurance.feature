@@ -31,7 +31,7 @@ Feature: header, fields test of CollectiveLifeInsurance Form Page
     Then validate that field "מספר זהות" has "332796184"
 
 
-  Scenario : save button  click test (BUG: the save button not working)
+  Scenario : save button click test (BUG: the save button not working)
     Given I navigate to "CollectiveLifeInsurance" page
     And I click on "שמור" button
     Then Accept Alert message

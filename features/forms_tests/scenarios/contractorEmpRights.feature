@@ -38,7 +38,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
     And I pick "גורמה ארוחות בע"מ " in "שם חברה"
     And I write "אבו דגשדגשדככ" in "שם אתר עירוני"
     And I pick date of "12/4/1990 " in "תאריך תחילת העבודה בחברה"
-    And I pick "ניהול פנקס שעות עבודה " in "נושא התלונה"
+    And I select "ניהול פנקס שעות עבודה " in "נושא התלונה"
     And I write "פראס" in "פרטי התלונה"
     And Click On "+" sign in "חודשים לבדיקה"
     And I pick "2023" in "שנה"
@@ -577,7 +577,7 @@ Feature: header, fields test of ContractorEmpRights Form Page
   @form
   Scenario Outline: company name valid value test
     Given I navigate to "PlaceContainer" page
-    When I pick "<complaint_subject>" in "נושא התלונה"
+    When I select "<complaint_subject>" in "נושא התלונה"
     Examples:
     | complaint_subject                                          |
     | ניהול פנקס שעות עבודה                                       |

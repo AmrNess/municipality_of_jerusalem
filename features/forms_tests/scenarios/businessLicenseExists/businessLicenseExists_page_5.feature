@@ -1,6 +1,5 @@
 Feature: header, fields test of BusinessLicenseExists Form Page
 
-
   """
   - Feature file name: businessLicenseExists_page_5.feature
   - Form link: https://jeronlineforms.jerusalem.muni.il/BusinessLicenseExists

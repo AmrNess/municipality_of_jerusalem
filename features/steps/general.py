@@ -490,3 +490,15 @@ def choose_in_search(context, widget_name):
         widget.set_web_element(web_element)
 
     widget.clickBtn()
+
+
+
+@when('סגור חלון המידע')
+def close_info_tab(context):
+    widget_name = "newHeader"
+    widget = context._config.current_page.widgets[widget_name]
+    if widget.get_web_element() is None:
+        web_element = context._config.current_page.driver.find_element(widget.locator['By'], widget.locator['Value'])
+        widget.set_web_element(web_element)
+
+    widget.close_info_tab

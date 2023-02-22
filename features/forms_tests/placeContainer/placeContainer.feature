@@ -23,7 +23,8 @@ Feature: Basic Test for PlaceContainer Form Page
 #    And Did application filled in "תאריך מילוי הטופס: 13/02/2023"
     When Click on "מידע" button
     And I wait for "2" seconds
-    And Close the information tab
+#    And Close the information tab
+    When סגור חלון המידע
 #    And Is application information tittle is "הסבר למילוי הטופס:"
 #    When Click on "שמור" button
 #    And Accept the alert
