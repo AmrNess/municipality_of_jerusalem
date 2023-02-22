@@ -522,3 +522,15 @@ Feature: Testing photo permission page FORM 2 ONLY
    Then I check if i click "שמור טיוטה" a popup with title "שמור טיוטה" is displayed
    Then at the popup "שמור טיוטה" click button "שמור טיוטה"
    Then I check that this form is form number "2"
+
+  @critical
+  @form
+  Scenario: verify required input field that have alert with message "field required"
+    Given I navigate to "PhotoPermission" page
+    When click on "המשך" button
+    Then Validate if "שם חברת ההפקה" field has invalid value with message "שדה חובה"
+    Then Validate if "טלפון חברת ההפקה" field has invalid value with message "שדה חובה"
+    Then Validate if "כתובת חברת ההפקה" field has invalid value with message "שדה חובה"
+    Then Validate if "שם מתאם ההפקה" field has invalid value with message "שדה חובה"
+    Then Validate if "טלפון מתאם ההפקה" field has invalid value with message "שדה חובה"
+    Then Validate if "דוא''ל" field has invalid value with message "שדה חובה"

@@ -378,6 +378,16 @@ Feature: Testing photo permission page FORM 1 ONLY
     |ASSSSSSSSSSSSSSSSSERTYUIOIUYRDFGHJKL@ERTY.TYUI|
 
 
-
+  @critical
+  @form
+  Scenario: verify required input field that have alert with message "field required"
+    Given I navigate to "PhotoPermission" page
+    When click on "המשך" button
+    Then Validate if "שם פרטי" field has invalid value with message "שדה חובה"
+    Then Validate if "שם משפחה" field has invalid value with message "שדה חובה"
+    Then Validate if "סוג זיהוי" field has invalid value with message "שדה חובה"
+    Then Validate if "מס' זיהוי" field has invalid value with message "שדה חובה"
+    Then Validate if "טלפון נייד" field has invalid value with message "שדה חובה"
+    Then Validate if "דוא"ל" field has invalid value with message "שדה חובה"
 
 

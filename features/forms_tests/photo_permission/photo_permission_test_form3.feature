@@ -426,3 +426,19 @@ Feature: Testing photo permission page FORM 3 ONLY
    Then I check if i click "שמור טיוטה" a popup with title "שמור טיוטה" is displayed
    Then at the popup "שמור טיוטה" click button "שמור טיוטה"
    Then I check that this form is form number "3"
+
+  @critical
+  @form
+  Scenario: verify required input field that have alert with message "field required"
+    Given I navigate to "PhotoPermission" page
+    When click on "המשך" button
+    Then Validate if "תאריך" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "שעת התחלה" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "שעת סיום" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "מספר אנשי צוות" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "שם האתר" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "כתובת" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "חסימת כביש" field has invalid value with message "שדה חובה" in table "פרטי המיקום ומועדי הצילומים" at index "1"
+    Then Validate if "האם יש חיבור לחשמל/גנרטור" field has invalid value with message "שדה חובה"
+    Then Validate if "פירוט שימוש באמצעי הפקה, אפקטים שונים (כגון ירי/פיצוץ)" field has invalid value with message "שדה חובה"
+    Then Validate if "פירוט ציוד צילום" field has invalid value with message "שדה חובה"

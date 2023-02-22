@@ -101,3 +101,12 @@ Feature: Testing photo permission page FORM 4 ONLY
    Then I check if i click "שמור טיוטה" a popup with title "שמור טיוטה" is displayed
    Then at the popup "שמור טיוטה" click button "שמור טיוטה"
    Then I check that this form is form number "3"
+
+  @critical
+  @form
+  Scenario: verify required upload field that have alert with message "must pick a file"
+    Given I navigate to "PhotoPermission" page
+    When click on "שלח" button
+    Then Validate if "צילום ת.ז. / דרכון" field has invalid value with message "חובה לצרף קובץ"
+    Then Validate if "כתב התחייבות" field has invalid value with message "חובה לצרף קובץ"
+    Then Validate if "סינופסיס קצר" field has invalid value with message "חובה לצרף קובץ"

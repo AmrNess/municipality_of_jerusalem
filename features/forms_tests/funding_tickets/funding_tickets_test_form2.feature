@@ -241,3 +241,12 @@ Feature: Testing funding tickets page FORM 2 ONLY
     |302799952|
     |32069445|
 
+  @critical
+  @form
+  Scenario: verify required input field that have alert with message "field required"
+    Given I navigate to "FundingTickets" page
+    When click on "המשך" button
+    Then Validate if "סוג זיהוי" field has invalid value with message "שדה חובה"
+    Then Validate if "מס' זיהוי" field has invalid value with message "שדה חובה"
+    Then Validate if "תאריך לידה" field has invalid value with message "שדה חובה"
+    Then Validate if "הורה שונה ממגיש הבקשה" field has invalid value with message "שדה חובה"
